@@ -1,0 +1,21 @@
+<div ng-click="toggle()" ng-class="enabled" class="icon" data-icon="Z" alt="Zoom"></div>
+<div class="container">
+    <div class="subContainer">
+        <div class="triangle"></div>
+        <div class="content">
+            <span class="icon" data-icon="+"></span>
+            <ul>
+                <li ng-repeat="zoomLevel in zoomInLevels">
+                    <a ng-href="{{ zoomLevel.name }}" ng-class="{'active': zoomLevel.level == level }" class="capitalize">{{ zoomLevel.level.replace('-', ' ') }}</a>
+                </li>
+            </ul>
+            <span class="current">{{ level }}</span>
+            <ul>
+                <li ng-repeat="zoomLevel in zoomOutLevels | reverse">
+                    <a ng-href="{{ zoomLevel.name }}" ng-class="{'active': zoomLevel.level == level }" class="capitalize">{{ zoomLevel.level.replace('-', ' ') }}</a>
+                </li>
+            </ul>
+            <span class="icon" data-icon="-"></span>
+        </div>
+    </div>
+</div>

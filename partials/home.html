@@ -1,0 +1,82 @@
+<header id="topbar" ng-class="{ dropshadow: scrolled, help: help }">
+    <nav id="nav">
+        <ul>
+            <li class="about drop" set-location="setLocation(url)"></li>
+        </ul>
+    </nav>
+
+    <h1>Semantic Body Browser</h1>
+</header>
+
+<div id="helpContainer" ng-include src="helpHtml"></div>
+
+<div id="errorContainer" ng-include src="errorHtml"></div>
+
+<div id="main" scroll>
+    <section id="content">
+        <h2 class="home">Explore an Organism</h2>
+        <nav class="quicklinks">
+            <ul>
+                <li><a href="human-adult-male-body" class="icon" data-icon="M">Male Human</a></li>
+                <li><a href="human-adult-female-body" class="icon" data-icon="W">Female Human</a></li>
+                <li><a href="mouse-adult-body" class="icon" data-icon="m">Mouse</a></li>
+            </ul>
+        </nav>
+        <form id="search">
+            <input ng-model="searchInput" ng-class="{ active: searchInput.length }" name="search" type="search" placeholder="Search for organs, anatomical parts or cells" autofocus />
+        </form>
+        <div id="searchResults" ng-class="{ active: searchInput.length }" search-results-center>
+            <section>
+                <h4>Views <span class="num">{{ results.views.length }}</span></h4>
+                <horizontal-slider data="results.views" num-visible-items="4" ng-show="results.views">
+                    <div class="container">
+                        <ul>
+                            <li ng-repeat="view in results.views" ng-repeat-finish-render>
+                                <h5><a ng-href="{{ view.sub[0].link }}">{{ view.name }}</a></h5>
+                                <i><a ng-href="{{ view.sub[0].link }}">{{ view.sub[0].species }} {{ view.sub[0].stage }}</a></i>
+                            </li>
+                        </ul>
+                    </div>
+                </horizontal-slider>
+                <p class="noResults" ng-hide="results.views">Nothing found</p>
+                <h4>Units <span class="num">{{ results.units.length }}</span></h4>
+                <horizontal-slider data="results.units" num-visible-items="4" ng-show="results.views">
+                    <div class="container">
+                        <ul>
+                            <li ng-repeat="unit in results.units" ng-repeat-finish-render>
+                                <h5><a ng-href="{{ unit.sub[0].link }}?unit={{ unit.name | linkCompliant }}">{{ unit.name }}</a></h5>
+                                <i>{{ unit.sub[0].species }} {{ unit.sub[0].stage }}</i>
+                            </li>
+                        </ul>
+                    </div>
+                </horizontal-slider>
+                <p class="noResults" ng-hide="results.views">Nothing found</p>
+            </section>
+        </div>
+        <ul class="summary">
+            <li>
+                <h3>About</h3>
+                <p>The Semantic Body Browser is a tool for graphically exploring an organism's body in respect to the <abbr title="Cell Expression Localization Development Anatomy">CELDA</abbr> ontology.</p>
+                <a data-icon=">" class="icon" href="./about">Find out more</a>
+            </li>
+            <li>
+                <h3>Introduction</h3>
+                <p>Is it your first time here? Activate the help to get valuable tips and explanations.</p>
+                <a data-icon=">" class="icon" ng-click="startHelp()">Start browsing</a>
+            </li>
+            <li>
+                <h3>Release</h3>
+                <ul>
+                    <li ng-repeat="version in versions | limitTo:3">
+                        <a ng-href="./about#changelog-{{ version.version }}">
+                            <strong property="http://purl.org/dc/terms/title">{{ version.version }}</strong>
+                            <span property="http://purl.org/dc/terms/date">{{ version.release }}</span>
+                        </a>
+                    </li>
+                </ul>
+                <a data-icon=">" class="icon" href="./about#changelog">All changelogs</a>
+            </li>
+        </ul>
+        <footer>Application is licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">GNU GPL v3</a>. Unless otherwise stated content is licensed under <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.<br/>By using our services you agree with our <a href="./legals">legal terms</a>.</footer>
+    </section>
+</div>

@@ -1,0 +1,10 @@
+# Enable the rewrite engine.
+RewriteEngine on
+
+# Set this to your location relative to your Apache document root directory.
+Rewritebase /sbb/github/
+
+# Change `index_production\.html` to `index_development\.html` to include the
+# original, i.e. not unglified, stylesheets and script files.
+RewriteCond $1 !^(index_development\.html|img|css|js|lib|font|partials)
+RewriteRule ^(.*)$ index_development\.html#!/$1 [L]

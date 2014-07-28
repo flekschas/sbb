@@ -1,0 +1,26 @@
+<section id="help" class="view" ng-class="{ 'show': helpMessage }" ng-click="closeHelpMessage($event)">
+    <div class="message">
+        <div class="content">
+            <h3>Heat map of RNA expressions</h3>
+            <div class="sidebar big">
+                <h4>Color Range</h4>
+                <div class="colors"></div>
+                <span class="min">0%</span>
+                <span class="max">100%</span>
+                <span class="med">50%</span>
+            </div>
+            <p>Heat map modus lets you color the current illustration according to the units RNA expression.</p>
+            <p>Select genes from the search panel in the bottom right and the units will be colored relatively to the minimum and maximum RNA expression value of your selection.<br/>The current minimum and maximum expression value can be found above the gene selection.</p>
+            <p>The RNA expression data is provided by the RNA Seq Atlas<sup>1</sup>.</p>
+            <p>For further information please refer to the <a href="about?goto=heat-map">about page</a>.</p>
+            <p>Thank you! This information will only be shown once.</p>
+            <ol class="note">
+                <li>
+                    <sup>1</sup>
+                    RNA-Seq Atlas - A reference database for gene expression profiling in normal tissue by next generation sequencing. Bioinformatics (Oxford, England), 10.1093/bioinformatics/bts084 (<a href="http://bioinformatics.oxfordjournals.org/content/28/8/1184.long" target="_blank">Krupp et al.</a>).
+                </li>
+            </ol>
+        </div>
+        <div class="close">Close</div>
+    </div>
+</section>

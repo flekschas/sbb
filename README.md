@@ -16,8 +16,11 @@ users.
 
 ## Requirements
 
-All you need to get the Semantic Body Browser up and running is an `Apache` web
-server with `mod_rewrite` enabled and a working internet connection.
+All you need to get the Semantic Body Browser up and running is:
+
+* [Apache web server][ape] with [mod_rewrite][mw] enabled
+* Internet connection
+* Modern [web browser][wb]
 
 
 ## Installation
@@ -43,12 +46,6 @@ root directory. (E.g. `Rewritebase /somewhere`)
 - [FileSaver.js][fs]
 
 
-## Contribute
-
-- Issue Tracker: github.com/flekschas/SBB/issues
-- Source Code: github.com/flekschas/SBB
-
-
 ## License
 
 Application is licensed under [GNU General Public License (GPL) Version 3.0][gnu].
@@ -58,11 +55,14 @@ Copyright © 2012 Fritz Lekschas.
 
 
 [about]: http://sbb.cellfinder.org/about
+[ape]: https://httpd.apache.org/
 [bl]: https://github.com/eligrey/Blob.js
 [cc]: https://creativecommons.org/licenses/by-sa/4.0/
 [fs]: https://github.com/eligrey/FileSaver.js
 [gnu]: LICENSE
 [jq]: https://github.com/jquery/jquery
+[mw]: https://httpd.apache.org/docs/current/mod/mod_rewrite.html
 [ng]: https://github.com/angular/angular.js
 [rp]: https://github.com/DmitryBaranovskiy/raphael/
 [sbb]: http://sbb.cellfinder.org
+[wb]: http://sbb.cellfinder.org/about#compatability

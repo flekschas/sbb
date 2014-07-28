@@ -6,13 +6,18 @@ background information about the project can be found on the [here][about].
 
 ## Abstract
 
-bla
+The Semantic Body Browser (SBB) is a web application for intuitively exploring
+the body of an organism from the organ to the sub-cellular level and visualising
+expression profiles by means of semantically annotated illustrations. It is used
+to comprehend biological and medical data related to the different body
+structures while relying on the strong pattern recognition capabilities of human
+users.
 
 
 ## Requirements
 
-All you need to get the Semantic Body Browser up and running is an Apache web
-server with Modrewrite enabled and a working internet connection.
+All you need to get the Semantic Body Browser up and running is an `Apache` web
+server with `mod_rewrite` enabled and a working internet connection.
 
 
 ## Installation

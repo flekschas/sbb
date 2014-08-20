@@ -187,6 +187,10 @@
     width: 320px;
 }
 
+.drop.bigger div.content {
+    width: 350px;
+}
+
 .drop.center div.content {
     left: 50%;
     margin-left: -120px;
@@ -195,6 +199,11 @@
 .drop.big.center div.content {
     margin-left: -160px;
 }
+
+.drop.bigger.center div.content {
+    margin-left: -175px;
+}
+
 
 .drop.only div.content {
     position: relative;
@@ -214,7 +223,7 @@
     display: block;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     margin: 3px;
     padding: 6px 0;
     width: 234px;

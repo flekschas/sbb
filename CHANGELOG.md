@@ -1,10 +1,40 @@
 # Changelog
 
+## 1.5.0 / 2014-08-19
+
+AngularJS and third party libraries update.
+
+***Attention:*** Firefox 3.6.x is no longer being supported. Problems concerning
+AngularJS and inline SVGs led to this decision. If you need support please
+check out version [1.4.2][https://github.com/flekschas/sbb/releases/tag/v1.4.2]
+which provides full support. The oldest version of Firefox supported.
+
+**Enhancements:**
+
+* Replaced the zoom-in / zoom-out list with a browse tree in the zoom drop down.
+* Illustration is centered and scaled to fit perfectly when activating the help.
+* Displaying copyright and license information about histological images in the
+  bottom left corner.
+
+**Updates:**
+
+* AngularJS from 1.2.21 to 1.2.22.
+* Normalize.css from 2.1.1 to 3.0.1.
+* Hammer.js from 1.x to 2.0.2.
+* Anatomical entities mapped to UBERON where possible.
+* Updated and extended the about page with further supplementary information.
+
+**Bug Fixes:**
+
+* Search results for the entities had not been displayed on the home page even
+  though they had been found.
+* Fixed some annotations.
+
 ## 1.4.2 / 2014-07-28
 
 AngularJS and third party libraries update.
 
-Updates:
+**Updates:**
 
 * AngularJS from 1.2.16 to 1.2.21.
 * Filesaver.js with Blob.js
@@ -13,7 +43,7 @@ Updates:
 
 Minor bug fixes.
 
-Bug Fixes:
+**Bug Fixes:**
 
 * Fixed a couple of minor bugs.
 
@@ -22,7 +52,7 @@ Bug Fixes:
 New expression data for the human body gross view added. Expression values
 changed from RPKM to TPM.
 
-Enhancements:
+**Enhancements:**
 
 * Added adrenal gland to the human adult female and male body gross view.
 * Added a single gene isolation mode in the heatmap mode to easily display the
@@ -32,13 +62,13 @@ Enhancements:
 * Human BodyMap 2.0 from Ilumina added to the heat map modus of the human body
   gross view.
 
-Updates:
+**Updates:**
 
 * AngularJS to version 1.2.16.
 * About page has been updated.
 * RPKM expression values have been replaced by TPM.
 
-Bug Fixes:
+**Bug Fixes:**
 
 * Minor bug fixes.
 
@@ -46,19 +76,19 @@ Bug Fixes:
 
 Mainly patches and minor visual enhancements.
 
-Enhancements:
+**Enhancements:**
 
 * Entities show expression value in heat map mode.
 * Added button for downloading the current illustrations as it is viewed.
 
-Updates:
+**Updates:**
 
 * Information panel has been enhanced.
 * jQuery from version 1.10 to 1.11.
 * AngularJS from version 1.2.5 to 1.2.15.
 * Renamed "unit" to "entities".
 
-Bug Fixes:
+**Bug Fixes:**
 
 * Couple of minor bugs have been fixed.
 
@@ -66,7 +96,7 @@ Bug Fixes:
 
 Changed license of the application from Creative Commons to GNU GPLv3.
 
-Updates:
+**Updates:**
 
 * Changed license of the web application from Creative Commons to GNU GPL v3.
 
@@ -75,12 +105,12 @@ Updates:
 Two new organs: liver and gall bladder, have been added. Update to AngularJS 1.2
 and code clean-up.
 
-Enhancements:
+**Enhancements:**
 
 * 6 new illustration for exploring the liver and gall bladder in human and mouse
   have been added.
 
-Updates:
+**Updates:**
 
 * Changed expression color scheme to avoid misleading interpreation of 'red' vs
   'green'. The expression data does not represent under vs over expressed genes
@@ -90,7 +120,7 @@ Updates:
 * RaphaelJS updated  to 2.1.2
 * AngularJS migration from 1.0.8 to 1.2.3.
 
-Bug Fixes:
+**Bug Fixes:**
 
 * Auto transparency for highlighted units has been replaced by explicit
   mechanism to avoid unwanted effects.
@@ -106,14 +136,14 @@ discovered that RPKM values are not proof for cross sample comparison. We are
 working on recalculating the the expression values Apart from that this release
 features technical improvements, bug fixes and sligh design refreshments.
 
-Enhancements:
+**Enhancements:**
 
 * Made the Semantic Body Browser indexable for search engines.
 * Breadcrumb bar of the current zoom level.
 * Compatability table.
 * Heat map coloring using the RNA Seq Atlas for the human dult gross body view.
 
-Updates:
+**Updates:**
 
 * Autozoom for two small units has been added.
 * The interface got a subtle retouch.
@@ -136,7 +166,7 @@ least we have added full RDFA annotations meaning that all illustration are
 semantically annotated by the W3C standard. Finally the start page and numbers
 of smaller bugs have been fixed since the initial release.
 
-Enhancements:
+**Enhancements:**
 
 * Interactive help has been added to give a quick overview and explanations of
   the features.
@@ -144,7 +174,7 @@ Enhancements:
 * Search has been implemented and replaces the 'unit filtering' to allow quick
   access to all views and units.
 
-Updates:
+**Updates:**
 
 * AngularJS to 1.0.8.
 * Third party libraries.
@@ -152,11 +182,10 @@ Updates:
 * Illustrations have been annotated with RDFA.
 * Start page has been updated to allow quick searching.
 
-Bug Fixes:
+**Bug Fixes:**
 
 * Several smaller bugs have been fixed.
 
 ## 1.0 / 2012-10-26
 
 Initial release.
-

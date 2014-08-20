@@ -17,7 +17,7 @@
         <h2 class="home">Explore an Organism</h2>
         <nav class="quicklinks">
             <ul>
-                <li><a href="human-adult-male-body" class="icon" data-icon="M">Male Human</a></li>
+                <li><a href="./human-adult-male-body" class="icon" data-icon="M">Male Human</a></li>
                 <li><a href="human-adult-female-body" class="icon" data-icon="W">Female Human</a></li>
                 <li><a href="mouse-adult-body" class="icon" data-icon="m">Mouse</a></li>
             </ul>
@@ -40,7 +40,7 @@
                 </horizontal-slider>
                 <p class="noResults" ng-hide="results.views">Nothing found</p>
                 <h4>Units <span class="num">{{ results.units.length }}</span></h4>
-                <horizontal-slider data="results.units" num-visible-items="4" ng-show="results.views">
+                <horizontal-slider data="results.units" num-visible-items="4" ng-show="results.units">
                     <div class="container">
                         <ul>
                             <li ng-repeat="unit in results.units" ng-repeat-finish-render>
@@ -50,7 +50,7 @@
                         </ul>
                     </div>
                 </horizontal-slider>
-                <p class="noResults" ng-hide="results.views">Nothing found</p>
+                <p class="noResults" ng-hide="results.units">Nothing found</p>
             </section>
         </div>
         <ul class="summary">

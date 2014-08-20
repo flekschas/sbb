@@ -14,7 +14,7 @@
 
 <div id="main" scroll>
     <section id="content">
-        <p><strong>Semantic Body Browser</strong> - a tool for graphically exploring an organism's body. The tool has been developed over the course of the <a href="http://cellfinder.org" target="_blank" property="schema:url">CellFinder</a> project. An integrated version can be found at <a href="http://cellfinder.org/browse" target="_blank" property="schema:url">cellfinder.org/browse</a>.</p>
+        <p><strong>Semantic Body Browser</strong> - a tool for graphically exploring an organism's body. The tool has been developed as part of the <a href="http://cellfinder.org" target="_blank" property="schema:url">CellFinder</a> project. An integrated version can be found at <a href="http://cellfinder.org/browse" target="_blank" property="schema:url">cellfinder.org/browse</a>. The source code is provided on <a href="https://github.com/flekschas/sbb" target="_blank" property="schema:url">Github</a>.</p>
         <ol class="authors">
             <li property="schema:name" typeof="Person"><span property="schema:creator" resource="#me">Fritz Lekschas (Concept, Design, Implementation)</span></li>
             <li property="schema:name" typeof="Person">Harald Stachelscheid (Concept)</li>
@@ -26,9 +26,9 @@
             <h3>Contents</h3>
             <ol>
                 <li><a ng-href="about#abstract">Abstract</a></li>
-                <li><a ng-href="about#introduction">Introduction</a></li>
                 <li><a ng-href="about#browse-tree">Browsing Tree</a></li>
                 <li><a ng-href="about#heat-map">Heat Map</a></li>
+                <li><a ng-href="about#implementation">Implementation</a></li>
                 <li><a ng-href="about#thesis">Bachelor Thesis</a></li>
                 <li><a ng-href="about#license">Copyright &amp; License</a></li>
                 <li><a ng-href="about#compatability">Compatibility</a></li>
@@ -41,7 +41,6 @@
 
         <h2 id="abstract">Abstract</h2>
         <p>Advancing technologies generate large amounts of molecular and phenotypic data on cells, tissues and organisms, leading to an ever-growing detail and complexity while information retrieval and analysis becomes increasingly time-consuming. Most data resources provide text-based information retrieval only, meaning that the user searches for key words of a desired target. While this is sufficient when the target is known by name, it often fails or is time-consuming when the exact target name is unknown. Similarly, data interpretation based on large tables of numbers is suitable for computational analysis, but requires thorough background knowledge and time to be analysed manually. Often, quick access to information is desirable to evaluate the benefits of further research.</p><p>The Semantic Body Browser (SBB) is a web application for intuitively exploring the body of an organism from the organ to the sub-cellular level and visualising expression profiles by means of semantically annotated illustrations. It is used to comprehend biological and medical data related to the different body structures while relying on the strong pattern recognition capabilities of human users. A simple mouse click highlights the target and makes it possible to retrieve information or browse further along one of the four dimensions: resolution, development, species or gender.</p><p>All biological entities are annotated using <abbr title="Cell: Expression, Localization, Development, Anatomy"><a href="http://cellfinder.de/about/ontology/" target="_blank">CELDA</a></abbr><sup>1</sup> ontology.</p>
-        <p>The SBB is implemented in JavaScript (using <a href="http://angularjs.org/" target="_blank">AngularJS</a>, <a href="http://raphaeljs.com/" target="_blank">Raphaël</a> and <a href="http://jquery.com/" target="_blank">jQuery</a>), HTML and CSS. Data is stored in a MySQL database and provided by a RESTful API written in PHP (using <a href="http://www.slimframework.com/" target="_blank">Slim Framework</a>). The application is furthermore integrated into <a href="http://cellfinder.org" target="_blank">CellFinder</a><sup>2</sup>.</p>
         <ol class="note">
             <li>
                 <sup>1</sup>
@@ -91,6 +90,18 @@
             </li>
         </ol>
 
+        <h2 id="implementation">Implementation</h2>
+        <p>The SBB is a JavaScript-based web application which is implemented using the <a href="http://angularjs.org/" target="_blank">AngularJS</a> framework provided by Google. For cross-browser drawing and manipulation of <abbr title="Scaleable Vector Graphics">SVG</abbr> we make use of <a href="http://raphaeljs.com/" target="_blank">Raphaël</a>. General DOM handling is realised using <a href="http://jquery.com/" target="_blank">jQuery</a>. Additionally we use the following smaller JavaScript libraries:</p>
+        <ul>
+            <li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank">Mousewheel</a>: Utilising the mousewheel.</li>
+            <li><a href="https://hammerjs.github.io/" target="_blank">Hammer.js</a>: Touch event library</li>
+            <li><a href="https://github.com/eligrey/Blob.js" target="_blank">Blob.js</a>: Cross-browser implmentation of the blob interface. (Used by FileSaver.)</li>
+            <li><a href="https://github.com/eligrey/FileSaver.js" target="_blank">FileSaver.js</a>: Cross-browser file saving interface.</li>
+        </ul>
+        <p>Templates are written in HTML5 and CSS 3 including the great <a href="https://necolas.github.io/normalize.css/" target="_blank">normalize.css</a> for rendering elements more consistently across multiple browsers.</p>
+        <p>Our server-side php-based RESTful <abbr title="Application programming interface">API</abbr> is implemented using the <a href="http://www.slimframework.com/" target="_blank">Slim</a> framework. Our data is stored using a <a href="https://www.mysql.com/" target="_blank">MySQL</a> server.</p>
+        <p>The source code is available on <a href="https://github.com/flekschas/sbb" target="_blank">GitHub</a>.</p>
+
         <h2 id="thesis">Bachelor Thesis</h2>
         <p>The initial <em>Semantic Body Browser</em> has been the bachelor thesis of Fritz Lekschas. It has been developed at the Stem Cell Research &amp; Knowledge Management group of Dr. Kurtz at the Berlin-Brandenburg Center for Regenerative Therapies, Charité Universitätsmedizin Berlin.</p>
         <p><a href="http://sbb.cellfinder.org/dl/sbb_-_bachelor_thesis_-_fritz_lekschas.pdf" target="_blank" data-icon=">" class="icon">Download the thesis <i>(PDF ~10MB)</i></a></p>
@@ -98,6 +109,7 @@
         <h2 id="license">Copyright &amp; License</h2>
         <p>Application is licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">GNU General Public License (GPL) Version 3.0</a>. Unless otherwise stated content is licensed under <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons BY-SA 4.0</a>. Copyright &copy; 2012-{{ currentDate | date:'yyyy' }} <a href="about#contact">Fritz Lekschas</a>.</p>
         <h3>Illustrations</h3>
+        <p>If you like to work with our Illustrations then have a look <a href="https://github.com/flekschas/sbi" target="_blank">GitHub</a>. For improvements please send a <a href="https://github.com/flekschas/sbi/pulls">pull request</a> and if you see any bugs please <a href="https://github.com/flekschas/sbi/issues" target="_blank">create an issue</a>.</p>
         <ul id="licenses">
             <li resource="/human-adult-male-body" typeof="schema:CreativeWork">
                 <b property="schema:name">Human Male Body</b>
@@ -292,6 +304,9 @@
                 </ul>
             </li>
         </ul>
+        <h3>Histological images</h3>
+        <p>Histological images are gathered from and hyper-linked to <a href="http://cellfinder.org" target="_blank">CellFinder</a>. Further information, e.g. description, along with a much more powerful image viewer can be found on <a href="http://cellfinder.org" target="_blank">CellFinder</a> by clicking into the central area of the image.</p>
+
         <h2 id="compatability">Compatability</h2>
         <p>The Semantic Body Browser is compatible with devices having a screen resolution of at least <strong>600&times;400<sup>1</sup> <abbr title="Pixel">px</abbr></strong> and either one of the following browser.</p>
         <ul class="notes">
@@ -321,7 +336,7 @@
                 </tr>
                 <tr>
                     <td>Firefox</td>
-                    <td>&ge; 3.6.28</td>
+                    <td>&ge; 4.0.1</td>
                 </tr>
                 <tr>
                     <td>Opera</td>

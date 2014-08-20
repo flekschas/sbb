@@ -29,9 +29,13 @@
     <link rel="stylesheet" href="css/ie.min.css">
     <![endif]-->
 
+    <!--[if lte IE 9]>
+    <script src="js/ie.min.js"></script>
+    <![endif]-->
+
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
 
-    <base href="/sbb/github/">
+    <base href="/">
 </head>
 <body data-status="{{ status }}">
 
@@ -46,6 +50,7 @@
     <div ng-view global-events class="noie"></div>
 
     <script src="js/app.min.js"></script>
+
 
 </body>
 </html>

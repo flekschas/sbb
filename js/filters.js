@@ -1,8 +1,9 @@
 'use strict';
 
-angular
-    .module('sbb.filters', [])
-    .filter('max', function() {
+var sbbFilters = angular.module('sbb.filters', []);
+
+sbbFilters.filter('max', [
+    function() {
         // Cuts a given text after the a certain number of characters (last word is preserved)
         // Default number is 100
         return function(s, limit) {
@@ -12,15 +13,21 @@ angular
             }
             return s;
         }
-    })
-    .filter('linkCompliant', function() {
+    }
+]);
+
+sbbFilters.filter('linkCompliant', [
+    function() {
         // Reformat view and unit names
         // Split at '-' and capitalize
         return function(s) {
             return s.replace(/\s/g, '-');
         }
-    })
-    .filter('devStage', function() {
+    }
+]);
+
+sbbFilters.filter('devStage', [
+    function() {
         // Reformat the developmental stage name
         return function(s, species) {
             try {
@@ -104,10 +111,14 @@ angular
                 // string not giving?
             }
         }
-    })
-    .filter('reverse', function () {
+    }
+]);
+
+sbbFilters.filter('reverse', [
+    function () {
         return function (items) {
             if (angular.isArray(items)) return items.slice().reverse();
             else return false;
         };
-    });
+    }
+]);

@@ -29,7 +29,13 @@
                 gender="{{ data.view.gender }}"
                 similar-views="similarViews">
             </li>
-            <li class="zoom fRight drop center" set-location="setLocation(url)" level="{{ data.view.level }}" zoom-views="zoomViews" zoom-in-levels="zoomInLevels" zoom-out-levels="zoomOutLevels"></li>
+            <li
+                class="zoom fRight drop bigger center"
+                set-location="setLocation(url)"
+                level="{{ data.view.level }}"
+                species="{{ data.view.species }}"
+                stage="{{ data.view.stage }}">
+            </li>
         </ul>
         <div class="poi leftNav" ng-include src="helpLeftNav" ng-class="{ active: help}"></div>
         <div class="poi rightNav" ng-include src="helpRightNav" ng-class="{ active: help}"></div>
@@ -171,14 +177,15 @@
             </div>
         </section>
 
-        <section class="closed" ng-class="{'disabled': !data.pictures.length, 'error': data.pictures.length && !omeroAvailable}">
+        <section class="closed" ng-class="{'disabled': !picturesAvailable(), 'error': data.pictures.length && !omeroAvailable}">
             <div class="poi" ng-include src="helpPicture" ng-class="{ active: help}"></div>
-            <h2 ng-click="toggle($event, !data.pictures.length || !omeroAvailable)" data-error="(Image server is not available!)">Histologic Images</h2>
+            <h2 ng-click="toggle($event, !picturesAvailable() || !omeroAvailable)" data-error="(Image server is not available!)">Histologic Images</h2>
             <div horizontal-slider class="body slider" data="data.pictures" num-visible-items="1">
                 <ul>
                     <li ng-repeat="picture in data.pictures" ng-repeat-finish-render>
-                        <a ng-href="http://cellfinder.org/ontology/image?id={{ data.view.ont_id }}&amp;omeId={{ picture }}" target="_blank" >
-                            <slider-img picture="{{ picture }}" />
+                        <div class="copyright-license">&copy; <a ng-href="{{ picture.source }} " target="_blank">{{ picture.copyright }}</a>. <span ng-show="{{ picture.license.length }}">Licensed under <a ng-href="{{ picture.license_url }}" ng-show="{{ picture.license_url }}" target="_blank">{{ picture.license }}</a><span ng-hide="{{ picture.license_url }}">{{ picture.license }}</span>.</span></div>
+                        <a ng-href="http://cellfinder.org/ontology/image?id={{ data.view.ont_id }}&amp;omeId={{ picture.id }}" target="_blank" >
+                            <slider-img picture="{{ picture.id }}" />
                         </a>
                     </li>
                 </ul>
@@ -191,10 +198,10 @@
     <div class="poi ilu" ng-include src="helpIlu" ng-class="{ active: help}"></div>
     <div class="poi iluAll" ng-include src="helpIluAll" ng-class="{ active: help}"></div>
     <div class="poi iluBlank" ng-include src="helpIluBlank" ng-class="{ active: help}"></div>
-    <header id="subtopbar" ng-class="{ 'visible' : zoomOutLevels.length }">
+    <header id="subtopbar" ng-class="{ 'visible' : data.zoomOutLevels.length }">
         <ol id="breadcrumbs">
-            <li ng-repeat="level in zoomOutLevels">
-                <a ng-href="{{ level.name }}">
+            <li ng-repeat="level in data.zoomOutLevels">
+                <a ng-href="{{ level.view }}">
                     {{ level.level.replace('-', ' ') }}
                 </a>
             </li>

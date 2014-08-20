@@ -21,12 +21,12 @@
     <meta name="application-name" content="Semantic Body Browser">
     <meta name="author" content="Fritz Lekschas">
 
-    <title>Semantic Body Browser</title>
+    <title ng-bind="'Semantic Body Browser &middot; ' + $root.title">Semantic Body Browser</title>
 
     <style>
-    [ng-cloak] {
+        [ng-cloak] {
             display: none;
-    }
+        }
     </style>
 
     <link rel="stylesheet" href="css/normalize.css">
@@ -38,11 +38,15 @@
     <link rel="stylesheet" href="css/ie.css">
     <![endif]-->
 
+    <!--[if lte IE 9]>
+    <script src="lib/history/history.js"></script>
+    <![endif]-->
+
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
 
-    <base href="/sbb/github/">
+    <base href="/">
 </head>
-<body data-status="{{ status }}">
+<body data-status="{{ status }}" ng-class="{ 'mobile': isMobile }">
 
     <!--[if lt IE 9]>
     <div id="chromeframe">
@@ -56,7 +60,8 @@
 
     <script src="lib/jquery/jquery.js"></script>
     <script src="lib/jquery/jquery.mousewheel.js"></script>
-    <script src="lib/jquery/jquery.hammer.js"></script>
+
+    <script src="lib/hammer/hammer.js"></script>
 
     <script src="lib/raphael/raphael.js"></script>
     <script src="lib/raphael/raphael.group.js"></script>
@@ -73,6 +78,7 @@
     <script src="js/directives.js"></script>
     <script src="js/services.js"></script>
     <script src="js/filters.js"></script>
+
 
 </body>
 </html>

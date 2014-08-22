@@ -100,7 +100,7 @@ Changed license of the application from Creative Commons to GNU GPLv3.
 
 * Changed license of the web application from Creative Commons to GNU GPL v3.
 
-## 1.3 / 2013-12-15
+## 1.3.0 / 2013-12-15
 
 Two new organs: liver and gall bladder, have been added. Update to AngularJS 1.2
 and code clean-up.
@@ -126,7 +126,7 @@ and code clean-up.
   mechanism to avoid unwanted effects.
 * Lots of smaller bug fixes.
 
-## 1.2 / 2013-11-15
+## 1.2.0 / 2013-11-15
 
 Version 1.2 adds heatmap coloring to the Semantic Body Browser. Using the RNA
 Seq Atlas as the source of RNA expressions it's possible to color the human body
@@ -150,7 +150,7 @@ features technical improvements, bug fixes and sligh design refreshments.
 * Use CSS3 for simplified and smooth animations e.g. dragging and scaling.
 
 
-## 1.1 / 2013-11-15
+## 1.1.0 / 2013-11-15
 
 This release features a couple of important changes. First of all the unit
 filtering as been replaced by a system wide search which dramatically simplyfies
@@ -186,6 +186,6 @@ of smaller bugs have been fixed since the initial release.
 
 * Several smaller bugs have been fixed.
 
-## 1.0 / 2012-10-26
+## 1.0.0 / 2012-10-26
 
 Initial release.

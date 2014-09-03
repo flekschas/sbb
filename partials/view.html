@@ -183,7 +183,7 @@
             <div horizontal-slider class="body slider" data="data.pictures" num-visible-items="1">
                 <ul>
                     <li ng-repeat="picture in data.pictures" ng-repeat-finish-render>
-                        <div class="copyright-license">&copy; <a ng-href="{{ picture.source }} " target="_blank">{{ picture.copyright }}</a>. <span ng-show="{{ picture.license.length }}">Licensed under <a ng-href="{{ picture.license_url }}" ng-show="{{ picture.license_url }}" target="_blank">{{ picture.license }}</a><span ng-hide="{{ picture.license_url }}">{{ picture.license }}</span>.</span></div>
+                        <div class="copyright-license">&copy; <a ng-href="{{ picture.source }} " target="_blank">{{ picture.copyright }}</a>. <span ng-show="{{ picture.license.length }}">Licensed under <a ng-href="{{ picture.license_url }}" ng-show="{{ picture.license_url.length }}" target="_blank">{{ picture.license }}</a><span ng-hide="{{ picture.license_url.length }}">{{ picture.license }}</span>.</span></div>
                         <a ng-href="http://cellfinder.org/ontology/image?id={{ data.view.ont_id }}&amp;omeId={{ picture.id }}" target="_blank" >
                             <slider-img picture="{{ picture.id }}" />
                         </a>

@@ -645,9 +645,16 @@ sbbController.controller('AboutCtrl', [
 sbbController.controller('LegalsCtrl', [
     '$scope',
     '$location',
+    'News',
     function(
         $scope,
-        $location) {
+        $location,
+        News) {
+
+        // Wrapper method for changing the location
+        $scope.setLocation = function(url) {
+            $location.url(url);
+        };
 
         // Watch for the $location.path() to change
         // Then trigger a page view for piwik
@@ -672,42 +679,3 @@ sbbController.controller('LegalsCtrl', [
         $scope.ready();
     }
 ]);
-
-// AboutCtrl.resolve = {
-//     changelog: ['$q', '$http', 'settings', function($q, $http, settings) {
-//         var deferred = $q.defer();
-
-//         $http
-//             .get(settings.apiPath + 'changelog')
-//             .success(function (data) {
-//                 var changelog = {};
-//                 for (var i = data.length; i--;) {
-//                     if (typeof changelog[data[i].version] !== 'undefined'){
-//                         changelog[data[i].version].push(data[i]);
-//                     } else {
-//                         changelog[data[i].version] = [data[i]];
-//                     }
-//                 }
-//                 deferred.resolve(changelog);
-//             })
-//             .error(function (error) {
-//                 deferred.reject(error);
-//             });
-
-//         return deferred.promise;
-//     }],
-//     versions: ['$q', '$http', 'settings', function($q, $http, settings) {
-//         var deferred = $q.defer();
-
-//         $http
-//             .get(settings.apiPath + 'versions')
-//             .success(function (data) {
-//                 deferred.resolve(data);
-//             })
-//             .error(function (error) {
-//                 deferred.reject(error);
-//             });
-
-//         return deferred.promise;
-//     }]
-// }

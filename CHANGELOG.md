@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1 / 2014-09-08
+
+A few minor bug and typo fixes.
+
 ## 1.5.0 / 2014-08-19
 
 AngularJS and third party libraries update.

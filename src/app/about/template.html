@@ -1,0 +1,426 @@
+<header id="topbar">
+    <nav id="nav">
+        <ul>
+            <li class="drop"
+                sbb-about>
+            </li>
+            <li>
+                <a href="."
+                   alt="Home"
+                   class="icon icon-home noText enabled">Home</a>
+            </li>
+            <li class="drop big"
+                bookmarks
+                set-location="setLocation(url)">
+            </li>
+        </ul>
+    </nav>
+
+    <h1>About</h1>
+</header>
+
+<div id="main">
+    <section id="content">
+        <p><strong>Semantic Body Browser</strong> - a tool for graphically exploring an organism's body. The tool has been developed as part of the <a href="http://cellfinder.org" target="_blank" property="schema:url">CellFinder</a> project. An integrated version can be found at <a href="http://cellfinder.org/browse" target="_blank" property="schema:url">cellfinder.org/browse</a>. The source code is provided on <a href="https://github.com/flekschas/sbb" target="_blank" property="schema:url">Github</a>.</p>
+        <ol class="authors">
+            <li property="schema:name" typeof="Person"><span property="schema:creator" resource="#me">Fritz Lekschas (Concept, Design, Implementation)</span></li>
+            <li property="schema:name" typeof="Person">Harald Stachelscheid (Concept)</li>
+            <li property="schema:name" typeof="Person">Stefanie Seltmann (CELDA integration)</li>
+            <li property="schema:name" typeof="Person">Andreas Kurtz (PI)</li>
+        </ol>
+
+        <nav class="toc">
+            <h3>Contents</h3>
+            <ol>
+                <li><a ng-href="about#abstract">Abstract</a></li>
+                <li><a ng-href="about#introduction">Introduction</a></li>
+                <li><a ng-href="about#browse-tree">Browsing Tree</a></li>
+                <li><a ng-href="about#heat-map">Heat Map</a></li>
+                <li><a ng-href="about#illustrations">Illustrations</a></li>
+                <li><a ng-href="about#implementation">Implementation</a></li>
+                <li><a ng-href="about#thesis">Bachelor Thesis</a></li>
+                <li><a ng-href="about#license">Copyright &amp; License</a></li>
+                <li><a ng-href="about#compatability">Compatibility</a></li>
+                <li><a ng-href="about#changelog">Changelog</a></li>
+                <li><a ng-href="about#contact">Contact</a></li>
+            </ol>
+        </nav>
+
+        <div class="separator"></div>
+
+        <h2 id="abstract">Abstract</h2>
+        <p>Advancing technologies generate large amounts of molecular and phenotypic data on cells, tissues and organisms, leading to an ever-growing detail and complexity while information retrieval and analysis becomes increasingly time-consuming. Most data resources provide text-based information retrieval only, meaning that the user searches for key words of a desired target. While this is sufficient when the target is known by name, it often fails or is time-consuming when the exact target name is unknown. Similarly, data interpretation based on large tables of numbers is suitable for computational analysis, but requires thorough background knowledge and time to be analysed manually. Often, quick access to information is desirable to evaluate the benefits of further research.</p><p>The Semantic Body Browser (SBB) is a web application for intuitively exploring the body of an organism from the organ to the sub-cellular level and visualising expression profiles by means of semantically annotated illustrations. It is used to comprehend biological and medical data related to the different body structures while relying on the strong pattern recognition capabilities of human users. A simple mouse click highlights the target and makes it possible to retrieve information or browse further along one of the four dimensions: resolution, development, species or gender.</p><p>All biological entities are annotated using <abbr title="Cell: Expression, Localization, Development, Anatomy"><a href="http://cellfinder.de/about/ontology/" target="_blank">CELDA</a></abbr><sup>1</sup> ontology.</p>
+        <ol class="note">
+            <li>
+                <sup>1</sup>
+                CELDA - an ontology for the comprehensive representation of cells in complex systems. <i>BMC Bioinformatics</i> (2013), 14, 228. (<a href="http://dx.doi.org/10.1186/1471-2105-14-228" target="_blank">Seltmann et al.</a>).
+            </li>
+            <li>
+                <sup>2</sup>
+                CellFinder: a cell data repository. <i>Nucleic Acid Res.</i> (2013), 42, D950-D958. (<a href="http://dx.doi.org/10.1093/nar/gkt1264" target="_blank">Stachelscheid et al.</a>).
+            </li>
+        </ol>
+
+        <h2 id="browse-tree">Browsing Tree</h2>
+        <p>The <b>Semantic Body Browser</b> currently incorporates 22 views for homo sapiens and 21 views for mus musculus. These views branch into 15 different levels of resolution and 6 developmental stages. The adult human body gross view does furthermore distinguish genders.</p>
+        <figure>
+            <img src="assets/images/browse-tree.png" alt="Browse tree">
+            <figcaption>Tree of currently available views.</figcaption>
+        </figure>
+
+        <h2 id="heat-map">Heat map of RNA abundance</h2>
+        <aside>
+            <h4>Color Range</h4>
+            <div class="colors"></div>
+            <span class="min"><abbr title="Minimum">Min</abbr></span>
+            <span class="max"><abbr title="Maximum">Max</abbr></span>
+            <span class="med">50%</span>
+            <p>The colors are <strong>relative</strong> to the accumulative RNA expression values of the selection of genes. The minimum displayed by a dark blue and the maximum by a bright yellow.</p>
+        </aside>
+        <p>The <em>heat map</em> modus lets you colour the human adult body gross view according to the spatially resolved RNA expression value.</p>
+        <p>The organs and anatomical parts for which data is available will be coloured relatively to the accumulative RNA expression value of the user-defined selection of genes. If multiple genes have been selected a stacked bar indicates the proportion of each gene. Sub-selection facilitates the comparison among the set of genes and helps to quickly identify the impact of one genes on the accumulative RNA expression value.</p>
+        <p>Currently transcriptome sequencing data is provided by the RNA-Seq Atlas<sup>1</sup> and the Human BodyMap 2.0<sup>2</sup>. As shown by Li et al.<sup>3</sup> and Wagner et al.<sup>4</sup> <abbr title="Transcripts per Kilobase per Million" class="show">RPKM</abbr> may be biased across different samples, therefore we provide <abbr title="Transcripts per Million" class="show">TPM</abbr>.</p>
+        <ol class="note">
+            <li>
+                <sup>1</sup>
+                RNA-Seq Atlas - A reference database for gene expression profiling in normal tissue by next generation sequencing. <i>Bioinformatics</i> (2012), 28, 1184-1185. (<a href="http://dx.doi.org/10.1093/bioinformatics/bts084" target="_blank">Krupp, M. et al.</a>).
+            </li>
+            <li>
+                <sup>2</sup>
+                (<a href="http://dec2013.archive.ensembl.org/" target="_blank">Ensembl Release 74</a>)
+            </li>
+            <li>
+                <sup>3</sup>
+                RNA-Seq gene expression estimation with read mapping uncertainty. <i>Bioinformatics</i> (2010), 26, 493-500. (<a href="http://dx.doi.org/10.1093/bioinformatics/btp692" target="_blank">Li, B. et al.</a>)
+            </li>
+            <li>
+                <sup>4</sup>
+                Measurement of mRNA abundance using RNA-seq data: RPKM measure is inconsistent among samples. <i>Theory Biosci</i> (2012), 131, 281-285. (<a href="http://dx.doi.org/10.1007/s12064-012-0162-3" target="_blank">Wagner, GP. et al.</a>).
+            </li>
+        </ol>
+
+        <h2 id="illustrations">Illustrations</h2>
+        <p>All illustrations are hand drawn by medical illustrators and annotated ontologically. If you like to use them please have a look at our <a href="https://github.com/flekschas/sbi" target="_blank">GitHub repository</a>. The annotation scheme is as follows:</p>
+        <ol>
+            <li>Uberon (Sometimes BioTop)</li>
+            <li>FMA / MA</li>
+            <li>CL</li>
+            <li>GO</li>
+        </ol>
+        <p>For improvements send a <a href="https://github.com/flekschas/sbi/pulls">pull request</a> and if you see any bugs please <a href="https://github.com/flekschas/sbi/issues" target="_blank">create an issue</a>.</p>
+        <h3>Details &amp; attribution</h3>
+        <ul id="licenses">
+            <li resource="/human-adult-male-body" typeof="schema:CreativeWork">
+                <b property="schema:name">Human Male Body</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Jörg Mair</span> &amp; <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-female-body" typeof="schema:CreativeWork">
+                <b property="schema:name">Human Female Body</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Jörg Mair</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/mouse-adult-body" typeof="schema:CreativeWork">
+                <b property="schema:name">Mouse Body</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-kidney" typeof="schema:CreativeWork">
+                <b property="schema:name">Kidney</b>
+                <ul>
+                    <li>Created: Markus Voll</li>
+                    <li>Edited: Fritz Lekschas</li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-renal-lobe" typeof="schema:CreativeWork">
+                <b property="schema:name">Renal Lobe</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-ureter" typeof="schema:CreativeWork">
+                <b property="schema:name">Ureter</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-nephron" typeof="schema:CreativeWork">
+                <b property="schema:name">Mature Nephron</b>
+                <ul>
+                    <li>Created: Markus Voll</li>
+                    <li>Edited: Fritz Lekschas</li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-pretubular-aggregate" typeof="schema:CreativeWork">
+                <b property="schema:name">Pretubular Aggregate</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-renal-vesicle" typeof="schema:CreativeWork">
+                <b property="schema:name">Renal Vesicle</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-comma-shaped-body" typeof="schema:CreativeWork">
+                <b property="schema:name">Comma-Shaped Body</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-s-shaped-body" typeof="schema:CreativeWork">
+                <b property="schema:name">S-Shaped Body</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-capillary-loop-nephron" typeof="schema:CreativeWork">
+                <b property="schema:name">Capillary Loop Nephron</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-renal-corpuscle" typeof="schema:CreativeWork">
+                <b property="schema:name">Renal Corpuscle</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Michal Komorniczak</span></li>
+                    <li>Edited: <span property="schema:editor">Markus Voll</span> &amp; <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en" target="_blank">Creative Commons BY-SA 3.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-collecting-duct" typeof="schema:CreativeWork">
+                <b property="schema:name">Collecting Duct</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-proximal-tubule" typeof="schema:CreativeWork">
+                <b property="schema:name">Proximal Tubule</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-distal-tubule" typeof="schema:CreativeWork">
+                <b property="schema:name">Distal Tubule</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-podocyte" typeof="schema:CreativeWork">
+                <b property="schema:name">Podocyte</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Markus Voll</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-liver" typeof="schema:CreativeWork">
+                <b property="schema:name">Human Adult Liver</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Jörg Mair</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-liver" typeof="schema:CreativeWork">
+                <b property="schema:name">Mouse Adult Liver</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Aller et. al.</span></li>
+                    <li>Edited: <span property="schema:editor">Jörg Mair</span> &amp; <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-liver" typeof="schema:CreativeWork">
+                <b property="schema:name">Adult Hepatic Lobes</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Jörg Mair</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-liver" typeof="schema:CreativeWork">
+                <b property="schema:name">Adult Hepatic Lobules</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Jörg Mair</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-liver" typeof="schema:CreativeWork">
+                <b property="schema:name">Adult Hepatic Acinus</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Frevert U, Engelmann S, Zougbédé S, Stange J, Ng B, et al.</span></li>
+                    <li>Edited: <span property="schema:editor">Jörg Mair</span> &amp; <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a href="https://creativecommons.org/licenses/by/2.5/deed.en" target="_blank">Creative Commons Attribution 2.5 Generic</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-liver" typeof="schema:CreativeWork">
+                <b property="schema:name">Hepatocyte</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Jörg Mair</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+            <li resource="/human-adult-gall-bladder" typeof="schema:CreativeWork">
+                <b property="schema:name">Gall bladder</b>
+                <ul>
+                    <li>Created: <span property="schema:creator">Jörg Mair</span></li>
+                    <li>Edited: <span property="schema:editor">Fritz Lekschas</span></li>
+                    <li>License: <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank">Creative Commons BY-SA 4.0</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2 id="implementation">Implementation</h2>
+        <p>The SBB is a JavaScript-based web application which is implemented using the <a href="http://angularjs.org/" target="_blank">AngularJS</a> framework provided by Google. For cross-browser drawing and manipulation of <abbr title="Scaleable Vector Graphics">SVG</abbr> we make use of <a href="http://raphaeljs.com/" target="_blank">Raphaël</a>. General DOM handling is realised using <a href="http://jquery.com/" target="_blank">jQuery</a>. Additionally we use the following smaller JavaScript libraries:</p>
+        <ul>
+            <li><a href="https://github.com/brandonaaron/jquery-mousewheel" target="_blank">Mousewheel</a>: Utilising the mousewheel.</li>
+            <li><a href="https://hammerjs.github.io/" target="_blank">Hammer.js</a>: Touch event library</li>
+            <li><a href="https://github.com/eligrey/Blob.js" target="_blank">Blob.js</a>: Cross-browser implmentation of the blob interface. (Used by FileSaver.)</li>
+            <li><a href="https://github.com/eligrey/FileSaver.js" target="_blank">FileSaver.js</a>: Cross-browser file saving interface.</li>
+        </ul>
+        <p>Templates are written in HTML5 and CSS 3 including the great <a href="https://necolas.github.io/normalize.css/" target="_blank">normalize.css</a> for rendering elements more consistently across multiple browsers.</p>
+        <p>Our server-side php-based RESTful <abbr title="Application programming interface">API</abbr> is implemented using the <a href="http://www.slimframework.com/" target="_blank">Slim</a> framework. Our data is stored using a <a href="https://www.mysql.com/" target="_blank">MySQL</a> server.</p>
+        <p>The source code is available on <a href="https://github.com/flekschas/sbb" target="_blank">GitHub</a>.</p>
+
+        <h2 id="thesis">Bachelor Thesis</h2>
+        <p>The initial <em>Semantic Body Browser</em> has been the bachelor thesis of Fritz Lekschas. It has been developed at the Stem Cell Research &amp; Knowledge Management group of Dr. Kurtz at the Berlin-Brandenburg Center for Regenerative Therapies, Charité Universitätsmedizin Berlin.</p>
+        <p><a href="http://sbb.cellfinder.org/dl/sbb_-_bachelor_thesis_-_fritz_lekschas.pdf" target="_blank" class="icon icon-download iconSpace">Download the thesis <i>(PDF ~10MB)</i></a></p>
+
+        <h2 id="license">Copyright &amp; License</h2>
+        <p>Application is licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">GNU General Public License (GPL) Version 3.0</a>. Unless otherwise stated content is licensed under <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons BY-SA 4.0</a>. Copyright &copy; 2012-{{ currentDate | date:'yyyy' }} <a href="about#contact">Fritz Lekschas</a>.</p>
+        <h3>Illustrations</h3>
+        <p>All illustrations can be used for accademic and comercial projects but the authers need to be cited. Details are given under <em><a href="#illustrations">illustrations</a></em>.</p>
+
+        <h3>Histological images</h3>
+        <p>Histological images are gathered from and hyper-linked to <a href="http://cellfinder.org" target="_blank">CellFinder</a>. Further information, e.g. description, along with a much more powerful image viewer can be found on <a href="http://cellfinder.org" target="_blank">CellFinder</a> by clicking into the central area of the image.</p>
+
+        <h2 id="compatability">Compatability</h2>
+        <p>The Semantic Body Browser is compatible with devices having a screen resolution of at least <strong>600&times;400<sup>1</sup> <abbr title="Pixel">px</abbr></strong> and either one of the following browser.</p>
+        <ul class="notes">
+            <li>
+                <sup>1</sup>
+                <p>The dimension refers to the device display dimension and not the actual physical pixel. E.g. a device which displays 1440&times;960 px at a density of 3 does have a device display dimension of only 480&times;320 px and is thus not supported.</p>
+            </li>
+        </ul>
+
+        <div class="left">
+        <h3>Desktop</h3>
+        <table class="two-col" colspacing="0">
+            <thead>
+                <tr>
+                    <th>Browser<sup>1, 2</sup></th>
+                    <th>Version</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chrome</td>
+                    <td>&ge; 19</td>
+                </tr>
+                <tr>
+                    <td>Safari</td>
+                    <td>&ge; 4.0.5</td>
+                </tr>
+                <tr>
+                    <td>Firefox</td>
+                    <td>&ge; 3.6.28</td>
+                </tr>
+                <tr>
+                    <td>Opera</td>
+                    <td>&ge; 12.15</td>
+                </tr>
+                <tr>
+                    <td>Internet Explorer</td>
+                    <td>&ge; 9</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="left">
+        <h3>Mobile / Touch<sup>*</sup></h3>
+        <table class="two-col" colspacing="0">
+            <thead>
+                <tr>
+                    <th>Browser<sup>1, 2</sup></th>
+                    <th>Version</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>iOS Safari</td>
+                    <td>&ge; 7</td>
+                </tr>
+                <tr>
+                    <td>Android Browser</td>
+                    <td>&ge; 4</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <ul class="notes">
+            <li>
+                <sup>1</sup>
+                <p>Browsers are ordered by recommendation.</p>
+            </li>
+            <li>
+                <sup>2</sup>
+                <p>Other browser may work as well but have not been tested.</p>
+            </li>
+            <li>
+                <sup>*</sup>
+                <p>We have been unable to test recently added features on touch devices. Therefore, a smooth usage can't be guaranteed.</p>
+            </li>
+        </ul>
+        <p>We have tested the Semantic Body Browser extensively but it may still be possible that we've overseen a problem or error. If so please <a href="about#contact">tell us</a> and we will fix it as soon as possible.</p>
+        <h2 id="changelog">Changelog</h2>
+        <ul class="changelog">
+            <li ng-repeat="version in versions">
+                <span property="http://purl.org/dc/terms/date">{{ version.release }}</span>
+                <h4 id="changelog-{{ version.version }}">Version <strong>{{ version.version }}</strong></h4>
+                <p>{{ version.msg }}</p>
+                <ul>
+                    <li ng-repeat="change in changelog[version.version]">
+                        <span class="tag">{{ change.type }}</span>
+                        <p>{{ change.msg }}</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <h2 id="contact">Contact</h2>
+        <p>For questions, bugs or feedback please feel free to email <button ng-click="mail()">Fritz Lekschas</button>.</p>
+    </div>
+</div>

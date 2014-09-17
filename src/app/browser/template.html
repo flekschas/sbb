@@ -1,0 +1,348 @@
+<header id="topbar">
+    <nav id="nav">
+        <ul>
+            <li class="drop"
+                sbb-about>
+            </li>
+            <li>
+                <a href="."
+                   alt="Home"
+                   class="icon icon-home noText enabled">Home</a>
+            </li>
+            <li class="drop"
+                sbb-bookmarks
+                set-location="setLocation(url)"
+                name="{{ title }}">
+            </li>
+            <sbb-help></sbb-help>
+
+            <li class="fRight drop center"
+                sbb-gender>
+                  <span class="icon icon-neutral noText"
+                        ng-hide="genderEnabled">
+                  </span>
+                  <a class="icon icon-{{ gender }} noText enabled"
+                     ng-click="changeGender()"
+                     ng-show="genderEnabled">
+                  </a>
+            </li>
+            <li class="fRight drop center"
+                sbb-species
+                set-location="setLocation(url, keepActiveUnit)"
+                current-species="{{ data.view.species }}"
+                stage="{{ data.view.stage }}"
+                similar-views="similarViews">
+            </li>
+            <li sbb-dev-stages
+                ng-class="{ 'opened': isOpen() }"
+                species="{{ data.view.species }}"
+                stage="{{ data.view.stage }}"
+                gender="{{ data.view.gender }}"
+                similar-views="similarViews">
+            </li>
+            <li class="fRight drop bigger center"
+                sbb-zoom
+                set-location="setLocation(url)"
+                level="{{ data.view.level }}"
+                species="{{ data.view.species }}"
+                stage="{{ data.view.stage }}">
+            </li>
+        </ul>
+        <div class="poi leftNav"
+             ng-include src="helpLeftNav"
+             ng-class="{ active: help}">
+        </div>
+        <div class="poi rightNav"
+             ng-include
+             src="helpRightNav"
+             ng-class="{ active: help}">
+        </div>
+    </nav>
+
+    <form id="search">
+        <div class="wrapper">
+            <input name="search"
+                   id="f_search"
+                   type="text"
+                   ng-model="searchInput" />
+            <label for="f_search" class="icon-search"></label>
+            <div class="close icon-cross"
+                 ng-show="searchInput.length"
+                 ng-click="searchInput = ''">Close</div>
+            <div class="poi"
+                 ng-include src="helpSearch"
+                 ng-class="{ active: help}"></div>
+        </div>
+    </form>
+
+    <h1 class="right">
+        {{ title }}
+    </h1>
+    <div class="poi"
+         ng-include src="helpTitle"
+         ng-class="{ active: help}"></div>
+</header>
+
+<sbb-results-bar
+    show="showResultsBar"
+    results="results"
+    type="{{ resultsBarType }}"
+    loading="resultsLoading">
+</sbb-results-bar>
+
+<div id="sidebar" sbb-accordion>
+    <section class="entities open"
+             panel="entities">
+        <div class="poi"
+             ng-include
+             src="helpUnits"
+             ng-class="{ active: help}">
+        </div>
+        <h3 class="toggler" ng-click="toggle('entities')">Entities</h3>
+        <ul class="controls">
+            <li title="Maximise"
+                class="hidden icon-plus"
+                ng-click="maximise('entities')">Max</li>
+        </ul>
+        <div class="content">
+            <div class="wrapper"
+                 id="entities"
+                 sbb-entities
+                 ng-class="{ 'heatmap' : expression }">
+                <ol class="alphabet itemList">
+                    <li ng-repeat="letter in units">
+                        <ul class="letter" data-letter="{{ letter[0].title.substr(0,1) }}">
+                            <li ng-repeat="unit in letter">
+                                <div class="wrapper">
+                                    <span class="hmIcon"
+                                          ng-style="relColor(expression.sum[unit.name])">
+                                        <span ng-show="selectedGene > -1">{{ expression[unit.name][genes[selectedGene]] }} / </span>{{ expression.sum[unit.name] | number:1 }}
+                                    </span>
+                                    <a
+                                        ng-href="{{ data.view.name }}?entity={{ unit.name }}"
+                                        class="unit"
+                                        ng-class="{'zoomable': unit.zoom,
+                                                   'active': unit.name == activeUnit,
+                                                   'highlight': unit.name == hoverUnit}"
+                                        ng-dblclick="setView(unit.name)"
+                                        data-prefix="{{ prefix(unit.prefix) }}"
+                                        data-expr="{{ unit.expr }}"
+                                        id="unit_{{ unit.name }}">{{ unit.title }}
+                                    </a>
+                                    <ol class="singleGenes" ng-if="expUnits">
+                                        <li ng-repeat="gene in genes"
+                                            ng-style="{ width: relExp(unit.name, gene) }">
+                                            <div class="bar"
+                                                 ng-class="{'highlight': gene == genes[selectedGene] }"
+                                                 ng-click="selectSingleGene($index)">
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <section class="information"
+             panel="information">
+        <div class="poi"
+             ng-include
+             src="helpInformation"
+             ng-class="{ active: help}">
+        </div>
+        <h3 class="toggler" ng-click="toggle('information')">Information</h3>
+        <ul class="controls">
+            <li title="Maximise"
+                class="hidden icon-plus"
+                ng-click="maximise('information')">Max</li>
+        </ul>
+        <div class="content">
+            <div class="wrapper">
+                <ul class="noMargin itemList">
+                    <li ng-show="data.definitions.length">
+                        <h4>Definition:</h4>
+                        <ul class="noMargin">
+                            <li ng-repeat="definition in data.definitions">
+                                <p>{{ definition.definition }}<i ng-show="definition.reference"> (<a href="{{ definition.reference }}" target="_blank">Reference</a>)</i>
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li ng-show="data.synonyms.length">
+                        <h4>Synonym:</h4>
+                        <ul class="noMargin csv"
+                            ng-show="data.synonyms.length">
+                            <li class="tag" ng-repeat="synonym in data.synonyms">{{ synonym }}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Details:</h4>
+                        <ul class="noMargin floating">
+                            <li>
+                                <a class="button icon icon-extern"
+                                   target="_blank"
+                                   ng-href="http://cellfinder.org/ontology?id={{ data.view.ontId }}">CellFinder</a>
+                            </li>
+                            <li ng-if="isMouse()">
+                                <a class="button icon icon-extern"
+                                   target="_blank"
+                                   title="International Mouse Phenotype Consortium"
+                                   ng-href="http://www.mousephenotype.org/data/anatomy/{{ data.view.ontId.replace('_', ':') }}">IMPC</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Species:</h4>
+                        <p>{{ data.view.species }}</p>
+                    </li>
+                    <li>
+                        <h4>Gender:</h4>
+                        <div ng-switch on="genderEnabled">
+                            <p ng-switch-when="false">gender-neutral</p>
+                            <p ng-switch-default>{{ gender }}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Resolution:</h4>
+                        <p>{{ data.view.level }}</p>
+                    </li>
+                    <li>
+                        <h4>Developmental Stage:</h4>
+                        <p>{{ data.view.stage | devStage:data.view.species }}</p>
+                    </li>
+                    <li>
+                        <h4>
+                            <abbr title="Unified Resource Identifier">URI</abbr>:
+                        </h4>
+                        <p>{{ data.view.uri }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section panel="heatmap"
+             id="heatmap"
+             ng-class="{'disabled': !heatmap, 'info': genes.length }">
+        <div class="poi"
+             ng-include
+             src="helpHeatmap"
+             ng-class="{ active: help}">
+        </div>
+        <h3 class="toggler" ng-click="toggle('heatmap')">Heat Map</h3>
+        <ul class="controls" ng-show="heatmap">
+            <li title="Maximise"
+                class="hidden icon-plus"
+                ng-click="maximise('heatmap')">Max</li>
+            <li class="hidden icon-info"
+                title="Info"
+                ng-click="openHeatmapInfo()">Info</li>
+            <li class="icon-cross"
+                title="Quit Heat Map"
+                ng-click="resetHeatmap()"
+                ng-show="genes.length">Close</li>
+        </ul>
+        <div class="content">
+            <div class="wrapper">
+                <div class="expValue">
+                    <h4 title="Transcripts per million">TPM</h4>
+                    <div class="colors"></div>
+                    <span class="min">{{ expression.min }}</span>
+                    <span class="max">{{ expression.max }}</span>
+                </div>
+                <div class="dataset">
+                    <select
+                        ng-model="dataset"
+                        ng-options="id as name for (id, name) in data.expDatasets">
+                    </select>
+                </div>
+                <sbb-chosen
+                    data="geneList"
+                    selection="genes"
+                    limit="15"
+                    placeholder="Search for a gene"
+                    no-results="Nothing found." />
+            </div>
+        </div>
+    </section>
+    <section panel="images"
+             ng-class="{
+                'disabled': !picturesAvailable(),
+                'error': data.pictures.length && !omeroAvailable
+            }">
+        <div class="poi"
+             ng-include
+             src="helpPicture"
+             ng-class="{ active: help}">
+        </div>
+        <h3 class="toggler" ng-click="toggle('images')">Histological Images</h3>
+        <ul class="controls" ng-show="picturesAvailable()">
+            <li title="Maximise"
+                class="hidden icon-plus"
+                ng-click="maximise('images')">Max</li>
+        </ul>
+        <div class="content">
+            <div class="wrapper">
+                <div class="slider"
+                     sbb-horizontal-slider
+                     ont-id="{{ data.view.ontId }}"
+                     pictures="data.pictures"
+                     num-visible-items="1">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="main" class="right browser">
+    <div class="poi ilu"
+         ng-class="{ active: help}"
+         ng-include src="helpIlu">
+    </div>
+    <div class="poi iluAll"
+         ng-class="{ active: help}"
+         ng-include src="helpIluAll">
+    </div>
+    <div class="poi iluBlank"
+         ng-class="{ active: help}"
+         ng-include
+         src="helpIluBlank">
+    </div>
+    <header id="subtopbar"
+            ng-class="{ 'visible' : data.zoomOutLevels.length }">
+        <ol id="breadcrumbs">
+            <li ng-repeat="level in data.zoomOutLevels">
+                <a ng-href="{{ level.view }}">
+                    {{ level.level.replace('-', ' ') }}
+                </a>
+            </li>
+            <li>
+                <em>{{ data.view.level }}</em>
+            </li>
+        </ol>
+    </header>
+    <sbb-illustration
+        id="raphael"
+        ilu="illustration"
+        ont-id="{{ data.view.ontId }}"
+        prefixes="data.prefixes"
+        set-view="setView(view)"
+        set-active-unit="setActiveUnit(unit, group)"
+        is-zoomable="isZoomable(unit)"
+        get-ont-id="getOntId(unit)"
+        expression="expression"
+        is-unit-overlayed="isUnitOverlayed(unit)"
+        reset-heat-map="resetHeatmap()"
+        view="data.view"
+        get-gxe="getGXE(entity)">
+    </sbb-illustration>
+    <footer>
+        <a href="about#license">Copyright</a> / <a href="legals">Legals</a>
+    </footer>
+</div>
+
+<div id="helpContainer" ng-include src="helpMessage"></div>
+
+<sbb-dialog></sbb-dialog>

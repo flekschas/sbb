@@ -1,0 +1,31 @@
+<section id="help" class="view" ng-class="{ 'show': helpMessage }" ng-click="closeHelpMessage($event)">
+    <div class="message">
+        <div class="content">
+            <h3>Heat map of RNA expressions</h3>
+            <div class="sidebar big">
+                <h4>Color Range</h4>
+                <div class="colors"></div>
+                <span class="min">0%</span>
+                <span class="max">100%</span>
+                <span class="med">50%</span>
+            </div>
+            <p>Heat map functionality lets you color the human body illustration according to the relative RNA abundance.</p>
+            <p>Select genes from the search panel in the bottom right and anatomical entities will be colored relatively to the minimum and maximum RNA expression value of your selection.<br/>The minimum and maximum expression value can be found above the gene selection.</p>
+            <p>The RNA expression data is provided by RNA Seq Atlas<sup>2</sup> and Human BodyMap 2.0<sup>2</sup>. Raw counts are normalised to transcripts per millions.</p>
+            <p>Genes can be de- and selected using your mouse or keyboard only. A click on the top right "x" button will close the whole heat map modus.</p>
+            <p>The coloured entities are shown together with a stacked bar chart in the entities panel. When multiple genes are selected a click on a single bar within the bar chart will highlight this single. To deselect the gene simply click again on the bar. Same can be done by clicking on the genes label.</p>
+            <p>For further information please refer to the <a href="about#heat-map">about page</a>.</p>
+            <ol class="note">
+                <li>
+                    <sup>1</sup>
+                    RNA-Seq Atlas - A reference database for gene expression profiling in normal tissue by next generation sequencing. <i>Bioinformatics</i> (2012), 28, 1184-1185. (<a href="http://dx.doi.org/10.1093/bioinformatics/bts084" target="_blank">Krupp, M. et al.</a>).
+                </li>
+                <li>
+                    <sup>2</sup>
+                    (<a href="http://dec2013.archive.ensembl.org/" target="_blank">Ensembl Release 74</a>)
+                </li>
+            </ol>
+        </div>
+        <div class="close">Close</div>
+    </div>
+</section>

@@ -1,10 +1,47 @@
-# Changelog
+Changelog
+=========
 
-## 1.5.1 / 2014-09-08
+1.6.0 / 2014-09-xx
+------------------
+
+Linked data from EBI RDF integrated and completely re-organised directory
+structure utilising *folders-by-feature*. Please see
+the [README][README.md#Folder-Structure] for details.
+
+**Enhancements:**
+
+* Source code now organised by *folders-by-feature*.
+* Gene expression experiments can now be searched. Double click on an entity and
+  click on `Gene Expression`.
+* Much more sophisticated build system with a growing number of tests.
+* Re-implemented, responsive accordion. 
+* Re-implemented results bars for displaying several different results depending
+  on what has been searched. (I.e. SBB, EBI RDF, etc.)
+* Re-implemented dialogs.
+* API calls now encapsulated into services.
+
+**Updates:**
+
+* New icon for the drop down panel of the tree of resolutions. It now shows an
+  actual tree instead of a magnifier.
+* New icon for the drop down panel of the developmental stages. Should show the
+  meiosis of a cell. Feedback is very welcome.
+* Search inputs now feature a magnifier icon.
+* AngularJS from 1.2.22 to 1.2.24
+
+**Bug Fixes:**
+
+* Lots of smaller bug fixes.
+
+
+1.5.1 / 2014-09-08
+------------------
 
 A few minor bug and typo fixes.
 
-## 1.5.0 / 2014-08-19
+
+1.5.0 / 2014-08-19
+------------------
 
 AngularJS and third party libraries update.
 
@@ -34,7 +71,9 @@ which provides full support. The oldest version of Firefox supported.
   though they had been found.
 * Fixed some annotations.
 
-## 1.4.2 / 2014-07-28
+
+1.4.2 / 2014-07-28
+------------------
 
 AngularJS and third party libraries update.
 
@@ -43,7 +82,9 @@ AngularJS and third party libraries update.
 * AngularJS from 1.2.16 to 1.2.21.
 * Filesaver.js with Blob.js
 
-## 1.4.1 / 2014-05-26
+
+1.4.1 / 2014-05-26
+------------------
 
 Minor bug fixes.
 
@@ -51,7 +92,9 @@ Minor bug fixes.
 
 * Fixed a couple of minor bugs.
 
-## 1.4.0 / 2014-05-09
+
+1.4.0 / 2014-05-09
+------------------
 
 New expression data for the human body gross view added. Expression values
 changed from RPKM to TPM.
@@ -76,7 +119,9 @@ changed from RPKM to TPM.
 
 * Minor bug fixes.
 
-## 1.3.2 / 2014-02-20
+
+1.3.2 / 2014-02-20
+------------------
 
 Mainly patches and minor visual enhancements.
 
@@ -96,7 +141,9 @@ Mainly patches and minor visual enhancements.
 
 * Couple of minor bugs have been fixed.
 
-## 1.3.1 / 2014-02-05
+
+1.3.1 / 2014-02-05
+------------------
 
 Changed license of the application from Creative Commons to GNU GPLv3.
 
@@ -104,7 +151,9 @@ Changed license of the application from Creative Commons to GNU GPLv3.
 
 * Changed license of the web application from Creative Commons to GNU GPL v3.
 
-## 1.3.0 / 2013-12-15
+
+1.3.0 / 2013-12-15
+------------------
 
 Two new organs: liver and gall bladder, have been added. Update to AngularJS 1.2
 and code clean-up.
@@ -130,15 +179,17 @@ and code clean-up.
   mechanism to avoid unwanted effects.
 * Lots of smaller bug fixes.
 
-## 1.2.0 / 2013-11-15
+
+1.2.0 / 2013-11-15
+------------------
 
 Version 1.2 adds heatmap coloring to the Semantic Body Browser. Using the RNA
 Seq Atlas as the source of RNA expressions it's possible to color the human body
-ullistration according to the expression (RPKM) of a selection of different
+illustration according to the expression (RPKM) of a selection of different
 genes. This feature is currently a proof of concept only as it has been
 discovered that RPKM values are not proof for cross sample comparison. We are
 working on recalculating the the expression values Apart from that this release
-features technical improvements, bug fixes and sligh design refreshments.
+features technical improvements, bug fixes and slight design refreshments.
 
 **Enhancements:**
 
@@ -154,10 +205,11 @@ features technical improvements, bug fixes and sligh design refreshments.
 * Use CSS3 for simplified and smooth animations e.g. dragging and scaling.
 
 
-## 1.1.0 / 2013-11-15
+1.1.0 / 2013-11-15
+------------------
 
 This release features a couple of important changes. First of all the unit
-filtering as been replaced by a system wide search which dramatically simplyfies
+filtering as been replaced by a system wide search which dramatically simplifies
 the process of finding specific illustrations. This search can be accessed
 anywhere except on this about page. The second most notable change is the
 refined overview of the human body which finally distinguishes between the
@@ -190,6 +242,8 @@ of smaller bugs have been fixed since the initial release.
 
 * Several smaller bugs have been fixed.
 
-## 1.0.0 / 2012-10-26
+
+1.0.0 / 2012-10-26
+------------------
 
 Initial release.

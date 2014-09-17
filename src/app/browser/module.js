@@ -1,0 +1,12 @@
+angular
+  .module(
+    'sbb.browser',
+    [
+      'colours',
+      'containElement',
+      'maxStringLength',
+      'pmid',
+      'SbbSpinner',
+      'stringWidth'
+    ]
+  );

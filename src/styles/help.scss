@@ -1,0 +1,180 @@
+div.poi {
+    position: absolute;
+}
+
+div.poi div.drop {
+    position: relative;
+    float: none;
+    width: 22px;
+    height: 22px;
+    opacity: 1;
+    transition: all .6s $easeInOutCubic;
+}
+
+div.poi div.drop.active {
+    opacity: 1;
+}
+
+div.poi div.hint {
+    opacity: .9;
+    margin: 4px;
+    width: 14px;
+    height: 14px;
+    background-color: #3b94eb;
+    background-image: linear-gradient(#3b94eb, #418ed9);
+    border-radius: 12px;
+}
+
+div.poi div.hint:after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 4px;
+    display: block;
+    content:'';
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    border: 3px solid #5596d5;
+    border-radius: 24px;
+
+    -webkit-animation: strongPulsate 1.5s $easeInOutCubic;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation: strongPulsate 1.5s $easeInOutCubic;
+    -moz-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes strongPulsate {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+    33% {
+        opacity: 1.0;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@-moz-keyframes strongPulsate {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+div.poi .drop div.content {
+    font-size: 12px;
+}
+
+div.poi .drop div.content h4 {
+    margin: 9px 6px 3px;
+}
+
+div.poi .drop div.content h4 + p {
+    margin-top: 3px;
+}
+
+div.poi .drop div.content p i {
+    color: #404040;
+    font-style: italic;
+}
+
+div.poi strong.action {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.1);
+    padding: 0 .2em;
+    border: none;
+    border-bottom: 1px solid #cc683e;
+    background-color: #ff8a59;
+    background-image: linear-gradient(#ff8a59, #f27b49);
+    border-radius: .2em;
+}
+
+div.poi strong.result {
+    color: #000;
+    font-style: italic;
+    padding-left: 5px;
+}
+
+div.poi strong.result:before {
+    padding-right: 5px;
+    content: '>';
+    color: #808080;
+    font-style: normal;
+    font-weight: normal;
+}
+
+div.poi strong.result:before {
+    padding-right: 5px;
+    content: '>';
+    color: #808080;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/*
+ * List of POIs (points of interest)
+ */
+
+#dialog div.poi {
+    z-index: 11;
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -11px;
+    line-height: 1em;
+}
+
+#nav div.poi.leftNav {
+    top: 10px;
+    left: 66px;
+}
+
+#nav div.poi.rightNav {
+    top: 10px;
+    right: 60px;
+}
+
+header > div.poi {
+    top: 10px;
+    left: 37.5%;
+    z-index: 3;
+}
+
+#search div.poi {
+    top: 5px;
+    left: 50%;
+}
+
+#main div.poi.ilu {
+    top: 30%;
+    left: 50%;
+    z-index: 2;
+}
+
+#main div.poi.iluAll {
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+}
+
+#main div.poi.iluBlank {
+    bottom: 25%;
+    left: 20%;
+    z-index: 2;
+}
+
+#sidebar section div.poi {
+    top: 2px;
+    left: 50%;
+    z-index: 2;
+}

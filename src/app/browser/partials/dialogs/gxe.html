@@ -1,0 +1,36 @@
+<h3>{{ content.title }}</h3>
+<div class="sidebar medium">
+    <h4>Link Out</h4>
+    <ul class="noMargin noListStyle">
+        <li>
+            <h5>{{ content.repo }}</h5>
+            <ul class="noMargin noListStyle">
+                <li>
+                    <a target="_blank"
+                       class="label icon-extern iconSpace"
+                       ng-href="{{ content.url }}">{{ content.acc }}</a>
+               </li>
+            </ul>
+        </li>
+        <li ng-show="content.pmid.length > 0">
+            <h5>PubMed:</h5>
+            <ul class="noMargin noListStyle">
+                <li ng-repeat="pmid in content.pmid track by $index">
+                    <a target="_blank"
+                       class="label icon-extern iconSpace"
+                       ng-href="{{ pmid | pmid }}">{{ pmid }}</a>
+               </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<h4 class="top">Description</h4>
+<p>{{ content.desc }}</p>
+<h4 ng-if="content.orgs.length">Organisations</h4>
+<ul class="noMargin csv">
+    <li ng-repeat="org in content.orgs">{{ org }}</li>
+</ul>
+<h4 ng-if="content.people.length">People</h4>
+<ul class="noMargin csv">
+    <li ng-repeat="person in content.people">{{ person }}</li>
+</ul>

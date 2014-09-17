@@ -1,0 +1,81 @@
+<div ng-class="{ 'ready': ready }">
+    <div>
+        <div id="heatMapNotify"
+             ng-class="{'visible': heatmap, 'topbar' : zoomOutLevels.length }">
+            <div class="deselectGene"
+                 ng-class="{'visible': selectedGene.length }"
+                 ng-click="resetSingleGene()">
+                {{ selectedGene }} <div class="icon icon-cross"></div>
+            </div>
+            <div ng-click="resetHeatMap()" class="closeAll">
+                Heat Map Modus <div class="icon icon-cross"></div>
+            </div>
+        </div>
+        <div id="displayAll"
+             title="Show All"
+             class="icon icon-displayall"
+             ng-class="{'heatMap': heatmap, 'topbar' : zoomOutLevels.length }"
+             ng-click="displayAll()">
+             Display All
+        </div>
+        <div id="download"
+             title="Download"
+             class="icon icon-download"
+             ng-class="{'heatMap': heatmap, 'topbar' : zoomOutLevels.length }"
+             ng-click="download()"
+             ng-show="fileSaverSupport">
+             Download
+        </div>
+    </div>
+    <div id="zoomDialog" class="drop only big">
+        <div class="container">
+            <div class="subContainer">
+                <div class="triangle"></div>
+                <div class="content">
+                    <h3>{{ activeUnit }}</h3>
+                    <p ng-hide="!unitDefinition.definition.length">
+                        {{ unitDefinition.definition | maxStringLength:300 }}
+                        <a target="_blank"
+                           class="reference"
+                           ng-href="{{ unitDefinition.reference }}"
+                           ng-show="unitDefinition.reference.length">Reference</a>
+                    </p>
+                    <div class="separator"
+                         ng-hide="!unitDefinition.definition.length">
+                    </div>
+                    <h4>Search associated data</h4>
+                    <div class="wrapper">
+                        <a class="left button"
+                           ng-click="getGxe({ entity: activeUnit })">BioSamples</a>
+                        <a class="right button"
+                           ng-click="setView({ view: activeUnit })">Gene Expression</a>
+                    </div>
+                    <div class="separator"></div>
+                    <h4>Navigate</h4>
+                    <div class="wrapper">
+                        <a class="icon iconSpace icon-extern left button"
+                           target="_blank"
+                           ng-class="{ 'disabled': !ontId.length }"
+                           ng-href="http://cellfinder.org/ontology?id={{ ontId }}">CellFinder</a>
+                        <a class="right button"
+                           ng-class="{ 'disabled': zoomDisabled }"
+                           ng-click="setView({view:activeUnit})">Zoom In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="heatMapCloseDialog"
+         class="drop only"
+         ng-class="{'opened': heatMapCloseDialog && heatmap}">
+        <div class="container">
+            <div class="subContainer">
+                <div class="triangle"></div>
+                <div class="content">
+                    <a class="button"
+                       ng-click="resetHeatMap()">Close Heat Map mode!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

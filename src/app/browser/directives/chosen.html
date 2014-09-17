@@ -1,0 +1,41 @@
+<ul class="selection" ng-click="focusLatest()">
+    <li ng-class="{'ready': select.ready,
+                   'highlight': selectedGene == $index }"
+        ng-repeat="select in preselection"
+        ng-repeat-finished>
+        <input
+            type="text"
+            placeholder="{{ placeholder($first) }}"
+            value="{{ select.value }}"
+            ng-keyup="inputKeyUp($event)"
+            ng-keydown="inputKeyDown($event)"
+            ng-focus="inputFocus($event)"
+            ng-blur="inputBlur($event)"
+            ng-class="{'last': $last}"
+        />
+        <div
+            class="final"
+            ng-click="selectSingleGene($index)">{{ select.value }}</div>
+        <div class="close icon-cross" ng-click="deselect($index)">Remove</div>
+    </li>
+</ul>
+<ul class="hits">
+    <li
+        ng-repeat="hit in hits | limitTo:limit "
+        ng-repeat-finish-render
+        ng-click="select($event)"
+        ng-mouseenter="hover($index)"
+        ng-bind-html="hit.with_hit"
+        ng-class="{ 'selected': $index == selected, 'disabled': alreadySelected(hit.value) }"
+        data-value="{{ hit.value }}">
+    </li>
+</ul>
+<p ng-show="noResults()" class="no-results">
+    {{ noResultsText }}
+</p>
+<p class="smallPadding"
+   ng-show="noInput()">
+    <abbr title="Example">Exp</abbr>.:<br/>
+    <a ng-click="setGeneExample('liver')">Liver (Alb, CYP1A2, CYP2B6, GJB1, SERPINA1)</a><br/>
+    <a ng-click="setGeneExample('kidney')">Kidney (CD24, GGT1, NPHS1, NPHS2, PAX2)</a>
+</p>

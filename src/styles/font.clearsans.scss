@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'clearsans';
+    src:url('../assets/fonts/clearsans/EOT/ClearSans-Light.eot');
+    src:url('../assets/fonts/clearsans/EOT/ClearSans-Light.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/clearsans/TTF/ClearSans-Light.ttf') format('truetype'),
+        url('../assets/fonts/clearsans/WOFF/ClearSans-Light.woff') format('woff'),
+        url('../assets/fonts/clearsans/SVG/ClearSans-Light.svg#ClearSans-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'clearsans';
+    src:url('../assets/fonts/clearsans/EOT/ClearSans-Medium.eot');
+    src:url('../assets/fonts/clearsans/EOT/ClearSans-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/clearsans/TTF/ClearSans-Medium.ttf') format('truetype'),
+        url('../assets/fonts/clearsans/WOFF/ClearSans-Medium.woff') format('woff'),
+        url('../assets/fonts/clearsans/SVG/ClearSans-Medium.svg#ClearSans-Medium') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}

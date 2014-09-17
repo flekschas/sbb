@@ -1,0 +1,22 @@
+<li class="fRight drop center"
+    ng-class="{ 'opened': isOpen() }">
+    <div alt="Developmental Stage"
+         title="Developmental Stage"
+         class="icon icon-meiosis noText"
+         ng-class="{'enabled': stageEnabled }"
+         ng-click="toggle()">
+    </div>
+    <div class="container">
+        <div class="subContainer">
+            <div class="triangle"></div>
+            <div class="content">
+                <h3>Developmental Stage</h3>
+                <ul>
+                    <li ng-repeat="differentStage in differentStages track by $index">
+                        <a ng-href="{{ differentStage.path }}" ng-class="{'active': differentStage.stage == data.view.stage }"><span class="uppercase lightbold">{{ differentStage.stage }}</span>: <i class="capitalize">{{ differentStage.name }}</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>

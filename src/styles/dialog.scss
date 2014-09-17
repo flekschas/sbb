@@ -1,0 +1,306 @@
+#dialog {
+    position: absolute;
+    display: none;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#dialog.show {
+    display: block;
+}
+
+#dialog .background {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.2s $easeInOutCubic;
+}
+
+#dialog.show .background {
+    opacity: 1;
+}
+
+#dialog .window {
+    position: absolute;
+    opacity: 0;
+    top: 7.5%;
+    right: 7.5%;
+    bottom: 7.5%;
+    left: 7.5%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0.5em;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 1px rgba(0, 0, 0, 0.1);
+    transform: scale(0.6);
+    transition: all 0.2s $easeInOutCubic;
+}
+
+#dialog .window.large {
+    top: 5%;
+    right: 5%;
+    bottom: 5%;
+    left: 5%;
+}
+
+#dialog.show .window {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#dialog .window > .content {
+    position: absolute;
+    z-index: 0;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 2.5em;
+    left: 0;
+    margin-top: 2em;
+    padding: 0 2em 2em 2em;
+    line-height: 1.5em;
+}
+
+#dialog h3 {
+    color: #40403c;
+    text-align: justify;
+    background: -webkit-gradient(linear, left top, left bottom, from(#1a1a18), to(#808078));
+    background: -webkit-linear-gradient(#1a1a18, #4d4b48);
+    background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#dialog .window > .content > h3 {
+    margin: 0 0 1em;
+    text-align: center;
+}
+
+#dialog h4 {
+    margin: 1em 0 0.5em 0;
+}
+
+#dialog h4.top {
+    margin-top: 0;
+}
+
+#dialog .window > .content p {
+    margin: 0.5em 0;
+    text-align: justify;
+}
+
+#dialog .window > .content b,
+#dialog .window > .content i {
+    color: #33312b;
+    font-weight: normal;
+}
+
+#dialog .window > .content a {
+    color: inherit;
+}
+
+#dialog .window > .content a.label {
+    font-size: 0.9em;
+    padding: 0 .5em 1px .5em;
+    text-decoration: none;
+    border: 1px solid #d9d5d2;
+    border-radius: 1em;
+}
+
+#dialog .sidebar {
+    position: relative;
+    float: right;
+    width: 20%;
+    margin: 0 0 2em 2em;
+    height: 100px;
+    padding: 0.5em;
+    font-size: 0.8em;
+    line-height: 1.71875em;  /* 1.375 / 0.8 */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5em;
+}
+
+#dialog .sidebar.medium {
+    width: 33%;
+    height: auto;
+}
+
+#dialog .sidebar.big {
+    width: 50%;
+    height: auto;
+}
+
+#dialog .sidebar h4 {
+    font-size: 1em;
+    margin: 0;
+    color: #807c73;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#dialog .sidebar h5 {
+    font-size: 1em;
+    margin: 0.5em 0 0 0;
+    color: #807c73;
+    font-weight: normal;
+}
+
+#dialog .sidebar li:first-child h5 {
+    margin-top: 0;
+}
+
+#dialog ol.note {
+    padding: 0 0 1em 0;
+    list-style: none;
+    color: #807c73;
+    font-size: 0.8em;
+}
+
+#dialog ol.note {
+    margin: 0;
+}
+
+#dialog ol.note sup {
+    color: #4D4A41;
+}
+
+#dialog ol.note li {
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#dialog ol.note li:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+#dialog .close {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0.5em 0;
+    color: #999690;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    line-height: 1em;
+    border: none;
+    background: #e5e5e5;
+    cursor: pointer;
+    border-radius: 0 0 0.4em 0.4em;
+    box-shadow: inset 0 1px 0 0 rgba(0,0,0,.05), 0 1px 0 0 rgba(0,0,0,.2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#dialog div.close:hover {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    background-color: #a1c4e5;
+    background-image: linear-gradient(#a1c4e5, #8db4d9);
+}
+
+#dialog div.close:active {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    padding: 0.6em 0 0.4em;
+    background-color: #8fafcc;
+    background-image: linear-gradient(#8fafcc, #7c9fbf);
+    box-shadow: inset 0 3px 3px -2px rgba(0,0,0,.2), inset 0 5px 5px -5px rgba(0,0,0,.1), inset 0 1px 0 0 rgba(0,0,0,.05), 0 1px 0 0 rgba(0,0,0,.2);
+}
+
+
+/*******************************************************************************
+ * Content related styling
+ ******************************************************************************/
+
+#dialog .sidebar span {
+    display: block;
+}
+
+#dialog .sidebar span.min {
+    position: absolute;
+    left: .75em;
+    color: #004080;
+    text-align: left;
+}
+
+#dialog .sidebar span.med {
+    color: #8f1020;
+    text-align: center;
+}
+
+#dialog .sidebar span.max {
+    position: absolute;
+    right: .75em;
+    color: #dcba0b;
+    text-align: right;
+}
+
+
+/*******************************************************************************
+ * Media Queries
+ ******************************************************************************/
+
+@media (min-width: 30em) {
+    #dialog .window {
+        top: 10%;
+        right: 10%;
+        bottom: 10%;
+        left: 10%;
+    }
+
+    #dialog .window.large {
+        top: 6.25%;
+        right: 6.25%;
+        bottom: 6.25%;
+        left: 6.25%;
+    }
+}
+
+@media (min-width: 50em) {
+    #dialog .window {
+        top: 15%;
+        right: 15%;
+        bottom: 15%;
+        left: 15%;
+    }
+
+    #dialog .window.large {
+        top: 7.5%;
+        right: 7.5%;
+        bottom: 7.5%;
+        left: 7.5%;
+    }
+}
+
+@media (min-width: 70em) {
+    #dialog .window {
+        top: 20%;
+        right: 15%;
+        bottom: 20%;
+        left: 15%;
+    }
+
+    #dialog .window.large {
+        top: 10%;
+        right: 10%;
+        bottom: 10%;
+        left: 10%;
+    }
+}

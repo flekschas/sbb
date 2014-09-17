@@ -1,0 +1,23 @@
+<h3>Illustrations <span class="num">{{ results.views.length }}</span></h3>
+<ul class="alphabet">
+    <li ng-repeat="view in results.views">
+        <h4><a ng-href="{{ view.sub[0].link }}">{{ view.name }}</a></h4>
+        <ul>
+            <li ng-repeat="subview in view.sub">
+                <a ng-href="{{ subview.link }}">{{ subview.species }} {{ subview.stage }}</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<h3>Entities within an illustration <span class="num">{{ results.units.length }}</span></h3>
+<ul class="alphabet">
+    <li ng-repeat="unit in results.units">
+        <h4><a ng-href="{{ unit.sub[0].link }}?entity={{ unit.name | linkCompliant }}">{{ unit.name }}</a></h4>
+        <ul>
+            <li ng-repeat="subunit in unit.sub">
+                    <a ng-href="{{ subunit.link }}?entity={{ unit.name | linkCompliant }}">
+                    {{ subunit.species }} {{ subunit.stage }} {{ subunit.view }}</a>
+            </li>
+        </ul>
+    </li>
+</ul>

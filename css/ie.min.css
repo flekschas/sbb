@@ -1,9 +1,0 @@
-/**
- * Semantic Body Browser - v1.5.0
- * http://sbb.cellfinder.org
- *
- * Copyright (c) 2014 Lekschas et al.
- * Licensed GPL3 <https://raw.github.com/flekschas/sbb/master/LICENSE>
- */
-
-#sbb #chromeframe{position:relative;color:#4d4a41;line-height:1.5}#sbb #chromeframe h1{position:relative;padding:.25em 0;font-size:2em;color:#202020;background:#e5e4de;border-bottom:1px solid #cccbc6}#sbb #chromeframe p{margin:15px auto 5px;width:800px;font-size:1em}#sbb #chromeframe p.intro{margin-top:30px;margin-bottom:30px;padding-bottom:30px;font-size:1.25em;text-align:center;border-bottom:1px solid #f0ede6}#sbb #chromeframe a{color:#d96636}#sbb #chromeframe strong{text-decoration:underline}#sbb .noie{display:none}

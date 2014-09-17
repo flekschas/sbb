@@ -1,0 +1,12 @@
+<h3>Experiments for: {{ resultsentity }} <span class="num">{{ results.length }}</span></h3>
+<ul class="liteMargin limited">
+    <li ng-repeat="experiment in results track by $index | limitTo:limit">
+        <h4 class="clickable"
+            ng-click="openGXE(experiment)">{{ experiment.title }}</h4>
+        <a target="_blank"
+            class="icon padding icon-extern"
+            ng-href="{{ experiment.url }}">
+            {{ experiment.repo }}: {{ experiment.acc }}
+        </a>
+    </li>
+</ul>

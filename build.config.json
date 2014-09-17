@@ -1,0 +1,43 @@
+{
+  "apache_root": "/Users/fritz/Sites",
+  "build_dir": "build",
+  "compile_dir": "bin",
+  "app_files": {
+    "js": [ "src/**/*.js", "!src/**/*.spec.js", "!src/assets/**/*.js" ],
+    "jsunit": [ "src/**/*.spec.js" ],
+
+    "atpl": [ "src/app/**/*.html" ],
+    "ctpl": [ "src/common/**/*.html" ],
+
+    "html": [ "src/index.html" ],
+    "sass": "src/styles/app.scss"
+  },
+  "test_files": {
+    "js": [
+      "vendor/angular-mocks/angular-mocks.js"
+    ]
+  },
+  "vendor_files": {
+    "js": [
+      "vendor/angular/angular.js",
+      "vendor/angular-bindonce/bindonce.js",
+      "vendor/angular-route/angular-route.js",
+      "vendor/angular-touch/angular-touch.js",
+      "vendor/angular-resource/angular-resource.js",
+      "vendor/Blob/Blob.js",
+      "vendor/FileSaver/FileSaver.js",
+      "vendor/hammerjs/hammer.js",
+      "vendor/isMobile/isMobile.js",
+      "vendor/jquery-custom/jquery.js",
+      "vendor/jquery-mousewheel/jquery.mousewheel.js",
+      "vendor/raphael/raphael.js",
+      "vendor/raphael-group/raphael.group.js",
+      "vendor/spin.js/spin.js"
+    ],
+    "css": [
+      "vendor/normalize-css/normalize.css"
+    ],
+    "assets": [
+    ]
+  }
+}

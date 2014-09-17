@@ -1,0 +1,17 @@
+<div id="resultsBar" ng-class="{ show: show }">
+    <section class="content"></section>
+    <div class="loading" ng-show="loading" ng-if="!error"></div>
+    <div class="error"
+         ng-if="error">
+        <div class="center icon-error iconAbove iconBigger">
+            Service broken
+        </div>
+    </div>
+    <div class="nothingFound"
+         ng-if="nothingFound">
+        <div class="center icon-info iconAbove iconBigger">
+            Nothing Found
+        </div>
+    </div>
+    <div class="close" ng-click="show = false">Close</div>
+</div>

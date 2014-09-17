@@ -1,0 +1,23 @@
+<div alt="Species"
+     class="icon icon-{{ currentSpecies }} noText"
+     ng-class="{ 'enabled': enabled }"
+     ng-click="toggle()">
+</div>
+<div class="container">
+    <div class="subContainer">
+        <div class="triangle"></div>
+        <div class="content">
+            <h3>Switch Species</h3>
+            <ul>
+                <li ng-repeat="species in allSpecies">
+                    <button class="big left icon-{{ species.species }} capitalize"
+                            ng-click="changeSpecies(species.name)"
+                            ng-disabled="currentSpecies == species.species"
+                            ng-class="{'active': currentSpecies == species.species}">
+                        {{ species.species }}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

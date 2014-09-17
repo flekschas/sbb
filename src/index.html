@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" ng-app="sbb" ng-controller="AppCtrl as app">
+<head>
+    <meta charset="utf-8">
+    <meta name="fragment" content="!">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="apple-touch-icon-precomposed" href="assets/images/apple-touch-icon-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/apple-touch-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/apple-touch-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/apple-touch-icon-144x144-precomposed.png" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Body Browser">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="The Semantic Body Browser is a tool for graphically exploring an organisms body by means of semantically annotated vector graphics.">
+    <meta name="keywords" content="Semantic Body Browser, Human, Mouse, Anatomy, Kidney, Liver, Ontology, CellFinder, CELDA, Semantic Vector Graphics, Ontology">
+    <meta name="application-name" content="Semantic Body Browser">
+    <meta name="author" content="Fritz Lekschas, Harald Stachelscheid, Stefanie Seltmann, Andreas Kurtz">
+
+    <title ng-bind="'Semantic Body Browser &middot; ' + app.title">Semantic Body Browser</title>
+
+    <style>
+    [ng-cloak] {
+        display: none;
+    }
+    </style>
+
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
+
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/ie.css">
+    <![endif]-->
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+
+    <base href="<%= base %>">
+</head>
+<body status="{{ app.status }}">
+    <!--[if lt IE 9]>
+    <div id="chromeframe">
+        <h1>Semantic Body Browser</h1>
+        <p class="intro">Internet Explorer <strong>&lt; 9</strong> is not supported.</p>
+        <p>The Semantic Body Browser does not support the Internet Explorer 8 or less. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true" target="_blank">activate Google Chrome Frame</a> to improve your experience.</p>
+    </div>
+    <![endif]-->
+
+    <div ng-view ng-click="app.globalClick($event)" class="noie"></div>
+
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+*.sw*
+*~
+.sass-cache
+build/
+bin/
+node_modules/

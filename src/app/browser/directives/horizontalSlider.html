@@ -1,0 +1,23 @@
+<div class="left icon icon-goleft button"
+     ng-click="scroll('prev')"
+     ng-show="numPictures > 1">Prev</div>
+<div class="right icon icon-goright button"
+     ng-click="scroll('next')"
+     ng-show="numPictures > 1">Next</div>
+<ul>
+    <li ng-repeat="picture in pictures"
+        ng-repeat-finished>
+        <div class="copyright-license">
+            &copy;
+            <a target="_blank"
+               ng-href="{{ picture.source }}">{{ picture.copyright }}</a>.
+            <span ng-show="{{ picture.license.length }}">Licensed under <a ng-href="{{ picture.license_url }}" ng-show="{{ picture.license_url.length }}" target="_blank">{{ picture.license }}</a>
+                <span ng-hide="{{ picture.license_url.length }}">{{ picture.license }}</span>.
+            </span>
+        </div>
+        <a target="_blank"
+           ng-href="http://cellfinder.org/ontology/image?id={{ ontId }}&amp;omeId={{ picture.id }}">
+            <sbb-slider-img picture="{{ picture.id }}" ready="ready" />
+        </a>
+    </li>
+</ul>

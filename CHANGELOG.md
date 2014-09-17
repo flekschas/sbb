@@ -27,7 +27,7 @@ the [README][README.md#Folder-Structure] for details.
 * New icon for the drop down panel of the developmental stages. Should show the
   meiosis of a cell. Feedback is very welcome.
 * Search inputs now feature a magnifier icon.
-* AngularJS from 1.2.22 to 1.2.24
+* AngularJS from 1.2.22 to 1.2.25
 
 **Bug Fixes:**
 

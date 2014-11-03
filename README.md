@@ -39,7 +39,7 @@ All you need to get the Semantic Body Browser up and running is:
    `git clone https://github.com/flekschas/sbb /path/to/apache/root/somewhere`
 
 2. Edit `build.config.json` and set `apache_root` to your Apache document root
-   directory.
+   directory. (e.g. `/path/to/apache/root`)
 
 4. Install Grunt, Bower and Karma:
   * `npm install -g grunt-cli bower`

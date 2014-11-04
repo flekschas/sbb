@@ -195,6 +195,15 @@ angular
             }
           };
 
+          scope.noInput = function () {
+            if (!scope.selection.length && !scope.hits.length && $selection.find('li:last input').val().length < 2) {
+              return true;
+            }
+            else {
+              return false;
+            }
+          };
+
           scope.selectSingleGene = function (index) {
             if (scope.selectedGene === index) {
               index = undefined;

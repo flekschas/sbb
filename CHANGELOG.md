@@ -1,7 +1,13 @@
 Changelog
 =========
 
-1.6.0 / 2014-09-xx
+1.6.1 / 2014-11-04
+------------------
+
+A few minor bug fixes and code clean-up.
+
+
+1.6.0 / 2014-11-03
 ------------------
 
 Linked data from EBI RDF integrated and completely re-organised directory
@@ -12,9 +18,9 @@ the [README][README.md#Folder-Structure] for details.
 
 * Source code now organised by *folders-by-feature*.
 * Gene expression experiments can now be searched. Double click on an entity and
-  click on `Gene Expression`.
+  click on `BioSamples`.
 * Much more sophisticated build system with a growing number of tests.
-* Re-implemented, responsive accordion. 
+* Re-implemented, responsive accordion.
 * Re-implemented results bars for displaying several different results depending
   on what has been searched. (I.e. SBB, EBI RDF, etc.)
 * Re-implemented dialogs.
@@ -27,7 +33,7 @@ the [README][README.md#Folder-Structure] for details.
 * New icon for the drop down panel of the developmental stages. Should show the
   meiosis of a cell. Feedback is very welcome.
 * Search inputs now feature a magnifier icon.
-* AngularJS from 1.2.22 to 1.2.25
+* AngularJS from 1.2.22 to 1.2.25.
 
 **Bug Fixes:**
 

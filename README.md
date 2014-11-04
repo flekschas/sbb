@@ -180,17 +180,18 @@ Unless otherwise stated content is licensed under [Creative Commons BY-SA 4.0][c
 
 Copyright © 2012-2014 Lekschas et al.
 
-### Reference
+### Publication
 
-Lekschas et al. (2014) Semantic Body Browser: Graphical exploration of an
-organism and spatially resolved expression data visualisation.
-*Bioinformatics*, doi: 10.1093/bioinformatics/btu707.
+Lekschas et al. (2014) **Semantic Body Browser: Graphical exploration of an
+organism and spatially resolved expression data visualisation.**
+*Bioinformatics*, [doi: 10.1093/bioinformatics/btu707][doi].
 
 [about]: http://sbb.cellfinder.org/about
 [ape]: https://httpd.apache.org/
 [bl]: https://github.com/eligrey/Blob.js
 [bo]: https://github.com/Pasvaz/bindonce
 [cc]: https://creativecommons.org/licenses/by-sa/4.0/
+[doi]: http://dx.doi.org/10.1093/bioinformatics/btu707
 [fbf]: https://github.com/johnpapa/angularjs-styleguide#application-structure-lift-principle
 [fs]: https://github.com/eligrey/FileSaver.js
 [gnu]: LICENSE

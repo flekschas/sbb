@@ -21,7 +21,7 @@ angular
               $selection = $el.find('ul.selection'),
               $hits = $el.find('ul.hits'),
               hitsHeight,
-              hitsOffsetTop,
+              hitsOffsetTop = $hits.offset().top,
               bodyFont = $('body').css('font-family'),
               hitsFontSize = $hits.css('font-size'),
               hitsFontSizePx = parseInt($hits.css('font-size').slice(0, -2), 10);
@@ -393,14 +393,19 @@ angular
 
           fn.checkScrollPos = function() {
             var el = $hits.find('li.selected'),
-              elHeight = el.outerHeight(),
-              elOffsetTop = el.offset().top;
+                elHeight = el.outerHeight(),
+                elOffsetTop = el.offset().top;
 
+            /*
+             * Scroll Up
+             */
             if (elOffsetTop - hitsOffsetTop < 0) {
               $hits.scrollTop($hits.scrollTop() + elOffsetTop - hitsOffsetTop);
             }
 
-            // Scroll down
+            /*
+             * Scroll Down
+             */
             if (elOffsetTop - hitsOffsetTop + elHeight > hitsHeight) {
               $hits.scrollTop($hits.scrollTop() + elOffsetTop - hitsOffsetTop + elHeight - hitsHeight);
             }

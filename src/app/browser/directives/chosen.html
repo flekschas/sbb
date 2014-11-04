@@ -22,7 +22,7 @@
 <ul class="hits">
     <li
         ng-repeat="hit in hits | limitTo:limit "
-        ng-repeat-finish-render
+        ng-repeat-finished
         ng-click="select($event)"
         ng-mouseenter="hover($index)"
         ng-bind-html="hit.with_hit"

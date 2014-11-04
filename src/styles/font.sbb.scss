@@ -10,7 +10,6 @@
     font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"],
 [class^="icon-"]:before, [class*=" icon-"]:before {
     font-family: 'sbb';
     speak: none;
@@ -18,11 +17,16 @@
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
-    line-height: 1;
+    line-height: normal;
 
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-only {
+    font-family: 'sbb';
+    line-height: 1;
 }
 
 .icon-meiosis:before {

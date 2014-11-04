@@ -33,7 +33,7 @@
             <h3>Contents</h3>
             <ol>
                 <li><a ng-href="about#abstract">Abstract</a></li>
-                <li><a ng-href="about#introduction">Introduction</a></li>
+                <li><a ng-href="about#publication">Scientific Publications</a></li>
                 <li><a ng-href="about#browse-tree">Browsing Tree</a></li>
                 <li><a ng-href="about#heat-map">Heat Map</a></li>
                 <li><a ng-href="about#illustrations">Illustrations</a></li>
@@ -50,7 +50,7 @@
 
         <h2 id="abstract">Abstract</h2>
         <p>Advancing technologies generate large amounts of molecular and phenotypic data on cells, tissues and organisms, leading to an ever-growing detail and complexity while information retrieval and analysis becomes increasingly time-consuming. Most data resources provide text-based information retrieval only, meaning that the user searches for key words of a desired target. While this is sufficient when the target is known by name, it often fails or is time-consuming when the exact target name is unknown. Similarly, data interpretation based on large tables of numbers is suitable for computational analysis, but requires thorough background knowledge and time to be analysed manually. Often, quick access to information is desirable to evaluate the benefits of further research.</p><p>The Semantic Body Browser (SBB) is a web application for intuitively exploring the body of an organism from the organ to the sub-cellular level and visualising expression profiles by means of semantically annotated illustrations. It is used to comprehend biological and medical data related to the different body structures while relying on the strong pattern recognition capabilities of human users. A simple mouse click highlights the target and makes it possible to retrieve information or browse further along one of the four dimensions: resolution, development, species or gender.</p><p>All biological entities are annotated using <abbr title="Cell: Expression, Localization, Development, Anatomy"><a href="http://cellfinder.de/about/ontology/" target="_blank">CELDA</a></abbr><sup>1</sup> ontology.</p>
-        <ol class="note">
+        <ol class="notes">
             <li>
                 <sup>1</sup>
                 CELDA - an ontology for the comprehensive representation of cells in complex systems. <i>BMC Bioinformatics</i> (2013), 14, 228. (<a href="http://dx.doi.org/10.1186/1471-2105-14-228" target="_blank">Seltmann et al.</a>).
@@ -61,6 +61,9 @@
             </li>
         </ol>
 
+        <h2 id="publication">Scientific Publications</h2>
+        <p>Fritz Lekschas, Harald Stachelscheid, Stefanie Seltmann and Andreas Kurtz.<br/><strong>Semantic Body Browser: Graphical exploration of an organism and spatially resolved expression data visualisation.</strong><br/><em>Bioinformatics</em>, 2014, <a href="http://dx.doi.org/10.1093/bioinformatics/btu707" target="_blank">doi: 10.1093/bioinformatics/btu707</a>.</p>
+
         <h2 id="browse-tree">Browsing Tree</h2>
         <p>The <b>Semantic Body Browser</b> currently incorporates 22 views for homo sapiens and 21 views for mus musculus. These views branch into 15 different levels of resolution and 6 developmental stages. The adult human body gross view does furthermore distinguish genders.</p>
         <figure>
@@ -69,7 +72,7 @@
         </figure>
 
         <h2 id="heat-map">Heat map of RNA abundance</h2>
-        <aside>
+        <aside class="sidebar medium">
             <h4>Color Range</h4>
             <div class="colors"></div>
             <span class="min"><abbr title="Minimum">Min</abbr></span>
@@ -80,7 +83,7 @@
         <p>The <em>heat map</em> modus lets you colour the human adult body gross view according to the spatially resolved RNA expression value.</p>
         <p>The organs and anatomical parts for which data is available will be coloured relatively to the accumulative RNA expression value of the user-defined selection of genes. If multiple genes have been selected a stacked bar indicates the proportion of each gene. Sub-selection facilitates the comparison among the set of genes and helps to quickly identify the impact of one genes on the accumulative RNA expression value.</p>
         <p>Currently transcriptome sequencing data is provided by the RNA-Seq Atlas<sup>1</sup> and the Human BodyMap 2.0<sup>2</sup>. As shown by Li et al.<sup>3</sup> and Wagner et al.<sup>4</sup> <abbr title="Transcripts per Kilobase per Million" class="show">RPKM</abbr> may be biased across different samples, therefore we provide <abbr title="Transcripts per Million" class="show">TPM</abbr>.</p>
-        <ol class="note">
+        <ol class="notes">
             <li>
                 <sup>1</sup>
                 RNA-Seq Atlas - A reference database for gene expression profiling in normal tissue by next generation sequencing. <i>Bioinformatics</i> (2012), 28, 1184-1185. (<a href="http://dx.doi.org/10.1093/bioinformatics/bts084" target="_blank">Krupp, M. et al.</a>).
@@ -321,9 +324,10 @@
         <p><a href="http://sbb.cellfinder.org/dl/sbb_-_bachelor_thesis_-_fritz_lekschas.pdf" target="_blank" class="icon icon-download iconSpace">Download the thesis <i>(PDF ~10MB)</i></a></p>
 
         <h2 id="license">Copyright &amp; License</h2>
-        <p>Application is licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">GNU General Public License (GPL) Version 3.0</a>. Unless otherwise stated content is licensed under <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons BY-SA 4.0</a>. Copyright &copy; 2012-{{ currentDate | date:'yyyy' }} <a href="about#contact">Fritz Lekschas</a>.</p>
+        <p>Application is licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">GNU General Public License (GPL) Version 3.0</a>. Unless otherwise stated content is licensed under <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons BY-SA 4.0</a>. Copyright &copy; 2012-{{ currentDate | date:'yyyy' }} <a href="about#publication">Lekschas et al.</a>.</p>
+
         <h3>Illustrations</h3>
-        <p>All illustrations can be used for accademic and comercial projects but the authers need to be cited. Details are given under <em><a href="#illustrations">illustrations</a></em>.</p>
+        <p>All illustrations can be used for accademic and comercial projects but the authers need to be cited. Details are given under <em><a href="about#illustrations">illustrations</a></em>.</p>
 
         <h3>Histological images</h3>
         <p>Histological images are gathered from and hyper-linked to <a href="http://cellfinder.org" target="_blank">CellFinder</a>. Further information, e.g. description, along with a much more powerful image viewer can be found on <a href="http://cellfinder.org" target="_blank">CellFinder</a> by clicking into the central area of the image.</p>

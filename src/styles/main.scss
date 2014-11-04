@@ -26,6 +26,20 @@ html, body {
     background: #fff;
 }
 
+::-moz-selection {
+    color: #000;
+    background: #f28252;
+    background: rgba(242, 123, 73, 0.9);
+}
+
+::selection {
+    color: #000;
+    background: #f28252;
+    background: rgba(242, 123, 73, 0.9);
+    -webkit-background-clip: none;
+    -webkit-text-fill-color: #000;
+}
+
 input:focus {
     outline: none;
 }
@@ -218,7 +232,7 @@ ul.csv li:last-child:after {
 
 #nav .icon.enabled:before {
     color: #555;
-    background: linear-gradient(#555 0%, #777 90%);
+    background: -webkit-linear-gradient(#555 0%, #777 90%);
     background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -227,7 +241,7 @@ ul.csv li:last-child:after {
 
 #nav .opened .icon:before {
     color: #e56c39;
-    background-image: linear-gradient(#f26b30, #e56c39);
+    background: -webkit-linear-gradient(#f26b30, #e56c39);
     background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -281,7 +295,6 @@ h1 {
     text-shadow: 0 1px 0 rgba(255,255,255,.1);
     text-align: center;
     color: #000;
-    background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#808080));
     background: -webkit-linear-gradient(#000000, #808080);
     background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
     -webkit-background-clip: text;
@@ -331,8 +344,9 @@ h1.right {
     position: absolute;
     top: 7px;
     left: 6px;
+    padding-left: 1px;
     color: #555;
-    background: linear-gradient(#555 0%, #777 90%);
+    background: -webkit-linear-gradient(#555 0%, #777 90%);
     /* Needed for stupid Opera */
     background: -o-linear-gradient(transparent, transparent);
     -webkit-background-clip: text;
@@ -524,7 +538,6 @@ div.info div.close:before {
 
 #resultsBar .nothingFound .icon-info:before {
     color: #803820;
-    background: -webkit-gradient(linear, left top, left bottom, from(#803820), to(#bf3000));
     background: -webkit-linear-gradient(#803820, #bf3000);
     background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
     -webkit-background-clip: text;
@@ -533,7 +546,6 @@ div.info div.close:before {
 
 #resultsBar .nothingFound .icon-info:before {
     color: #4d4a41;
-    background: -webkit-gradient(linear, left top, left bottom, from(#4d4a41), to(#807b6c));
     background: -webkit-linear-gradient(#4d4a41, #807b6c);
     background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
     -webkit-background-clip: text;
@@ -1036,6 +1048,81 @@ header #search,
     background: #ff8a59;
 }
 
+#content .sidebar,
+#dialog .sidebar {
+    position: relative;
+    float: right;
+    width: 20%;
+    margin: 0 0 2em 2em;
+    height: 100px;
+    padding: 0.5em;
+    font-size: 0.8em;
+    line-height: 1.71875em;  /* 1.375 / 0.8 */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5em;
+}
+
+#content .sidebar.medium,
+#dialog .sidebar.medium {
+    width: 33%;
+    height: auto;
+}
+
+#content .sidebar.big,
+#dialog .sidebar.big {
+    width: 50%;
+    height: auto;
+}
+
+#content .sidebar h4,
+#dialog .sidebar h4 {
+    font-size: 1em;
+    margin: 0;
+    color: #807c73;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#content .sidebar h5,
+#dialog .sidebar h5 {
+    font-size: 1em;
+    margin: 0.5em 0 0 0;
+    color: #807c73;
+    font-weight: normal;
+}
+
+#content .sidebar li:first-child h5,
+#dialog .sidebar li:first-child h5 {
+    margin-top: 0;
+}
+
+#content .sidebar span,
+#dialog .sidebar span {
+    display: block;
+}
+
+#content .sidebar span.min,
+#dialog .sidebar span.min {
+    position: absolute;
+    left: .75em;
+    color: #004080;
+    text-align: left;
+}
+
+#content .sidebar span.med,
+#dialog .sidebar span.med {
+    color: #8f1020;
+    text-align: center;
+}
+
+#content .sidebar span.max,
+#dialog .sidebar span.max {
+    position: absolute;
+    right: .75em;
+    color: #dcba0b;
+    text-align: right;
+}
+
 #heatmap .expValue {
     height: 0;
     opacity: 0;
@@ -1064,8 +1151,7 @@ header #search,
     height: 23px;
 }
 
-#dialog .colors,
-#heatmap .expValue .colors {
+.colors {
     width: 100%;
     height: 3px;
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNDA4MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc1JSIgc3RvcC1jb2xvcj0iI2JmMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmQ1MDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -1742,7 +1828,6 @@ svg .pulsate {
     margin: 0.5em 0;
     font-size: 2.25em;
     font-weight: 700;
-    background: -webkit-gradient(linear, left top, left bottom, from(#1a1a18), to(#4d4b48));
     background: -webkit-linear-gradient(#1a1a18, #4d4b48);
     background: -o-linear-gradient(transparent, transparent); /* Needed for stupid Opera */
     -webkit-background-clip: text;
@@ -1988,7 +2073,7 @@ svg .pulsate {
     left: 25%;
     margin-left: .5625em;
     color: #555;
-    background: linear-gradient(#555 0%, #777 90%);
+    background: -webkit-linear-gradient(#555 0%, #777 90%);
     /* Needed for stupid Opera */
     background: -o-linear-gradient(transparent, transparent);
     -webkit-background-clip: text;
@@ -2461,8 +2546,28 @@ svg .pulsate {
     display: inline;
 }
 
-#content ol.notes {
-    margin: 1em 0 0;
+ol.notes {
+    margin: 0.5em 0 0 0;
+    padding: 0.5em 0 0 0;
+    list-style: none;
+    color: #807c73;
+    font-size: 0.8em;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+ol.notes sup {
+    color: #4D4A41;
+}
+
+ol.notes li {
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+}
+
+ol.notes li:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
 }
 
 #content aside p {

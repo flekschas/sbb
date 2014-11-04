@@ -112,75 +112,6 @@
     border-radius: 1em;
 }
 
-#dialog .sidebar {
-    position: relative;
-    float: right;
-    width: 20%;
-    margin: 0 0 2em 2em;
-    height: 100px;
-    padding: 0.5em;
-    font-size: 0.8em;
-    line-height: 1.71875em;  /* 1.375 / 0.8 */
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.5em;
-}
-
-#dialog .sidebar.medium {
-    width: 33%;
-    height: auto;
-}
-
-#dialog .sidebar.big {
-    width: 50%;
-    height: auto;
-}
-
-#dialog .sidebar h4 {
-    font-size: 1em;
-    margin: 0;
-    color: #807c73;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-#dialog .sidebar h5 {
-    font-size: 1em;
-    margin: 0.5em 0 0 0;
-    color: #807c73;
-    font-weight: normal;
-}
-
-#dialog .sidebar li:first-child h5 {
-    margin-top: 0;
-}
-
-#dialog ol.note {
-    padding: 0 0 1em 0;
-    list-style: none;
-    color: #807c73;
-    font-size: 0.8em;
-}
-
-#dialog ol.note {
-    margin: 0;
-}
-
-#dialog ol.note sup {
-    color: #4D4A41;
-}
-
-#dialog ol.note li {
-    margin-top: 0.5em;
-    padding-top: 0.5em;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-#dialog ol.note li:first-child {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-}
-
 #dialog .close {
     position: absolute;
     z-index: 2;
@@ -222,34 +153,6 @@
     background-color: #8fafcc;
     background-image: linear-gradient(#8fafcc, #7c9fbf);
     box-shadow: inset 0 3px 3px -2px rgba(0,0,0,.2), inset 0 5px 5px -5px rgba(0,0,0,.1), inset 0 1px 0 0 rgba(0,0,0,.05), 0 1px 0 0 rgba(0,0,0,.2);
-}
-
-
-/*******************************************************************************
- * Content related styling
- ******************************************************************************/
-
-#dialog .sidebar span {
-    display: block;
-}
-
-#dialog .sidebar span.min {
-    position: absolute;
-    left: .75em;
-    color: #004080;
-    text-align: left;
-}
-
-#dialog .sidebar span.med {
-    color: #8f1020;
-    text-align: center;
-}
-
-#dialog .sidebar span.max {
-    position: absolute;
-    right: .75em;
-    color: #dcba0b;
-    text-align: right;
 }
 
 

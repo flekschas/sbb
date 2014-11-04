@@ -143,7 +143,7 @@ module.exports = function ( grunt ) {
               var base = __dirname.substr(cfg.apache_root.length) + "/" +
                          cfg.compile_dir;
               content = content.replace(/RewriteBase.*/, "RewriteBase " + base);
-              content = content.replace(/RewriteCond.*/, "RewriteCond $1 !^(index\\.html|assets|sitemap\\.xml)");
+              content = content.replace(/RewriteCond $1 .*/, "RewriteCond $1 !^(index\\.html|assets|sitemap\\.xml)");
               content = content.replace(/Header set Content-Security-Policy.*/, '');
             }
             return content;

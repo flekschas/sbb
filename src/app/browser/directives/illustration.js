@@ -23,17 +23,12 @@ angular
         resetHeatMap: '&',
         view: '='
       },
-      link: function(scope, element, attrs) {
+      link: function(scope, element) {
         var $el = $(element),
-            mousedown,
             x = 0,
             y = 0,
             oldX = 0,
             oldY = 0,
-            mouseStartX,
-            mouseStartY,
-            mouseEndX,
-            mouseEndY,
             transform = {
               translate: {
                 x: 0,
@@ -68,7 +63,6 @@ angular
             autoTransformed = false,
             groupOfGroups = [],
             colored_units = [],
-            activeExpr,
             blockCloseClick,
             ticking = false,
             precedingTap = false,
@@ -364,7 +358,7 @@ angular
         };
 
         // Method for setting groups
-        fn.group = function(g) {
+        fn.group = function() {
           var len = scope.ilu.groups.length,
             lastK;
           for (var i = 0; i < len; ++i) {
@@ -451,7 +445,7 @@ angular
 
         // Applies the default values for the scaling and positioning of the
         // illustration
-        scope.displayAll = function (notSmooth) {
+        scope.displayAll = function () {
           smoothTransform = true;
           fn.showZoomDialog();
           transform = {
@@ -515,10 +509,9 @@ angular
 
                 colored_units.push(expId2);
 
-                var percent,
-                    textColor;
+                var percent;
 
-                if (gene == 'sum') {
+                if (gene === 'sum') {
                   percent = (scope.expression.sum[expId2] - scope.expression.min) / scope.expression.norm;
                 } else {
                   percent = (scope.expression[expId2][gene] - tmpMin) / tmpNorm;
@@ -543,7 +536,7 @@ angular
           // Reset colored units that are not available in the new expression
           // data
           for (var i in oldColoredUnits) {
-            if (!~colored_units.indexOf(oldColoredUnits[i])) {
+            if (colored_units.indexOf(oldColoredUnits[i]) === -1) {
               fn.reset(oldColoredUnits[i]);
             }
           }
@@ -625,16 +618,16 @@ angular
             group = el.getAttribute("data-group"),
             parent = el.parentNode;
 
-          if (unit == scope.activeUnit) {
+          if (unit === scope.activeUnit) {
             return false;
           }
 
-          while (parent.tagName === 'g' && parent.getAttribute('data-group') && group != scope.activeUnit) {
+          while (parent.tagName === 'g' && parent.getAttribute('data-group') && group !== scope.activeUnit) {
             group = parent.getAttribute('data-group');
             parent = parent.parentNode;
           }
 
-          if (group == scope.activeUnit) {
+          if (group === scope.activeUnit) {
             return false;
           }
 
@@ -758,7 +751,7 @@ angular
                   if (typeof units[id][i] === 'number') {
                     if (typeof scope.ilu.elements[units[id][i]].stroke === 'undefined' && scope.ilu.elements[units[id][i]].fill === 'none') {
                       // Unit currently has no color
-                      if (scope.heatmap && color == '#ff8a59') {
+                      if (scope.heatmap && color === '#ff8a59') {
                         vectorElements[units[id][i]].node.setAttribute('class', 'pulsate');
                       } else {
                         vectorElements[units[id][i]].node.setAttribute('class', '');
@@ -769,7 +762,7 @@ angular
                       }
                     } else {
                       // Unit has color
-                      if (scope.heatmap && color == '#ff8a59') {
+                      if (scope.heatmap && color === '#ff8a59') {
                         vectorElements[units[id][i]].node.setAttribute('class', 'pulsate');
                       } else {
                         vectorElements[units[id][i]].node.setAttribute('class', '');
@@ -793,7 +786,7 @@ angular
                 // a single unit is highlighted
                 if (typeof scope.ilu.elements[units[id]].stroke === 'undefined' && scope.ilu.elements[units[id]].fill === 'none') {
                   // Unit currently has no color
-                  if (scope.heatmap && color == '#ff8a59') {
+                  if (scope.heatmap && color === '#ff8a59') {
                     vectorElements[units[id]].node.setAttribute('class', 'pulsate');
                   } else {
                     vectorElements[units[id]].node.setAttribute('class', '');
@@ -804,7 +797,7 @@ angular
                   }
                 } else {
                   // Unit has color
-                  if (scope.heatmap && color == '#ff8a59') {
+                  if (scope.heatmap && color === '#ff8a59') {
                     vectorElements[units[id]].node.setAttribute('class', 'pulsate');
                   } else {
                     vectorElements[units[id]].node.setAttribute('class', '');
@@ -843,7 +836,7 @@ angular
                 // a set of units is reset
                 while(i--) {
                   if (typeof units[id][i] === 'number') {
-                    if (scope.heatmap && ~colored_units.indexOf(id)) {
+                    if (scope.heatmap && colored_units.indexOf(id) >= 0) {
                       vectorElements[units[id][i]].node.setAttribute('class', '');
                     } else {
                       vectorElements[units[id][i]].attr({
@@ -867,7 +860,7 @@ angular
                     stroke: scope.ilu.elements[units[id]].stroke
                   });
                 } else {
-                  if (~colored_units.indexOf(id)) {
+                  if (colored_units.indexOf(id) >= 0) {
                     vectorElements[units[id]].node.setAttribute('class', '');
                   } else {
                     vectorElements[units[id]].attr({
@@ -886,7 +879,7 @@ angular
           var width = $el.width(),
             height = $el.height();
 
-          if ((width && $containerWidth != width) || (height && $containerHeight != height)) {
+          if ((width && $containerWidth !== width) || (height && $containerHeight !== height)) {
             $containerWidth = width;
             $containerHeight = height;
 
@@ -908,7 +901,7 @@ angular
         fn.mousewheel = function(e, d) {
           var mousewheelZoomFactor = 0.02;
 
-          if (~navigator.userAgent.indexOf('Firefox') || ~navigator.userAgent.indexOf('MSIE')) {
+          if (navigator.userAgent.indexOf('Firefox') >= 0 || navigator.userAgent.indexOf('MSIE') >= 0) {
             mousewheelZoomFactor *= 2;
           }
 
@@ -1062,9 +1055,11 @@ angular
         // Event Handler
         ///////////////////////////////////////////////////////////////////////
 
-        // Shim layer with setTimeout fallback
-        // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-        // Creator Erik Möller
+        /*
+         * Shim layer with setTimeout fallback
+         * http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+         * Creator Erik Möller
+         */
         (function() {
           var lastTime = 0;
           var vendors = ['webkit', 'moz'];
@@ -1206,7 +1201,7 @@ angular
           fn.requestElementUpdate();
         };
 
-        fn.onPress = function (e) {
+        fn.onPress = function () {
           if (precedingTap && (new Date().getTime() - precedingTapTime < 1000)) {
             tapScale = true;
           }
@@ -1257,7 +1252,7 @@ angular
           .on('mouseout', function(e){
             fn.mouseout(e);
           })
-          .on('mousewheel', function(e, d, dX, dY) {
+          .on('mousewheel', function(e, d) {
             fn.mousewheel(e, d);
           });
 

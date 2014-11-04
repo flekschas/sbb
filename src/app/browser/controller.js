@@ -41,7 +41,7 @@ angular
       // Shim for browsers that do not support Object.keys()
       if (typeof Object.keys != 'function') {
         Object.keys = function(obj) {
-          if (typeof obj != "object" && typeof obj != "function" || obj === null) {
+          if (typeof obj !== "object" && typeof obj !== "function" || obj === null) {
             throw new TypeError("Object.keys called on non-object");
           }
           var keys = [];
@@ -81,7 +81,7 @@ angular
       $scope.unit = {};
       for (i = $scope.data.units.length; i--;) {
         // Check for prefix
-        if (~$scope.data.units[i].name.indexOf($scope.data.view.prefix)) {
+        if ($scope.data.units[i].name.indexOf($scope.data.view.prefix) >= 0) {
           $scope.data.units[i].prefix = true;
           $scope.data.units[i].title = $scope.data.units[i].title ? $scope.data.units[i].title : $scope.data.units[i].name.substr($scope.data.view.prefix.length + 1).replace(/-/g, ' ');
         } else {
@@ -144,7 +144,7 @@ angular
       // Enable heatmap and load hgnc_symbols
       $scope.$watch(function(){
         return $scope.data.expDatasets;
-      }, function(newValue, oldValue) {
+      }, function(newValue) {
         if (newValue) {
           // Set default dataset to hbm
           $scope.dataset = 'hbm';
@@ -311,7 +311,7 @@ angular
       // Watch a dataset
       $scope.$watch(function(){
         return $scope.dataset;
-      }, function(newValue, oldValue) {
+      }, function(newValue) {
         if (newValue) {
           fn.getExpressions();
         }
@@ -319,8 +319,6 @@ angular
 
       fn.getExpressions = function() {
         if ($scope.genes.length && $scope.dataset) {
-          var serializedGenes = $scope.genes.join('_');
-
           geneExpressions
             .get($scope.dataset, $scope.genes)
             .then(function success (data) {
@@ -341,7 +339,7 @@ angular
               $scope.expression.norm = max - min;
               fn.expressionUnitSelection();
               news.broadcast('sbbAccordion:open', 'heatmap');
-            }, function failure (error) {
+            }, function failure () {
               if (console) {
                 console.log('Expression data could not been loaded!');
               }
@@ -376,7 +374,7 @@ angular
         return $location.search().genes;
       }, function (newValue) {
         if (newValue) {
-          if ($scope.genes.join(',') != newValue) {
+          if ($scope.genes.join(',') !== newValue) {
             $scope.genes = newValue.split(',');
           }
         }
@@ -437,7 +435,7 @@ angular
                 // Cache results for later use
                 results[search] = data;
               })
-              .error (function (error) {
+              .error (function () {
                 $scope.resultsLoading = false;
                 if (console) {
                   console.log('Data for searching could not have been loaded!');
@@ -462,7 +460,7 @@ angular
       };
 
       $scope.selectSingleGene = function (index) {
-        if ($scope.selectedGene == index) {
+        if ($scope.selectedGene === index) {
           index = undefined;
         }
         news.broadcast('singleGene', index, $scope.genes[index]);
@@ -484,7 +482,7 @@ angular
       });
 
       $scope.$on('activePanel', function () {
-        if (news.activePanel == 'heatmap') {
+        if (news.activePanel === 'heatmap') {
           // Open a message the first time the heatmap is used
           if (storage.enabled() && !storage.get('heatmapIntroMessage')) {
             storage.set('heatmapIntroMessage', 1);
@@ -539,8 +537,8 @@ angular
       $scope.closeHelpMessage = function($event) {
         if ($event) {
           var target = $event.target;
-          while (target.tagName.toLowerCase() != 'body') {
-            if (target.tagName.toLowerCase() == 'div' && ~target.className.indexOf('content')) {
+          while (target.tagName.toLowerCase() !== 'body') {
+            if (target.tagName.toLowerCase() === 'div' && (target.className.indexOf('content') >= 0)) {
               return;
             }
             target = target.parentNode;

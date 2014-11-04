@@ -84,6 +84,8 @@ AddDefaultCharset utf-8
   Options +FollowSymlinks
   RewriteEngine On
   RewriteBase /
+
+
   RewriteCond $1 !^(index\.html|assets|styles|src|vendor|templates-.+\.js|sitemap\.xml)
   RewriteRule ^(.*)$ index\.html#!/$1 [L]
 </IfModule>

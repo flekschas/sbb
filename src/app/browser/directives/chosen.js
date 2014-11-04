@@ -2,9 +2,7 @@ angular
   .module( 'sbb.browser' )
   .directive( 'sbbChosen', [
     '$compile', '$sce', '$timeout', '$', 'stringWidth', 'news',
-    'settings',
-    function($compile, $sce, $timeout, $, stringWidth, news,
-             settings) {
+    function($compile, $sce, $timeout, $, stringWidth, news) {
       return {
         restrict: 'E',
         scope: {
@@ -19,15 +17,14 @@ angular
               fn = {},
               cachedHits = {},
               dataLength = 0,
-              limit = parseInt(attrs.limit),
+              limit = parseInt(attrs.limit, 10),
               $selection = $el.find('ul.selection'),
               $hits = $el.find('ul.hits'),
               hitsHeight,
               hitsOffsetTop,
-              hitHeight,
               bodyFont = $('body').css('font-family'),
               hitsFontSize = $hits.css('font-size'),
-              hitsFontSizePx = parseInt($hits.css('font-size').slice(0, -2));
+              hitsFontSizePx = parseInt($hits.css('font-size').slice(0, -2), 10);
 
           scope.limit = limit;
           scope.hits = [];
@@ -66,7 +63,7 @@ angular
           });
 
           // Whatch for source data
-          scope.$watch('data', function(newValue, oldValue) {
+          scope.$watch('data', function(newValue) {
             if (newValue && newValue.length) {
               // Enable chosen
               dataLength = newValue.length;
@@ -93,8 +90,6 @@ angular
           };
 
           scope.inputKeyUp = function ($event) {
-            var key = $event.keyCode;
-
             switch ($event.keyCode) {
               case 8:
                 // Backspace
@@ -157,7 +152,7 @@ angular
                 // Arrow Down
                 $event.preventDefault();
                 if (scope.selected < (scope.hits.length - 1)) {
-                  if (scope.selected + 2 == scope.limit) {
+                  if (scope.selected + 2 === scope.limit) {
                     scope.limit += limit;
                   }
                   ++scope.selected;
@@ -200,27 +195,15 @@ angular
             }
           };
 
-          scope.noInput = function () {
-            if (!scope.selection.length && !scope.hits.length) {
-              if ($selection.find('li:last input').val().length < 2) {
-
-              }
-              return true;
-            }
-            else {
-              return false;
-            }
-          };
-
           scope.selectSingleGene = function (index) {
-            if (scope.selectedGene == index) {
+            if (scope.selectedGene === index) {
               index = undefined;
             }
             news.broadcast('singleGene', index, scope.selection[index]);
           };
 
           scope.alreadySelected = function (needle) {
-            return ~scope.selection.indexOf(needle);
+            return (scope.selection.indexOf(needle) >= 0);
           };
 
           scope.$on('singleGene', function(e, index) {
@@ -319,7 +302,7 @@ angular
             }
           };
 
-          fn.select = function (el, valueOnly, k) {
+          fn.select = function (el, valueOnly) {
             var value;
 
             if (valueOnly) {
@@ -346,12 +329,11 @@ angular
             if (Object.prototype.toString.call( value ) === '[object Array]') {
               // Multi-select
               var tmp = [],
-                tmp2 = [],
-                len = value.length;
+                  len = value.length;
 
               for (var i = 0; i < len; ++i) {
                 // Check if value is already selected
-                if (!~scope.preselection.indexOf(value[i])) {
+                if (scope.preselection.indexOf(value[i]) === -1) {
                   tmp.push({'value': value[i], 'ready': 1});
                 }
               }
@@ -363,17 +345,15 @@ angular
               // Single-select
               // Check if value is already selected
               try {
-                if (!~scope.selection.indexOf(value)) {
+                if (scope.selection.indexOf(value) === -1) {
                   scope.selection.push(value);
                 }
               } catch(e) {
 
               }
-              if (scope.preselection.length != scope.selection) {
-                scope.preselection[scope.preselection.length - 1].value = value;
-                scope.preselection[scope.preselection.length - 1].ready = 1;
-                scope.preselection.push({});
-              }
+              scope.preselection[scope.preselection.length - 1].value = value;
+              scope.preselection[scope.preselection.length - 1].ready = 1;
+              scope.preselection.push({});
             }
 
             scope.$on('ngRepeatFinished', function() {
@@ -399,7 +379,7 @@ angular
               }
               scope.selection.pop();
             }
-            if (scope.selectedGene > 0 && scope.selectedGene == index) {
+            if (scope.selectedGene > 0 && scope.selectedGene === index) {
               news.broadcast('singleGene', undefined);
             }
           };

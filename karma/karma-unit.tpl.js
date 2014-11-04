@@ -16,13 +16,32 @@ module.exports = function ( karma ) {
       'src/assets/**/*.js'
     ],
     frameworks: [ 'jasmine' ],
-    plugins: [ 'karma-jasmine', 'karma-chrome-launcher',
-               'karma-firefox-launcher', 'karma-phantomjs-launcher' ],
+    plugins: [
+      'karma-jasmine',
+      'karma-coverage',
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-phantomjs-launcher'
+    ],
+
+    /*
+     * Code coverage
+     */
+    preprocessors: {
+      'src/**/*.js': 'coverage'
+    },
 
     /*
      * How to report, by default.
      */
-    reporters: 'progress',
+    reporters: [
+      'progress',
+      'coverage'
+    ],
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
     colors: true,
 
     /*

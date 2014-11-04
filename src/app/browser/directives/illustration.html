@@ -43,12 +43,12 @@
                     <div class="separator"
                          ng-hide="!unitDefinition.definition.length">
                     </div>
-                    <h4>Search associated data</h4>
+                    <h4>Search associated <abbr title="European Bioinformatics Institute">EBI</abbr> data</h4>
                     <div class="wrapper">
                         <a class="left button"
                            ng-click="getGxe({ entity: activeUnit })">BioSamples</a>
-                        <a class="right button"
-                           ng-click="setView({ view: activeUnit })">Gene Expression</a>
+                        <a class="right button disabled"
+                           title="Coming soon">Gene Expression</a>
                     </div>
                     <div class="separator"></div>
                     <h4>Navigate</h4>

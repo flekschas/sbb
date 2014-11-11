@@ -17,6 +17,13 @@ angular
           }
           return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
         },
+        /*
+         * Overlay a background colour with another colour where 0 percent means
+         * no overlay colour at all and 1 percent means only overlay colour.
+         *
+         * bg: HEX colour string
+         * overlay: HEX colour string
+         */
         overlay: function(bg, overlay, percent) {
           if (bg && bg !== 'none') {
 

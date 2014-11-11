@@ -14,7 +14,7 @@ describe("errors: Errors (unit testing)", function() {
     });
   });
 
-  it('should contain the errors errors', function () {
+  it('should contain the errors service', function () {
     expect(errors).not.toEqual(null);
   });
 

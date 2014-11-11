@@ -7,7 +7,7 @@ angular
        */
       return function( pmid ) {
         var url = null;
-        if (typeof pmid === 'string') {
+        if (typeof(pmid) !== 'undefined' && pmid.toString().length > 0) {
           url = 'http://www.ncbi.nlm.nih.gov/pubmed/' + pmid;
         }
         return url;

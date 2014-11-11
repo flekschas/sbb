@@ -10,16 +10,22 @@ angular
         searchEl.setAttribute('SBBSEARCH', true);
 
         var target = targetEl;
-        while (target.tagName.toLowerCase() != 'body') {
-          if (target.attributes.getNamedItem('SBBSEARCH')) {
-            found = true;
-            break;
+        try {
+          while (target.tagName.toLowerCase() !== 'body') {
+            if (target.attributes.getNamedItem('SBBSEARCH')) {
+              found = true;
+              break;
+            }
+            // console.log(target, target.parentNode);
+            target = target.parentNode;
           }
-          target = target.parentNode;
-        }
 
-        // Remove special search attribute
-        searchEl.removeAttribute('SBBSEARCH');
+          // Remove special search attribute
+          searchEl.removeAttribute('SBBSEARCH');
+        }
+        catch (e) {
+
+        }
 
         return found;
       };

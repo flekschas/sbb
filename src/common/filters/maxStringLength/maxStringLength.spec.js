@@ -1,4 +1,4 @@
-describe("Unit: maxStringLength", function() {
+describe("maxStringLength (unit testing)", function() {
   "use strict";
 
   var $filter;
@@ -22,7 +22,8 @@ describe("Unit: maxStringLength", function() {
   it('should return full string when length is below standard cutoff',
      function() {
       expect($filter('short string')).toEqual('short string');
-  });
+    }
+  );
 
   it('should return full string when length is below custom cutoff',
      function() {

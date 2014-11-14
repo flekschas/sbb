@@ -19,8 +19,6 @@ angular
       };
 
       // Listen for scroll event
-      // Note that activeUnit is only the name of the notification the news
-      // service broadcasts
       $scope.$on('scrolled', function () {
         $scope.scrolled = news.scrolled;
         if (!$scope.$$phase) {

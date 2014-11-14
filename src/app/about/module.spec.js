@@ -1,6 +1,7 @@
-describe("About Module: Unit Testing", function() {
+describe("about.mobule Unit Testing", function() {
 
   var module;
+
   beforeEach(function() {
     module = angular.module("sbb.about");
   });

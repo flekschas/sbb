@@ -46,28 +46,4 @@ describe("SbbSpinner (unit testing)", function() {
       expect(i).toEqual(12);
     }
   );
-
-  /*
-   * Need to use: jasmine.clock()
-   */
-  // it('should no paths after terminating the spinner',
-  //   function () {
-  //     var spinner = new SbbSpinner(paper, 100, 100),
-  //         i = 0,
-  //         j = 0;
-
-  //     paper.forEach(function(el) {
-  //       i++;
-  //     });
-
-  //     spinner();
-
-  //     paper.forEach(function(el) {
-  //       j++;
-  //     });
-
-  //     // expect(typeof(i) === 'number' && typeof(j) === 'number' && i - j === 12).toBeTruthy();
-  //     expect(j).toEqual(0);
-  //   }
-  // );
 });

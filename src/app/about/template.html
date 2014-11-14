@@ -412,7 +412,7 @@
         <p>We have tested the Semantic Body Browser extensively but it may still be possible that we've overseen a problem or error. If so please <a href="about#contact">tell us</a> and we will fix it as soon as possible.</p>
         <h2 id="changelog">Changelog</h2>
         <ul class="changelog">
-            <li ng-repeat="version in versions">
+            <li ng-repeat="version in ::versions">
                 <span property="http://purl.org/dc/terms/date">{{ version.release }}</span>
                 <h4 id="changelog-{{ version.version }}">Version <strong>{{ version.version }}</strong></h4>
                 <p>{{ version.msg }}</p>

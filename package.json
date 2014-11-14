@@ -2,7 +2,7 @@
   "name": "sbb",
   "fullName": "Semantic Body Browser",
   "author": "Fritz Lekschas",
-  "version": "1.6.1",
+  "version": "1.6.2-pre",
   "homepage": "http://sbb.cellfinder.org",
   "licenses": {
     "type": "GPL3",

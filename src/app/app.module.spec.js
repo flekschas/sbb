@@ -38,10 +38,6 @@ describe("App Module: Unit Testing", function() {
      * Third party modules
      */
 
-    it("should have pasvaz.bindonce as a dependency", function() {
-      expect(hasModule('pasvaz.bindonce')).toEqual(true);
-    });
-
     /*
      * Angular modules
      */

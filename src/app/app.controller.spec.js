@@ -1,17 +1,101 @@
-describe( 'AppCtrl', function() {
-  describe( 'isCurrentUrl', function() {
-    var AppCtrl, $location, $scope;
+describe("app.controller (unit testing)", function() {
+  "use strict";
 
-    beforeEach( module( 'sbb' ) );
+  var AppCtrl,
+      appScope,
+      $rootScope,
+      storage;
 
-    beforeEach( inject( function( $controller, _$location_, $rootScope ) {
-      $location = _$location_;
-      $scope = $rootScope.$new();
-      AppCtrl = $controller( 'AppCtrl', { $location: $location, $scope: $scope });
-    }));
+  beforeEach(function() {
+    module('sbb');
 
-    it( 'should pass a dummy test', inject( function() {
-      expect( AppCtrl ).toBeTruthy();
-    }));
+    inject(function ($injector) {
+      var $controller = $injector.get('$controller');
+
+      storage = $injector.get('storage');
+      $rootScope = $injector.get('$rootScope');
+
+      appScope = $rootScope.$new();
+
+      AppCtrl = $controller('AppCtrl as app', {
+        $scope: appScope,
+        storage: storage
+      });
+    });
   });
+
+  it('should find the AppCtrl',
+    function() {
+      expect(AppCtrl).toBeTruthy();
+    }
+  );
+
+  it('should have the `globalClick` function',
+    function() {
+      expect(typeof(AppCtrl.globalClick)).toEqual('function');
+    }
+  );
+
+  it('should have the `ready` function',
+    function() {
+      expect(typeof(AppCtrl.ready)).toEqual('function');
+    }
+  );
+
+  it('should set app status correctly',
+    function() {
+      /*
+       * App status should be undefined before the `$routeChangeStart` event has
+       * been triggered.
+       */
+      expect(typeof(appScope.app.status)).toEqual('undefined');
+
+      /*
+       * After `$routeChangeStart` has been triggered the app status should be
+       * `loading`.
+       */
+      $rootScope.$broadcast('$routeChangeStart', {});
+      $rootScope.$digest();
+
+      expect(appScope.app.status).toEqual('loading');
+
+      /*
+       * Finally, after calling `ready()` the app status should be `ready`.
+       */
+      AppCtrl.ready();
+      $rootScope.$digest();
+
+      expect(appScope.app.status).toEqual('ready');
+    }
+  );
+
+  it('should set the title according to the `$routeChangeStart` currentRoute title',
+    function() {
+
+      $rootScope.$broadcast('$routeChangeStart', {title: 'test'});
+      $rootScope.$digest();
+
+      expect(appScope.app.title).toEqual('test');
+    }
+  );
+
+  it('should set the title according to the `$location` if currentRoute title is unavailable',
+    inject(function($location) {
+      $location.path('/this-is-a-test');
+
+      $rootScope.$broadcast('$routeChangeStart', {});
+      $rootScope.$digest();
+
+      expect(appScope.app.title).toEqual('This Is A Test');
+    })
+  );
+
+  it('should store last visited',
+    function() {
+      $rootScope.$broadcast('$routeChangeStart', {});
+      $rootScope.$digest();
+
+      expect(storage.lastVisit).toEqual(Math.floor(Date.now() / 86400000));
+    }
+  );
 });

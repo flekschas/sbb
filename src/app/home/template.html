@@ -91,7 +91,7 @@
             <li>
                 <h3>Release</h3>
                 <ul>
-                    <li ng-repeat="version in versions | limitTo:3">
+                    <li ng-repeat="version in ::versions | limitTo:3">
                         <a ng-href="./about#changelog-{{ version.version }}">
                             <strong property="http://purl.org/dc/terms/title">{{ version.version }}</strong>
                             <span property="http://purl.org/dc/terms/date">{{ version.release }}</span>

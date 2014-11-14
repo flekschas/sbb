@@ -8,7 +8,6 @@ angular.module( 'sbb', [
   /*
    * Third party modules
    */
-  'pasvaz.bindonce',
 
   /*
    * Angular modules

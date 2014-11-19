@@ -13,7 +13,7 @@ describe("app.service.storage (unit testing)", function() {
     });
   });
 
-  it('should contain the storage',
+  it('should exist the storage service',
     function () {
       expect(storage).not.toEqual(null);
     }
@@ -34,6 +34,18 @@ describe("app.service.storage (unit testing)", function() {
   it('exists the `enabled` function',
     function () {
       expect(typeof(storage.enabled)).toEqual('function');
+    }
+  );
+
+  it('should set and get a value',
+    function () {
+      var obj = {
+        test: 'test'
+      };
+
+      storage.set('test', obj);
+
+      expect(storage.get('test')).toEqual(obj);
     }
   );
 

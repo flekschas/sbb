@@ -258,7 +258,7 @@ ul.csv li:last-child:after {
     outline: none;
     border: none;
     border-radius: 8px;
-    background-color: #366cd9;
+    background: #366cd9;
     background-image: linear-gradient(#1386bf, #115da9);
     cursor: pointer;
     transition: all 0.2 $easeInOutCubic;
@@ -273,12 +273,9 @@ ul.csv li:last-child:after {
 }
 
 #logo:active,
-.opened #logo {
+#logo.active {
     background: #e56c39;
     background-image: linear-gradient(#f26b30, #e56c39);
-    // background-color: #366cd9;
-    // background-image: linear-gradient(#17c3e5, #115da9);
-    // box-shadow: 0 0 3px 0 rgb(255, 255, 255);
 }
 
 h1 {
@@ -774,7 +771,7 @@ header #search,
     position: relative;
     overflow: hidden;
     height: 0;
-    transition: height 0.3s $easeInOutCubic;
+    transition: height 0.2s $easeInOutCubic;
 }
 
 #sidebar section > .content > .wrapper {

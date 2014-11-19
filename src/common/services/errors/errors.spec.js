@@ -53,19 +53,20 @@ describe("errors: Errors (unit testing)", function() {
   it('should provide an error object',
     inject(function ($q) {
       var error = {
-        type: 'type',
-        message: 'message',
-        reason: 'error'
-      };
+            type: 'type',
+            message: 'message',
+            reason: 'error'
+          },
+          returnedErrId;
 
       $q.reject(error.reason)
         .catch(errors.catch(error.type, error.message));
 
-      rootScope.$on('error:type', function (e, errId) {
-        expect(errors.get(errId)).toEqual(error);
-      });
-
       rootScope.$digest();
+
+      expect(rootScope.$broadcast).toHaveBeenCalledWith('error:type', 0);
+
+      expect(errors.get(0)).toEqual(error);
     })
   );
 

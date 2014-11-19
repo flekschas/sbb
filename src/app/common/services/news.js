@@ -46,26 +46,6 @@ angular
         $rootScope.$broadcast('sliderWidth');
       };
 
-      news.setTopic = function ( topic ) {
-        try {
-          news[topic] = {};
-          $rootScope.$broadcast('setTopic', topic);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      };
-
-      news.setTopicData = function ( topic, data ) {
-        try {
-          news[topic][data.attr] = data.val;
-          $rootScope.$broadcast('setTopicData', topic, data);
-          return true;
-        } catch (e) {
-          return false;
-        }
-      };
-
       // Generic broadcast function
       news.broadcast = function( event, data, extra) {
         $rootScope.$broadcast( event, data, extra);

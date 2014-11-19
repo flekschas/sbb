@@ -30,7 +30,6 @@ angular
          */
 
         function init () {
-          news.setTopic('panel');
           /*
            * Store each panel's DOM reference in an object for fast access
            */
@@ -50,19 +49,14 @@ angular
               content: $this.find('.content')
             };
 
-            news.setTopicData('panel', {
-              attr: $this.attr('panel'),
-              val: 0
-            });
-
             numPanels++;
 
             if ($this.hasClass('open')) {
               numOpenPanels++;
             }
-
-            news.broadcast('sbbAccordion:ready');
           });
+
+          news.broadcast('sbbAccordion:ready');
 
           contentHeight = accordionHeight - numPanels * togglerHeight;
 
@@ -74,15 +68,15 @@ angular
             if (panels.hasOwnProperty(id)) {
               if (panels[id].open) {
                 panels[id].content.css('height', contentHeight / numOpenPanels);
-                news.setTopicData('panel', {
-                  attr: id,
-                  val: contentHeight / numOpenPanels
+                news.broadcast('panel', {
+                  name: id,
+                  height: contentHeight / numOpenPanels
                 });
               } else {
                 panels[id].content.css('height', 0);
-                news.setTopicData('panel', {
-                  attr: id,
-                  val: 0
+                news.broadcast('panel', {
+                  name: id,
+                  height: 0
                 });
               }
             }

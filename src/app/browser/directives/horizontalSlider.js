@@ -26,11 +26,9 @@ angular
           // Give 'margin-left' a value
           hSlider.ul.css('margin-left', '0%');
 
-          scope.$on('setTopicData', function ( e, topic, data) {
-            if (topic === 'panel') {
-              if (data.attr === 'images') {
-                scope.height = hSlider.button.css('line-height', data.val + 'px');
-              }
+          scope.$on('panel', function ( e, panel) {
+            if (panel.name === 'images') {
+              scope.height = hSlider.button.css('line-height', panel.height + 'px');
             }
           });
 

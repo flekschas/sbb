@@ -16,14 +16,14 @@
     cursor: pointer;
 }
 
-.drop div.container,
-.drop.closed div.container {
+.drop div.container {
     position: absolute;
     top: -10000px;
     width: 100%;
 }
 
-.drop.opened div.container {
+.drop.opened div.container,
+.drop div.container.open {
     top: 30px;
 }
 .drop.hover:hover div.container {
@@ -79,14 +79,15 @@
     position: absolute;
     width: 100%;
     opacity: 0;
-    transition: translate3d( 0, -4px, 0);
+    transform: translate3d( 0, -4px, 0);
     transition: all .1s $easeInOutCubic;
 }
 
 .drop.opened div.subContainer,
+.drop .open div.subContainer,
 .drop.hover:hover div.subContainer {
     opacity: 1;
-    transition: translate3d( 0, 6px, 0);
+    transform: translate3d( 0, 6px, 0);
 }
 
 .drop.only.top.opened div.subContainer,

@@ -18,11 +18,11 @@ angular
         },
         get: function (key, sessionOnly) {
           try {
-            if (sessionOnly) {
+            var value = localStorage.getItem('SBB/' + key);
+            if (value === null) {
               return session[key];
             } else {
-              var value = localStorage.getItem('SBB/' + key);
-              return (value && JSON.parse(value));
+              return JSON.parse(value);
             }
           } catch(e) {
             return false;

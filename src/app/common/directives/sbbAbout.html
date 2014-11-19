@@ -1,5 +1,8 @@
-<div id="logo" class="icon-sbb" ng-click="toggle()">Semantic Body Browser</div>
-<div class="container">
+<div id="logo"
+     class="icon-sbb"
+     ng-class="{'active': open}"
+     ng-click="toggle()">Semantic Body Browser</div>
+<div class="container" ng-class="{'open': open}">
     <div class="subContainer">
         <div class="triangle"></div>
         <div class="content">

@@ -1,0 +1,3 @@
+<ul class="drop-area">
+    <li ng-repeat="file in files">{{ file }}<span class="icon-close"></span></li>
+</ul>

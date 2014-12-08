@@ -16,6 +16,7 @@ angular
       }
 
       function link ( scope, element, attrs ) {
+        var supported = isSupported();
 
         function handleFileSelect (evt) {
           files = evt.target.files;
@@ -45,7 +46,7 @@ angular
       return {
         link: link,
         replace: true,
-        restrict: 'A',
+        restrict: 'E',
         scope: true,
         templateUrl: 'directives/fileReader/fileReader.html'
       };

@@ -1,11 +1,12 @@
 angular
   .module( 'sbb.browser' )
   .directive( 'sbbResultsBar', [
-    '$compile', '$templateCache', '$', 'Spinner', 'news', 'bioSamples', 'errors',
-    function($compile, $templateCache, $, Spinner, news, bioSamples, errors) {
+    '$compile', '$templateCache', '$', 'Spinner', 'news', 'bioSamples',
+    function($compile, $templateCache, $, Spinner, news, bioSamples) {
       var directive = {
         link: link,
         restrict: 'AE',
+        replace: true,
         scope: {
           show: '=',
           results: '=',
@@ -77,7 +78,6 @@ angular
           scope.error = true;
           scope.nothingFound = false;
           scope.loading = false;
-          console.log('ladng', scope.loading);
          });
 
 

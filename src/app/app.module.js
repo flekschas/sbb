@@ -13,7 +13,6 @@ angular.module( 'sbb', [
    * Angular modules
    */
   'ngRoute',
-  'ngTouch',
 
   /*
    * Common

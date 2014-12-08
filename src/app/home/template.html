@@ -10,14 +10,11 @@
     <h1>Semantic Body Browser</h1>
 </header>
 
-<div id="helpContainer" ng-include src="helpHtml"></div>
+<sbb-notification></sbb-notification>
 
-<div id="errorContainer" ng-include src="errorHtml"></div>
-
-<div id="main">
-    <section id="content">
-        <!-- <div class="bubble bounceIn">Hey there,<br/>new here?</div> -->
-        <h2 class="home">Explore an Organism</h2>
+<div id="main" class="home">
+    <section id="welcome">
+        <h2>Explore an Organism</h2>
         <nav class="quicklinks">
             <ul>
                 <li>
@@ -34,19 +31,25 @@
                 </li>
             </ul>
         </nav>
+    </section>
+    <section id="content">
         <form id="search">
-            <label for="f_search" class="icon-search icon-only"></label>
+            <label for="f_search"
+                   class="icon-only icon-search"
+                   aria-hidden="true"></label>
             <input name="search"
                    id="f_search"
                    type="text"
                    placeholder="Search for organs, anatomical parts or cells"
-                   autofocus
                    ng-model="searchInput"
                    ng-class="{ active: searchInput.length }" />
+            <button class="icon-only icon-cross"
+                    aria-hidden="true"
+                    ng-class="{ show: searchInput.length }"
+                    ng-click="searchInput = ''"></button>
         </form>
         <div id="searchResults"
-             ng-class="{ active: searchInput.length }"
-             search-results-center>
+             ng-class="{ active: searchInput.length }">
             <section>
                 <h4>Views <span class="num">{{ results.views.length }}</span></h4>
                 <horizontal-slider data="results.views" num-visible-items="4" ng-show="results.views">
@@ -79,26 +82,32 @@
         </div>
         <ul class="summary">
             <li>
-                <h3>About</h3>
-                <p>The Semantic Body Browser is a tool for graphically exploring an organism by means of ontologically annotated anatomical illustrations.</p>
-                <a class="icon icon-goright" href="./about">Find out more</a>
+                <div class="m-box">
+                    <h3>About</h3>
+                    <p>The Semantic Body Browser is a tool for graphically exploring an organism by means of ontologically annotated anatomical illustrations.</p>
+                    <a class="icon icon-goright" href="./about">Find out more</a>
+                </div>
             </li>
             <li>
-                <h3>Introduction</h3>
-                <p>Is it your first time here? Activate the help to get valuable tips and explanations.</p>
-                <a class="icon icon-goright" ng-click="startHelp()">Start browsing</a>
+                <div class="m-box">
+                    <h3>Introduction</h3>
+                    <p>Is it your first time here? Activate the help to get valuable tips and explanations.</p>
+                    <a class="icon icon-goright" ng-click="startHelp()">Start browsing</a>
+                </div>
             </li>
             <li>
-                <h3>Release</h3>
-                <ul>
-                    <li ng-repeat="version in ::versions | limitTo:3">
-                        <a ng-href="./about#changelog-{{ version.version }}">
-                            <strong property="http://purl.org/dc/terms/title">{{ version.version }}</strong>
-                            <span property="http://purl.org/dc/terms/date">{{ version.release }}</span>
-                        </a>
-                    </li>
-                </ul>
-                <a class="icon icon-goright" href="./about#changelog">All changelogs</a>
+                <div class="m-box">
+                    <h3>Release</h3>
+                    <ul>
+                        <li ng-repeat="version in ::versions | limitTo:3">
+                            <a ng-href="./about#changelog-{{ version.version }}">
+                                <strong property="http://purl.org/dc/terms/title">{{ version.version }}</strong>
+                                <span property="http://purl.org/dc/terms/date">{{ version.release }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <a class="icon icon-goright" href="./about#changelog">All changelogs</a>
+                </div>
             </li>
         </ul>
         <footer>Application is licensed under <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0" target="_blank">GNU GPL v3</a>. Unless otherwise stated content is licensed under <a property="http://creativecommons.org/ns#license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.<br/>By using our services you agree with our <a href="./legals">legal terms</a>.</footer>

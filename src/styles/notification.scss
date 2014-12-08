@@ -1,0 +1,117 @@
+/* Variables ******************************************************************/
+
+$notificationHeight: 1em;
+
+
+/* Styles *********************************************************************/
+
+#sbb-notification {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 0.33em 5px 0.33em;
+    opacity: 0;
+    font-size: 0.75em;
+    line-height: 1em;
+    border-bottom: 1px solid rgba(72, 125, 178, 0.9);
+    background: rgba(82, 143, 204, 0.9);
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    transform: translate3d(0, -$notificationHeight, 0);
+    transition: transform 0.3s $easeInOutCubic, opacity 0.3s $easeInOutCubic, height 0 0.3s $easeInOutCubic;
+    height: 0;
+}
+
+#sbb-notification.show {
+    height: $notificationHeight;
+    opacity: 1;
+    transform: translate3d(0, 40px, 0);
+    transition: transform 0.2s $easeInOutCubic, opacity 0.2s $easeInOutCubic, height 0;
+}
+
+#sbb-notification.success {
+    background: rgba(106, 226, 79, 0.9);
+    border-bottom: 1px solid rgba(96, 204, 71, 0.9);
+}
+
+#sbb-notification.error {
+    background: rgba(242, 87, 73, 0.9);
+    border-bottom: 1px solid rgba(229, 82, 69, 0.9);
+}
+
+#sbb-notification.extraMargin.show {
+    top: 70px;
+}
+
+#sbb-notification.dropshadow {
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.4);
+}
+
+#sbb-notification p.info {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    color: #4374a6;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#sbb-notification.error p.info {
+    color: #d9764c;
+}
+
+#sbb-notification p {
+    float: left;
+    margin: 0 0 0 40px;
+    padding: 0;
+    width: 80%;
+    color: #fff;
+}
+
+#sbb-notification.error p {
+    color: #101010;
+}
+
+#sbb-notification a {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#sbb-notification.error a {
+    color: #000;
+}
+
+#sbb-notification .icon-only {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    color: #fff;
+}
+
+#sbb-notification .icon-only:before {
+    display: block;
+    z-index: 1;
+    padding: 0.25em;
+    font-size: 1.33em;
+    line-height: 1em;
+}
+
+#sbb-notification .info {
+    left: 7px;
+}
+
+#sbb-notification .close {
+    right: 0;
+    opacity: .33;
+    cursor: pointer;
+    transition: all 0.1s $easeInOutCubic;
+}
+
+#sbb-notification .close:hover {
+    opacity: 1;
+}

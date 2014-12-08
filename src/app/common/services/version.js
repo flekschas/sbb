@@ -1,7 +1,7 @@
 angular
   .module( 'sbb' )
-  .factory( 'versionService', ['$q', '$http', 'settings',
-    function($q, $http, settings) {
+  .factory( 'versionService', ['$q', '$http', 'settings', 'errors',
+    function($q, $http, settings, errors) {
       return {
         getVersions: function() {
           var deferred = $q.defer();

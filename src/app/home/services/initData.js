@@ -5,11 +5,16 @@ angular
       return function() {
         var versions = versionService.getVersions();
 
-        return $q.all([versions]).then(function(results) {
-          return {
-            versions: results[0]
-          };
-        });
+        return $q.all([versions]).then(function (results) {
+            return {
+              versions: results[0]
+            };
+          })
+          .catch(function () {
+            return {
+              versions: null
+            };
+          });
       };
     }
   ]);

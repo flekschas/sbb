@@ -46,10 +46,6 @@ describe("App Module: Unit Testing", function() {
       expect(hasModule('ngRoute')).toEqual(true);
     });
 
-    it("should have ngTouch as a dependency", function() {
-      expect(hasModule('ngTouch')).toEqual(true);
-    });
-
     /*
      * Semantic Body Browser modules
      */

@@ -1,5 +1,5 @@
 {
-  "apache_root": "/Users/fritz/Sites",
+  "apache_root": "/Users/Fritz/Sites",
   "build_dir": "build",
   "compile_dir": "bin",
   "app_files": {
@@ -22,7 +22,6 @@
       "vendor/angular/angular.js",
       "vendor/angular-bindonce/bindonce.js",
       "vendor/angular-route/angular-route.js",
-      "vendor/angular-touch/angular-touch.js",
       "vendor/angular-resource/angular-resource.js",
       "vendor/Blob/Blob.js",
       "vendor/FileSaver/FileSaver.js",
@@ -32,7 +31,9 @@
       "vendor/jquery-mousewheel/jquery.mousewheel.js",
       "vendor/raphael/raphael.js",
       "vendor/raphael-group/raphael.group.js",
-      "vendor/spin.js/spin.js"
+      "vendor/spin.js/spin.js",
+      "vendor/fastclick/lib/fastclick.js",
+      "vendor/papaparse/papaparse.js"
     ],
     "css": [
       "vendor/normalize-css/normalize.css"

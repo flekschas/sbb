@@ -1,15 +1,17 @@
 #dialog {
-    position: absolute;
-    display: none;
+    position: fixed;
+    display: block;
     z-index: 10;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
+    height: 0;
+    transition: height 0 0.15s $easeInOutCubic;
 }
 
 #dialog.show {
-    display: block;
+    height: 100%;
+    transition: height 0;
 }
 
 #dialog .background {
@@ -20,7 +22,7 @@
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
-    transition: all 0.2s $easeInOutCubic;
+    transition: all 0.15s $easeInOutCubic;
 }
 
 #dialog.show .background {
@@ -37,8 +39,9 @@
     background: rgba(255, 255, 255, 0.95);
     border-radius: 0.5em;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 1px rgba(0, 0, 0, 0.1);
-    transform: scale(0.6);
-    transition: all 0.2s $easeInOutCubic;
+    transform: scale(0.8);
+    transition: all 0.15s $easeInOutCubic;
+    overflow: hidden;
 }
 
 #dialog .window.large {

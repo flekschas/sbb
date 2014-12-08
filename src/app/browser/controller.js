@@ -54,6 +54,15 @@ angular
         };
       }
 
+      // Wrapper method for changing the location
+      $scope.setLocation = function(url, keepActiveUnit) {
+        if (keepActiveUnit && $scope.activeUnit) {
+          $location.url(url + '?unit=' + $scope.activeUnit);
+        } else {
+          $location.url(url);
+        }
+      };
+
       if (Object.keys($scope.data) && !Object.keys($scope.data).length) {
         $scope.setLocation('/?error=' + $routeParams.view);
         return;
@@ -219,15 +228,6 @@ angular
               $scope.setLocation(data.name);
             }
           });
-      };
-
-      // Wrapper method for changing the location
-      $scope.setLocation = function(url, keepActiveUnit) {
-        if (keepActiveUnit && $scope.activeUnit) {
-          $location.url(url + '?unit=' + $scope.activeUnit);
-        } else {
-          $location.url(url);
-        }
       };
 
       $scope.relExp = function(unit, gene) {

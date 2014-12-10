@@ -21,15 +21,15 @@ angular
             switch (data.type) {
               case 'error':
                 scope.type = 'error';
-                scope.icon = 'error';
+                scope.icon = 'warning';
                 break;
               case 'success':
                 scope.type = 'success';
-                scope.icon = 'checkmark';
+                scope.icon = 'checkmark-circle';
                 break;
               default:
                 scope.type = 'info';
-                scope.icon = 'info';
+                scope.icon = 'info-circle';
                 break;
             }
 

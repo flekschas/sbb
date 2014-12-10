@@ -65,8 +65,8 @@
                    id="f_search"
                    type="text"
                    ng-model="searchInput" />
-            <label for="f_search" class="icon-search icon-only"></label>
-            <div class="close icon-cross"
+            <label for="f_search" class="icon-magnifier icon-only"></label>
+            <div class="close icon-cross-circle"
                  ng-show="searchInput.length"
                  ng-click="searchInput = ''">Close</div>
             <div class="poi"
@@ -101,7 +101,7 @@
         <h3 class="toggler" ng-click="toggle('entities')">Entities</h3>
         <ul class="controls">
             <li title="Maximise"
-                class="hidden icon-plus"
+                class="hidden icon-plus-circle"
                 ng-click="maximise('entities')">Max</li>
         </ul>
         <div class="content">
@@ -156,7 +156,7 @@
         <h3 class="toggler" ng-click="toggle('information')">Information</h3>
         <ul class="controls">
             <li title="Maximise"
-                class="hidden icon-plus"
+                class="hidden icon-plus-circle"
                 ng-click="maximise('information')">Max</li>
         </ul>
         <div class="content">
@@ -234,12 +234,12 @@
         <h3 class="toggler" ng-click="toggle('heatmap')">Heat Map</h3>
         <ul class="controls" ng-show="heatmap">
             <li title="Maximise"
-                class="hidden icon-plus"
+                class="hidden icon-plus-circle"
                 ng-click="maximise('heatmap')">Max</li>
-            <li class="hidden icon-info"
+            <li class="hidden icon-info-circle"
                 title="Info"
                 ng-click="openHeatmapInfo()">Info</li>
-            <li class="icon-cross"
+            <li class="icon-cross-circle"
                 title="Quit Heat Map"
                 ng-click="resetHeatmap()"
                 ng-show="genes.length">Close</li>
@@ -280,7 +280,7 @@
         <h3 class="toggler" ng-click="toggle('images')">Histological Images</h3>
         <ul class="controls" ng-show="picturesAvailable()">
             <li title="Maximise"
-                class="hidden icon-plus"
+                class="hidden icon-plus-circle"
                 ng-click="maximise('images')">Max</li>
         </ul>
         <div class="content">

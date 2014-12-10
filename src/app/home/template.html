@@ -15,19 +15,19 @@
 <div id="main" class="home">
     <section id="welcome">
         <h2>Explore an Organism</h2>
-        <nav class="quicklinks">
+        <nav>
             <ul>
                 <li>
                     <a href="human-adult-male-body"
-                       class="icon icon-man">Male Human</a>
+                       class="icon icon-man"><span class="label">Male Human</span></a>
                 </li>
                 <li>
                     <a href="human-adult-female-body"
-                       class="icon icon-woman">Female Human</a>
+                       class="icon icon-woman"><span class="label">Female Human</span></a>
                 </li>
                 <li>
                     <a href="mouse-adult-body"
-                       class="icon icon-mouse">Mouse</a>
+                       class="icon icon-mouse"><span class="label">Mouse</span></a>
                 </li>
             </ul>
         </nav>
@@ -35,7 +35,7 @@
     <section id="content">
         <form id="search">
             <label for="f_search"
-                   class="icon-only icon-search"
+                   class="icon-only icon-magnifier"
                    aria-hidden="true"></label>
             <input name="search"
                    id="f_search"
@@ -43,7 +43,7 @@
                    placeholder="Search for organs, anatomical parts or cells"
                    ng-model="searchInput"
                    ng-class="{ active: searchInput.length }" />
-            <button class="icon-only icon-cross"
+            <button class="close icon-only icon-cross-circle"
                     aria-hidden="true"
                     ng-class="{ show: searchInput.length }"
                     ng-click="searchInput = ''"></button>
@@ -51,31 +51,18 @@
         <div id="searchResults"
              ng-class="{ active: searchInput.length }">
             <section>
-                <h4>Views <span class="num">{{ results.views.length }}</span></h4>
-                <horizontal-slider data="results.views" num-visible-items="4" ng-show="results.views">
-                    <div class="container">
-                        <ul>
-                            <li ng-repeat="view in results.views" ng-repeat-finished>
-                                <h5><a ng-href="{{ view.sub[0].link }}">{{ view.name }}</a></h5>
-                                <i><a ng-href="{{ view.sub[0].link }}">{{ view.sub[0].species }} {{ view.sub[0].stage }}</a></i>
-                            </li>
-                        </ul>
-                    </div>
+                <h4>Views <span class="num">{{ results.views.length || "0" }}</span></h4>
+                <horizontal-slider
+                    data="results.views"
+                    num-visible-items="4"
+                    ng-show="results.views">
                 </horizontal-slider>
                 <p class="noResults" ng-hide="results.views">Nothing found</p>
-                <h4>Units <span class="num">{{ results.units.length }}</span></h4>
+                <h4>Units <span class="num">{{ results.units.length || "0" }}</span></h4>
                 <horizontal-slider
                     data="results.units"
                     num-visible-items="4"
                     ng-show="results.units">
-                    <div class="container">
-                        <ul>
-                            <li ng-repeat="unit in results.units" ng-repeat-finished>
-                                <h5><a ng-href="{{ unit.sub[0].link }}?unit={{ unit.name | linkCompliant }}">{{ unit.name }}</a></h5>
-                                <i>{{ unit.sub[0].species }} {{ unit.sub[0].stage }}</i>
-                            </li>
-                        </ul>
-                    </div>
                 </horizontal-slider>
                 <p class="noResults" ng-hide="results.units">Nothing found</p>
             </section>
@@ -85,14 +72,14 @@
                 <div class="m-box">
                     <h3>About</h3>
                     <p>The Semantic Body Browser is a tool for graphically exploring an organism by means of ontologically annotated anatomical illustrations.</p>
-                    <a class="icon icon-goright" href="./about">Find out more</a>
+                    <a class="icon icon-right-arrow" href="./about">Find out more</a>
                 </div>
             </li>
             <li>
                 <div class="m-box">
                     <h3>Introduction</h3>
                     <p>Is it your first time here? Activate the help to get valuable tips and explanations.</p>
-                    <a class="icon icon-goright" ng-click="startHelp()">Start browsing</a>
+                    <a class="icon icon-right-arrow" ng-click="startHelp()">Start browsing</a>
                 </div>
             </li>
             <li>
@@ -106,7 +93,7 @@
                             </a>
                         </li>
                     </ul>
-                    <a class="icon icon-goright" href="./about#changelog">All changelogs</a>
+                    <a class="icon icon-right-arrow" href="./about#changelog">All changelogs</a>
                 </div>
             </li>
         </ul>

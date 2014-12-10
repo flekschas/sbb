@@ -1,11 +1,9 @@
 angular
   .module( 'sbb.home' )
-  .directive( 'horizontalSlider', ['$', 'news',
-  function($, news) {
-    // Horizontal Slider for the search results
+  .directive( 'horizontalSlider', ['$',
+    function($) {
     return {
-      restrict: 'AE',
-      transclude: true,
+      restrict: 'E',
       templateUrl: 'home/directives/horizontalSlider.html',
       scope: {
         data: '=',
@@ -18,70 +16,57 @@ angular
               'numEntries'    : 0,
               'totalWidth'    : 0,
               'itemWidth'     : 0,
-              'button'        : $el.find('div.button'),
               'ul'            : $el.find('ul'),
               'disabled'      : true
             };
 
+        scope.scrollable = false;
+
         // Give 'margin-left' a value
         hSlider.ul.css('margin-left', '0%');
-
-        news.setSliderWidth($el.width());
-
-        scope.$on('sliderHeight', function(e, h) {
-          hSlider.button.css('line-height', h + 'px');
-        });
 
         // Watch for the number of search results and adjust the container
         // widths accordingly
         scope.$watch(function() {
-            return scope.data;
+          return scope.data;
         }, function(data) {
-            if (typeof data === 'object') {
-              // Update properties
-              hSlider.numEntries = 0;
-              for (var prop in data) {
-                  if (data.hasOwnProperty(prop)) {
-                      ++hSlider.numEntries;
-                  }
+          if (typeof data === 'object') {
+            // Update properties
+            hSlider.numEntries = Object.keys(data).length;
+
+            scope.$on('ngRepeatFinished', function() {
+              hSlider.li = $el.find('li');
+
+              // Set UL width to ceil(number of items / numVisibleItems)
+              // Set LI width to UL-Width / numVisibleItems
+              if (hSlider.numEntries > scope.numVisibleItems) {
+                scope.scrollable = true;
+                hSlider
+                  .ul
+                  .css(
+                    'width',
+                    ((hSlider.numEntries /
+                       scope.numVisibleItems) * 100) + '%'
+                  );
+                hSlider.li.css('width', (100 / hSlider.numEntries) + '%');
+              } else {
+                scope.scrollable = false;
+                hSlider.ul.css('width', '100%');
+                hSlider.li.css('width', (100 / scope.numVisibleItems) + '%');
               }
 
-              scope.$on('ngRepeatFinished', function() {
-                hSlider.li = $el.find('li');
+              hSlider.itemWidth = (100 / scope.numVisibleItems);
+              hSlider.totalWidth = hSlider.itemWidth * hSlider.numEntries;
 
-                // Set UL width to ceil(number of items / numVisibleItems)
-                // Set LI width to UL-Width / numVisibleItems
-                if (hSlider.numEntries > scope.numVisibleItems) {
-                    hSlider.button.removeClass('disabled');
-                    hSlider.disabled = false;
-                    hSlider
-                      .ul
-                      .css(
-                        'width',
-                        ((hSlider.numEntries /
-                           scope.numVisibleItems) * 100) + '%'
-                      );
-                    hSlider.li.css('width', (100 / hSlider.numEntries) + '%');
-                } else {
-                    hSlider.button.addClass('disabled');
-                    hSlider.disabled = true;
-                    hSlider.ul.css('width', '100%');
-                    hSlider.li.css('width', (100 / scope.numVisibleItems) + '%');
-                }
-
-                hSlider.itemWidth = (100 / scope.numVisibleItems);
-                hSlider.totalWidth = hSlider.itemWidth * hSlider.numEntries;
-
-                // Reset position
-                hSlider.currentPos = 1;
-                hSlider.transition(0, 0);
-              });
-            }
+              // Reset position
+              hSlider.currentPos = 1;
+              hSlider.transition(0, 0);
+            });
           }
-        );
+        });
 
         scope.scroll = function(dir) {
-          if (hSlider.disabled || hSlider.currentPos === 0) {
+          if (hSlider.currentPos === 0) {
             return;
           }
 

@@ -5,15 +5,15 @@
             <div class="deselectGene"
                  ng-class="{'visible': selectedGene.length }"
                  ng-click="resetSingleGene()">
-                {{ selectedGene }} <div class="icon icon-cross"></div>
+                {{ selectedGene }} <div class="icon icon-cross-circle"></div>
             </div>
             <div ng-click="resetHeatMap()" class="closeAll">
-                Heat Map Modus <div class="icon icon-cross"></div>
+                Heat Map Modus <div class="icon icon-cross-circle"></div>
             </div>
         </div>
         <div id="displayAll"
              title="Show All"
-             class="icon icon-displayall"
+             class="icon icon-expand"
              ng-class="{'heatMap': heatmap, 'topbar' : zoomOutLevels.length }"
              ng-click="displayAll()">
              Display All

@@ -40,12 +40,6 @@ angular
         $rootScope.$broadcast('activePanel');
       };
 
-      // Sets and broadcasts the active width
-      news.setSliderWidth = function( width ) {
-        this.sliderWidth = width;
-        $rootScope.$broadcast('sliderWidth');
-      };
-
       // Generic broadcast function
       news.broadcast = function( event, data, extra) {
         $rootScope.$broadcast( event, data, extra);

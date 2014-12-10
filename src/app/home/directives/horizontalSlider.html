@@ -1,9 +1,20 @@
 <div
-  class="left icon icon-goleft button"
+  class="icon-left-arrow"
+  aria-hidden="true"
   line-height
-  ng-click="scroll('prev')">Prev</div>
+  ng-class="{ disabled: !scrollable }"
+  ng-click="scroll('prev')"></div>
 <div
-  class="right icon icon-goright button"
+  class="icon-right-arrow"
+  aria-hidden="true"
   line-height
-  ng-click="scroll('next')">Next</div>
-<div ng-transclude></div>
+  ng-class="{ disabled: !scrollable }"
+  ng-click="scroll('next')"></div>
+<div class="container">
+    <ul>
+        <li ng-repeat="result in data" ng-repeat-finished>
+            <h5><a ng-href="{{ result.sub[0].link }}">{{ result.name }}</a></h5>
+            <i><a ng-href="{{ result.sub[0].link }}">{{ result.sub[0].species }} {{ result.sub[0].stage }}</a></i>
+        </li>
+    </ul>
+</div>

@@ -39,7 +39,7 @@ describe("legals.controller (unit testing)", function() {
   it('should set the app status to `ready`',
     function() {
       $rootScope.$digest();
-      expect(legalsScope.app.status).toEqual('ready');
+      expect(AppCtrl.status).toEqual('ready');
     }
   );
 });

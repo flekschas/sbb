@@ -31,7 +31,7 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
 
 
   /*****************************************************************************
-   * General / Existing
+   * General / Existance testing
    ****************************************************************************/
 
   it('should have a scroll function',
@@ -54,14 +54,14 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
 
   it('should have a data object',
     function () {
-      $parentScope.data = {
+      $parentScope.data = [{
         name: 'test',
         sub: [{
           link: 'test',
           species: 'test',
           stage: 'test'
         }],
-      };
+      }];
       $parentScope.$digest();
 
       expect($scope.data).toEqual($parentScope.data);
@@ -70,54 +70,112 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
 
 
   /*****************************************************************************
-   * General / Existing
+   * Functional testing
    ****************************************************************************/
 
-  // it('should toggle the `open` attribute',
-  //   function () {
-  //     expect($scope.open).toEqual(false);
-  //     $scope.toggle();
-  //     $rootScope.$digest();
-  //     expect($scope.open).toEqual(true);
-  //   }
-  // );
+  it('should be scrollable when the number of results > number visual',
+    function () {
+      $parentScope.data = {
+        testA: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        },
+        testB: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        },
+        testC: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        }
+      };
+      $parentScope.$digest();
 
-  // it('should listen to the global click event and set `open` to `false`',
-  //   inject(function ($injector) {
-  //     /*
-  //      * First open the drop down.
-  //      */
-  //     $scope.toggle();
-  //     $rootScope.$digest();
-  //     expect($scope.open).toEqual(true);
+      $rootScope.$broadcast('ngRepeatFinished');
+      $rootScope.$digest();
 
+      expect($scope.scrollable).toEqual(true);
 
-  //      * Manually fire the global click event using the news service.
-  //      * 1. Test closing (set open  to `false`)
-  //      * 2. Test kepping the drop down open
+      $parentScope.data = {
+        testA: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        }
+      };
+      $parentScope.$digest();
 
-  //     var news = $injector.get('news');
+      $rootScope.$broadcast('ngRepeatFinished');
+      $rootScope.$digest();
 
-  //     news.setClick(element[0].querySelector('#other'));  // (1)
-  //     $rootScope.$digest();
-  //     expect($scope.open).toEqual(false);
+      expect($scope.scrollable).toEqual(false);
+    }
+  );
 
-  //     $scope.toggle();
-  //     $rootScope.$digest();
-  //     news.setClick(element[0].querySelector('.triangle'));  // (2)
-  //     $rootScope.$digest();
-  //     expect($scope.open).toEqual(true);
-  //   })
-  // );
+  it('should be change the margin when invoking the scroll function',
+    function () {
+      var ul = angular.element(element[0].querySelector('ul'));
 
-  // it('`open` should set class',
-  //   function () {
-  //     expect(element[0].querySelector('#logo.active')).toEqual(null);
-  //     expect(element[0].querySelector('div.container.open')).toEqual(null);
-  //     $scope.toggle();
-  //     $rootScope.$digest();
-  //     expect(element[0].querySelector('#logo.active')).toBeTruthy();
-  //     expect(element[0].querySelector('div.container.open')).toBeTruthy();
-  //   }
-  // );
+      $parentScope.data = {
+        testA: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        },
+        testB: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        },
+        testC: {
+          name: 'test',
+          sub: [{
+            link: 'test',
+            species: 'test',
+            stage: 'test'
+          }],
+        }
+      };
+      $rootScope.$digest();
+
+      $rootScope.$broadcast('ngRepeatFinished');
+      $rootScope.$digest();
+
+      $scope.scroll('next');
+      $rootScope.$digest();
+
+      expect(ul.css('margin-left')).toEqual('-50%');
+
+      $scope.scroll('next');
+      $rootScope.$digest();
+
+      expect(ul.css('margin-left')).toEqual('-100%');
+
+      $scope.scroll('next');
+      $rootScope.$digest();
+
+      expect(ul.css('margin-left')).toEqual('0%');
+    }
+  );
 });

@@ -84,10 +84,6 @@ angular
         }
       });
 
-      $scope.hideError = function() {
-        $location.search('error', null);
-      };
-
       $scope.startHelp = function() {
         storage.set('helpActive', 1, true);
         $location.url('human-adult-male-body?unit=liver');

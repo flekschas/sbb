@@ -39,6 +39,13 @@ describe("about.controller (unit testing)", function() {
     }
   );
 
+  it('should set app in `ready` mode',
+    function() {
+      $rootScope.$digest();
+      expect(AppCtrl.status).toEqual('ready');
+    }
+  );
+
   it('should exist the `mail` function',
     function() {
       expect(typeof(aboutScope.mail)).toEqual('function');

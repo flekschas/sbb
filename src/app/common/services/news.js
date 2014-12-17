@@ -11,12 +11,6 @@ angular
       };
 
       // Sets and broadcasts the target of a global click
-      news.setClick = function( target ) {
-        this.clickTarget = target;
-        $rootScope.$broadcast('click');
-      };
-
-      // Sets and broadcasts the target of a global click
       news.setScrolled = function( status ) {
         this.scrolled = status;
         $rootScope.$broadcast('scrolled');

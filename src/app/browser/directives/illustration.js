@@ -282,16 +282,16 @@ angular
         });
 
         // Listens for the global click event broad-casted by the news service
-        scope.$on('click', function() {
+        scope.$on('click', function(e, target) {
           if (scope.heatmap) {
             if (scope.heatMapCloseDialog && (blockCloseClick - Date.now() < 0)) {
-              if (!containElement($heatMapCloseDialog[0], news.clickTarget)) {
+              if (!containElement($heatMapCloseDialog[0], target)) {
                 fn.showHeatMapCloseDialog();
               }
             }
           } else {
-            if (!$el.find(news.clickTarget).length) {
-              if (!$zoomDialog.find(news.clickTarget).length) {
+            if (!$el.find(target).length) {
+              if (!$zoomDialog.find(target).length) {
                 fn.showZoomDialog();
               }
             }

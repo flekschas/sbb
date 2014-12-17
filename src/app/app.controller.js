@@ -5,7 +5,7 @@ angular
       var ctrl = this;
 
       ctrl.globalClick = function ($event) {
-        news.setClick($event.target);
+        news.broadcast('click', $event.target);
       };
 
       ctrl.ready = function() {
@@ -30,9 +30,6 @@ angular
               ctrl.title = words.join(' ');
             }
 
-            if (typeof(piwikTracker) === 'object') {
-              piwikTracker.trackPageView($location.path());
-            }
           }
         );
 

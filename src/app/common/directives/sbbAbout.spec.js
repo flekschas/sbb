@@ -59,13 +59,13 @@ describe("app.common.directive.sbbAbout (unit testing)", function() {
        */
       var news = $injector.get('news');
 
-      news.setClick(element[0].querySelector('#other'));  // (1)
+      news.broadcast('click', element[0].querySelector('#other'));  // (1)
       $rootScope.$digest();
       expect($scope.open).toEqual(false);
 
       $scope.toggle();
       $rootScope.$digest();
-      news.setClick(element[0].querySelector('.triangle'));  // (2)
+      news.broadcast('click', element[0].querySelector('.triangle'));  // (2)
       $rootScope.$digest();
       expect($scope.open).toEqual(true);
     })

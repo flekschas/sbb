@@ -30,12 +30,6 @@ describe("app.service.news (unit testing)", function() {
     }
   );
 
-  it('exists the `setClick` function',
-    function () {
-      expect(typeof(news.setClick)).toEqual('function');
-    }
-  );
-
   it('exists the `setScrolled` function',
     function () {
       expect(typeof(news.setScrolled)).toEqual('function');
@@ -78,17 +72,6 @@ describe("app.service.news (unit testing)", function() {
 
       expect($rootScope.$broadcast).toHaveBeenCalledWith('activeUnit');
       expect(news.activeUnit).toEqual('test');
-    }
-  );
-
-  it('broadcast and sets the click target',
-    function () {
-      news.setClick('test');
-
-      $rootScope.$digest();
-
-      expect($rootScope.$broadcast).toHaveBeenCalledWith('click');
-      expect(news.clickTarget).toEqual('test');
     }
   );
 

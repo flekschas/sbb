@@ -18,28 +18,10 @@ angular
 
         scope
           .$on('sbbNotification:open', function (e, data) {
-            switch (data.type) {
-              case 'error':
-                scope.type = 'error';
-                scope.icon = 'warning';
-                break;
-              case 'success':
-                scope.type = 'success';
-                scope.icon = 'checkmark-circle';
-                break;
-              default:
-                scope.type = 'info';
-                scope.icon = 'info-circle';
-                break;
-            }
+            setType(data.type);
 
             scope.message = data.message;
             scope.show = true;
-          });
-
-        scope
-          .$on('sbbNotification:updateContent', function (e, data) {
-            angular.extend(scope.content, data);
           });
 
         scope
@@ -50,6 +32,23 @@ angular
         scope.close = function () {
           scope.show = false;
         };
+
+        function setType (type) {
+          switch (type) {
+            case 'error':
+              scope.type = 'error';
+              scope.icon = 'warning';
+              break;
+            case 'success':
+              scope.type = 'success';
+              scope.icon = 'checkmark-circle';
+              break;
+            default:
+              scope.type = 'info';
+              scope.icon = 'info-circle';
+              break;
+          }
+        }
       }
 
       return directive;

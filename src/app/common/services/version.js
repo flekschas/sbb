@@ -24,7 +24,7 @@ angular
             .get(settings.apiPath + 'changelog')
             .success(function (data) {
               var changelog = {};
-              for (var i = data.length; i--;) {
+              for (var i = 0, len = data.length; i < len; i++) {
                 if (typeof changelog[data[i].version] !== 'undefined'){
                   changelog[data[i].version].push(data[i]);
                 } else {

@@ -44,8 +44,8 @@ angular
           };
 
           // Listens for the global click event broad-casted by the news service
-          scope.$on('click', function() {
-            if ($el.find(news.clickTarget.tagName)[0] !== news.clickTarget) {
+          scope.$on('click', function(e, target) {
+            if ($el.find(target.tagName)[0] !== target) {
               scope.toggle(false);
             }
           });

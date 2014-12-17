@@ -112,4 +112,53 @@ describe("app.common.directive.dialog (unit testing)", function() {
 
     }
   );
+
+  it('should extend the data object when `update` event is triggered',
+    function () {
+      var data = {
+            tpl: 'browser/partials/dialogs/gxe.html',
+            size: 'large',
+            scope: {
+              title: 'title',
+              repo: 'repo',
+              acc: 'acc',
+              url: 'url',
+              pmid: [
+                1, 2, 3
+              ],
+              desc: 'description',
+              org: [
+                'organisation 1', 'organisation 2', 'organisation 3'
+              ],
+              person: [
+                'person 1', 'person 2', 'person 3'
+              ]
+            }
+          },
+          update = {
+            title: 'updatedTitle',
+            new: 'new'
+          };
+
+      $rootScope.$broadcast('sbbDialog:open', data);
+      $rootScope.$digest();
+
+      expect($scope.content).toEqual(data.scope);
+
+      $rootScope.$broadcast('sbbDialog:updateContent', update);
+      $rootScope.$digest();
+
+      expect($scope.content.title).toEqual(update.title);
+      expect($scope.content.new).toEqual(update.new);
+
+      /*
+       * Flush timeout to see if the dialog now has a `show` class.
+       */
+      $timeout.flush();
+
+      expect(dialogEl.hasClass('show')).toEqual(true);
+
+      expect(dialogEl.find('h3').text()).toEqual(data.scope.title);
+    }
+  );
 });

@@ -88,20 +88,104 @@ describe("home.controller (unit testing)", function() {
    * Functional Testing
    ****************************************************************************/
 
-  it('should post search request when input changes',
+  it('should get and cache search data when input changes',
     inject(function ($injector) {
       var $httpBackend = $injector.get('$httpBackend'),
-          keyword = 'test';
+          keyword = 'kid',
+          data = {
+            "views": [
+              {
+                "name": "kidney",
+                "score": 0.5,
+                "i": 0,
+                "sub":  [
+                  {
+                    "species": "human",
+                    "stage": "adult",
+                    "link": "human-adult-kidney",
+                    "score": 0
+                  },
+                  {
+                    "species": "mouse",
+                    "stage": "adult",
+                    "link": "mouse-adult-kidney",
+                    "score": 0
+                  }
+                ]
+              }
+            ],
+            "units": [
+              {
+                "name": "kidney",
+                "score": 0.5,
+                "i": 0,
+                "sub": [
+                  {
+                    "species": "human",
+                    "stage": "adult",
+                    "link": "human-adult-male-body",
+                    "score": 0,
+                    "view": "male body"
+                  },
+                  {
+                    "species": "human",
+                    "stage": "adult",
+                    "link": "human-adult-female-body",
+                    "score": 0,"view": "female body"
+                  },
+                  {
+                    "species": "mouse",
+                    "stage": "adult",
+                    "link": "mouse-adult-body",
+                    "score": 0,"view": "body"
+                  }
+                ]
+              }
+            ]
+          };
 
       homeScope.searchInput = keyword;
 
       $httpBackend
         .expectGET('http://sbb.cellfinder.org/api/1.2.3/s/' + keyword)
-        .respond(200, '');
+        .respond(data);
+      $httpBackend.flush();
 
       homeScope.$digest();
 
+      expect(homeScope.results).toEqual(data);
 
+      // Reset search
+      homeScope.searchInput = '';
+      homeScope.results = null;
+
+      homeScope.$digest();
+
+      // Search again but this time the results should cause any GET request.
+      homeScope.searchInput = keyword;
+      homeScope.$digest();
+
+      expect(homeScope.results).toEqual(data);
+    })
+  );
+
+  it('should watch the `error` parameter and trigger a notification event',
+    inject(function ($injector) {
+      var $location = $injector.get('$location'),
+          errLocation = 'test',
+          errData = {
+            type: 'error',
+            message: 'The page you were looking for (' + errLocation + ') is not available!'
+          };
+
+      spyOn($rootScope, '$broadcast').andCallThrough();
+
+      $location.search('error', errLocation);
+
+      $rootScope.$digest();
+
+      expect($rootScope.$broadcast)
+        .toHaveBeenCalledWith('sbbNotification:open', errData, undefined);
     })
   );
 });

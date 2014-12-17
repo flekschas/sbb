@@ -41,8 +41,7 @@ angular
         });
 
         // Listens for the global click event broad-casted by the news service
-        scope.$on('click', function() {
-          var target = news.clickTarget;
+        scope.$on('click', function(e, target) {
           while (target && target.tagName.toLowerCase() != 'body') {
             if (target.attributes.getNamedItem('sbb-dev-stages')) {
               return;

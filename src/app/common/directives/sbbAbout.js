@@ -15,8 +15,8 @@ angular
 
         // Listens for the global click event broad-casted by the news
         // service
-        scope.$on('click', function() {
-          if (!containElement(element[0], news.clickTarget)) {
+        scope.$on('click', function(e, target) {
+          if (!containElement(element[0], target)) {
             scope.open = false;
           }
         });

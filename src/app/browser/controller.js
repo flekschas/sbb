@@ -484,7 +484,7 @@ angular
       $scope.$on('activePanel', function () {
         if (news.activePanel === 'heatmap') {
           // Open a message the first time the heatmap is used
-          if (storage.enabled() && !storage.get('heatmapIntroMessage')) {
+          if (storage.persistent && !storage.get('heatmapIntroMessage')) {
             storage.set('heatmapIntroMessage', 1);
             $scope.helpMessage = 'browser/partials/heatmap/introduction.html';
           }

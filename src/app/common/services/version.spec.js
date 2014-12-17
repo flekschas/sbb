@@ -1,6 +1,10 @@
 describe("app.service.version (unit testing)", function() {
   "use strict";
 
+  /*****************************************************************************
+   * Global Variables
+   ****************************************************************************/
+
   var versionService,
       $rootScope,
       $httpBackend,
@@ -8,6 +12,11 @@ describe("app.service.version (unit testing)", function() {
           {
             version: "0.0.0",
             type: "fix",
+            msg: "test"
+          },
+          {
+            version: "0.0.0",
+            type: "update",
             msg: "test"
           }
         ],
@@ -19,6 +28,11 @@ describe("app.service.version (unit testing)", function() {
           }
         ];
 
+
+  /*****************************************************************************
+   * Global Setting / Setup
+   ****************************************************************************/
+
   beforeEach(function() {
     module('sbb');
 
@@ -27,16 +41,13 @@ describe("app.service.version (unit testing)", function() {
 
       $rootScope = $injector.get('$rootScope');
       $httpBackend = $injector.get('$httpBackend');
-
-      $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/changelog')
-        .respond(changelogFakeData);
-
-      $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
-        .respond(versionsFakeData);
     });
   });
+
+
+  /*****************************************************************************
+   * General / Existance Testing
+   ****************************************************************************/
 
   it('should contain the versionService',
     function () {
@@ -56,13 +67,26 @@ describe("app.service.version (unit testing)", function() {
     }
   );
 
-  it('should resolve a promise',
+
+  /*****************************************************************************
+   * Functional Testing
+   ****************************************************************************/
+
+  it('should resolve promises',
     function () {
       var changelog,
           versions,
           transformedChangelog = {
             "0.0.0": changelogFakeData
           };
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/changelog')
+        .respond(changelogFakeData);
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
+        .respond(versionsFakeData);
 
       versionService.getChangelog().then(function(data){
         changelog = data;
@@ -77,6 +101,39 @@ describe("app.service.version (unit testing)", function() {
 
       expect(changelog).toEqual(transformedChangelog);
       expect(versions).toEqual(versionsFakeData);
+    }
+  );
+
+  it('should reject errors',
+    function () {
+      var changelogErr,
+          versionErr;
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/changelog')
+        .respond(500, 'error');
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
+        .respond(500, 'error');
+
+      versionService
+        .getChangelog()
+        .catch(function (e) {
+          changelogErr = e;
+        });
+
+      versionService
+        .getVersions()
+        .catch(function (e) {
+          versionErr = e;
+        });
+
+      $httpBackend.flush();
+      $rootScope.$digest();
+
+      expect(changelogErr).toEqual('error');
+      expect(versionErr).toEqual('error');
     }
   );
 

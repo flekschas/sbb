@@ -73,14 +73,10 @@ angular
         return $location.search().error;
       }, function (newValue, oldValue) {
         if(newValue) {
-          // $scope.errorHtml = settings.partialsPath + 'error.html';
-          $scope.error = true;
           news.broadcast('sbbNotification:open', {
             type: 'error',
             message: 'The page you were looking for (' + $location.search().error + ') is not available!'
           });
-        } else if (oldValue) {
-          $scope.error = false;
         }
       });
 

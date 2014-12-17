@@ -1,10 +1,19 @@
 describe("app.controller (unit testing)", function() {
   "use strict";
 
+  /*****************************************************************************
+   * Global Variables
+   ****************************************************************************/
+
   var AppCtrl,
       appScope,
       $rootScope,
       storage;
+
+
+  /*****************************************************************************
+   * Global Setting / Setup
+   ****************************************************************************/
 
   beforeEach(function() {
     module('sbb');
@@ -24,7 +33,12 @@ describe("app.controller (unit testing)", function() {
     });
   });
 
-  it('should find the AppCtrl',
+
+  /*****************************************************************************
+   * General / Existance Testing
+   ****************************************************************************/
+
+  it('should have the AppCtrl',
     function() {
       expect(AppCtrl).toBeTruthy();
     }
@@ -41,6 +55,11 @@ describe("app.controller (unit testing)", function() {
       expect(typeof(AppCtrl.ready)).toEqual('function');
     }
   );
+
+
+  /*****************************************************************************
+   * Functional Testing
+   ****************************************************************************/
 
   it('should set app status correctly',
     function() {
@@ -97,5 +116,19 @@ describe("app.controller (unit testing)", function() {
 
       expect(storage.lastVisit).toEqual(Math.floor(Date.now() / 86400000));
     }
+  );
+
+  it('should broadcast click target when `globalClick` is called',
+    inject(function ($injector) {
+      var event = {
+        target: 'test'
+      };
+
+      spyOn($rootScope, '$broadcast');
+
+      AppCtrl.globalClick(event);
+
+      expect($rootScope.$broadcast).toHaveBeenCalledWith('click', event.target, undefined);
+    })
   );
 });

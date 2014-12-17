@@ -66,10 +66,6 @@ angular
         });
 
         scope.scroll = function(dir) {
-          if (hSlider.currentPos === 0) {
-            return;
-          }
-
           var loc = hSlider.itemWidth;
 
           if (dir === 'next') {

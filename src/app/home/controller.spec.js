@@ -72,17 +72,6 @@ describe("home.controller (unit testing)", function() {
     }
   );
 
-  it('should be listened to the `scrolled` event',
-    function () {
-      expect(typeof(homeScope.scrolled)).toEqual('undefined');
-
-      news.setScrolled(true);
-      $rootScope.$digest();
-
-      expect(homeScope.scrolled).toEqual(true);
-    }
-  );
-
 
   /*****************************************************************************
    * Functional Testing
@@ -169,6 +158,32 @@ describe("home.controller (unit testing)", function() {
     })
   );
 
+  it('should show error notification if API is unavailable',
+    inject(function ($injector) {
+      var $httpBackend = $injector.get('$httpBackend'),
+          keyword = 'test',
+          notificationData = {
+            type: 'error',
+            message: 'API is currently unavailable! Please try again later.'
+          };
+
+      spyOn($rootScope, '$broadcast').andCallThrough();
+
+      homeScope.searchInput = keyword;
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/s/' + keyword)
+        .respond(500);
+      $httpBackend.flush();
+
+      homeScope.$digest();
+
+      expect(homeScope.searchError).toEqual(true);
+      expect($rootScope.$broadcast)
+        .toHaveBeenCalledWith('sbbNotification:open', notificationData, undefined);
+    })
+  );
+
   it('should watch the `error` parameter and trigger a notification event',
     inject(function ($injector) {
       var $location = $injector.get('$location'),
@@ -186,6 +201,37 @@ describe("home.controller (unit testing)", function() {
 
       expect($rootScope.$broadcast)
         .toHaveBeenCalledWith('sbbNotification:open', errData, undefined);
+    })
+  );
+
+  it('should change the location when `setLocation` is called',
+    inject(function ($injector) {
+      var $location = $injector.get('$location'),
+          testUrl = 'test';
+
+      spyOn($location, 'url').andCallThrough();
+
+      homeScope.setLocation('test');
+
+      $rootScope.$digest();
+
+      expect($location.url).toHaveBeenCalledWith(testUrl);
+    })
+  );
+
+  it('should change the location and set a flag when `setHelp` is called',
+    inject(function ($injector) {
+      var $location = $injector.get('$location'),
+          storage = $injector.get('storage');
+
+      spyOn($location, 'url').andCallThrough();
+
+      homeScope.startHelp();
+
+      $rootScope.$digest();
+
+      expect($location.url).toHaveBeenCalledWith('human-adult-male-body?unit=liver');
+      expect(storage.get('helpActive')).toEqual(1);
     })
   );
 });

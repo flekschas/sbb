@@ -114,7 +114,7 @@ describe("app.controller (unit testing)", function() {
       $rootScope.$broadcast('$routeChangeStart', {});
       $rootScope.$digest();
 
-      expect(storage.lastVisit).toEqual(Math.floor(Date.now() / 86400000));
+      expect(storage.get('lastVisit')).toEqual(Math.floor(Date.now() / 86400000));
     }
   );
 

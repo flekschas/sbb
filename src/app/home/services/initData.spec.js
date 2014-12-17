@@ -1,31 +1,22 @@
 describe("home.service.initData (unit testing)", function() {
   "use strict";
 
-  var homeInitData,
-      $rootScope;
+  var $rootScope,
+      $httpBackend,
+      $q,
+      homeInitData,
+      versionService;
 
   beforeEach(function() {
     module('sbb');
     module('sbb.home');
 
     inject(function ($injector) {
-      var versionService = $injector.get('versionService'),
-          $q = $injector.get('$q'),
-          $httpBackend = $injector.get('$httpBackend');
-
+      $q = $injector.get('$q');
+      $httpBackend = $injector.get('$httpBackend');
+      versionService = $injector.get('versionService');
       homeInitData = $injector.get('homeInitData');
       $rootScope = $injector.get('$rootScope');
-
-      spyOn(versionService, "getVersions")
-        .andCallFake(function() {
-          var deferred = $q.defer();
-          deferred.resolve('test');
-          return deferred.promise;
-        });
-
-      $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
-        .respond(200, '');
     });
   });
 
@@ -42,9 +33,49 @@ describe("home.service.initData (unit testing)", function() {
           },
           results;
 
+      spyOn(versionService, "getVersions")
+        .andCallFake(function() {
+          var deferred = $q.defer();
+          deferred.resolve('test');
+          return deferred.promise;
+        });
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
+        .respond(200, '');
+
       homeInitData().then(function(data){
         results = data;
       });
+
+      $rootScope.$digest();
+
+      expect(results).toEqual(data);
+    }
+  );
+
+  it('should return `null` if promise is rejected',
+    function () {
+      var data = {
+            versions: null
+          },
+          results;
+
+      spyOn(versionService, "getVersions")
+        .andCallFake(function() {
+          var deferred = $q.defer();
+          deferred.reject('test');
+          return deferred.promise;
+        });
+
+      $httpBackend
+        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
+        .respond(200, '');
+
+      homeInitData()
+        .then(function(data){
+          results = data;
+        });
 
       $rootScope.$digest();
 

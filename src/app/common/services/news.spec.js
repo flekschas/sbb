@@ -99,6 +99,17 @@ describe("app.service.news (unit testing)", function() {
 
   it('broadcast and set help',
     function () {
+      news.setActivePanel('test');
+
+      $rootScope.$digest();
+
+      expect($rootScope.$broadcast).toHaveBeenCalledWith('activePanel');
+      expect(news.activePanel).toEqual('test');
+    }
+  );
+
+  it('broadcast and set active panel',
+    function () {
       news.setHelp('test');
 
       $rootScope.$digest();

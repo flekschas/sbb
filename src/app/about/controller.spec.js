@@ -1,16 +1,34 @@
 describe("about.controller (unit testing)", function() {
   "use strict";
 
+  /*****************************************************************************
+   * Global Variables
+   ****************************************************************************/
+
   var AppCtrl,
       appScope,
       AboutCtrl,
       aboutScope,
       $rootScope,
+      $window,
       news;
+
+
+  /*****************************************************************************
+   * Global Setting / Setup
+   ****************************************************************************/
 
   beforeEach(function() {
     module('sbb');
     module('sbb.about');
+    module( function ($provide) {
+      $window = {
+        location: {},
+        document: window.document
+      };
+      // We register our new $window instead of the old
+      $provide.constant( '$window' , $window );
+    });
 
     inject(function ($injector) {
       var $controller = $injector.get('$controller');
@@ -33,6 +51,11 @@ describe("about.controller (unit testing)", function() {
     });
   });
 
+
+  /*****************************************************************************
+   * General / Existance Testing
+   ****************************************************************************/
+
   it('should exist the AboutCtrl controller',
     function() {
       expect(AboutCtrl).toBeTruthy();
@@ -52,20 +75,17 @@ describe("about.controller (unit testing)", function() {
     }
   );
 
-  it('should exist the `setLocation` function',
-    function() {
-      expect(typeof(aboutScope.setLocation)).toEqual('function');
-    }
-  );
 
-  it('should be listened to the `scrolled` event',
-    function() {
-      expect(typeof(aboutScope.scrolled)).toEqual('undefined');
+  /*****************************************************************************
+   * Functional Testing
+   ****************************************************************************/
 
-      news.setScrolled('test');
+  it('should change the `window` location to trigger mail clients',
+    function () {
+      aboutScope.mail();
       $rootScope.$digest();
 
-      expect(aboutScope.scrolled).toEqual('test');
+      expect($window.location).toEqual('mailto:fritz.lekschas@charite.de?subject=[SBB]');
     }
   );
 });

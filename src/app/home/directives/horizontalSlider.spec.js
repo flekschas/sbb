@@ -127,7 +127,7 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
     }
   );
 
-  it('should be change the margin when invoking the scroll function',
+  it('should change the margin when invoking the scroll function',
     function () {
       var ul = angular.element(element[0].querySelector('ul'));
 
@@ -176,6 +176,14 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
       $rootScope.$digest();
 
       expect(ul.css('margin-left')).toEqual('0%');
+
+      /*
+       * Prev should also work
+       */
+      $scope.scroll('prev');
+      $rootScope.$digest();
+
+      expect(ul.css('margin-left')).toEqual('-100%');
     }
   );
 });

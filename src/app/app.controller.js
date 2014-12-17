@@ -34,6 +34,6 @@ angular
         );
 
       // Set a current timestamp in days scince 1970
-      storage.lastVisit = Math.floor(Date.now() / 86400000);
+      storage.set('lastVisit', Math.floor(Date.now() / 86400000));
     }
   ]);

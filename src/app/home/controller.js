@@ -29,18 +29,6 @@ angular
         $location.url(url);
       };
 
-      // Listen for scroll event
-      $scope.$on('scrolled', function() {
-        $scope.scrolled = news.scrolled;
-        if(!$scope.$$phase) {
-          $scope.$apply();
-        }
-      });
-
-      $scope.$on('error:api', function (e, data) {
-
-      });
-
       // Watch for the search to change
       // Cache results for more speed
       var results = {};
@@ -55,14 +43,17 @@ angular
             $http
               .get (settings.apiPath + 's/' + search)
               .success (function (data) {
+                $scope.searchError = false;
                 $scope.results = data;
                 // Cache results for later use
                 results[search] = data;
               })
               .error (function (error) {
-                if (console) {
-                  console.log('Data for searching could not have been loaded!');
-                }
+                $scope.searchError = true;
+                news.broadcast('sbbNotification:open', {
+                  type: 'error',
+                  message: 'API is currently unavailable! Please try again later.'
+                });
               });
           }
         }

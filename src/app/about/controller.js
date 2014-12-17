@@ -8,23 +8,10 @@ angular
       $scope.versions = initData.versions;
       $scope.currentDate = Date.now();
 
-      // Wrapper method for changing the location
-      $scope.setLocation = function ( url ) {
-        $location.url(url);
-      };
-
       // Helper method to hide email in HTML
       $scope.mail = function() {
         $window.location = 'mailto:fritz.lekschas@charite.de?subject=[SBB]';
       };
-
-      // Listen for scroll event
-      $scope.$on('scrolled', function () {
-        $scope.scrolled = news.scrolled;
-        if (!$scope.$$phase) {
-          $scope.$apply();
-        }
-      });
 
       // Scope is ready
       $scope.app.ready();

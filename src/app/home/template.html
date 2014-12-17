@@ -34,9 +34,13 @@
     </section>
     <section id="content">
         <form id="search">
+            <span class="icon-only icon-warning"
+                  aria-hidden="true"
+                  ng-show="searchError"></span>
             <label for="f_search"
                    class="icon-only icon-magnifier"
-                   aria-hidden="true"></label>
+                   aria-hidden="true"
+                   ng-hide="searchError"></label>
             <input name="search"
                    id="f_search"
                    type="text"
@@ -49,7 +53,7 @@
                     ng-click="searchInput = ''"></button>
         </form>
         <div id="searchResults"
-             ng-class="{ active: searchInput.length }">
+             ng-class="{ active: searchInput.length && !searchError }">
             <section>
                 <h4>Views <span class="num">{{ results.views.length || "0" }}</span></h4>
                 <horizontal-slider

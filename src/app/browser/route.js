@@ -7,8 +7,8 @@ angular
         controllerAs: 'browser',
         reloadOnSearch: false,
         resolve: {
-            initData: function( initData ){
-                return initData();
+            initData: function( browserInitData ){
+                return browserInitData();
             }
         },
         templateUrl: 'browser/template.html',

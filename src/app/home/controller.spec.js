@@ -37,7 +37,8 @@ describe("home.controller (unit testing)", function() {
 
       HomeCtrl = $controller('HomeCtrl', {
         $scope: homeScope,
-        news: news
+        news: news,
+        initData: $injector.get('homeInitData')
       });
     });
   });

@@ -1,6 +1,6 @@
 angular
   .module( 'sbb.browser' )
-  .factory( 'initData', ['$q', '$location', 'viewData',
+  .factory( 'browserInitData', ['$q', '$location', 'viewData',
     function($q, $location, viewData) {
       return function () {
         /*
@@ -11,8 +11,11 @@ angular
         var data = viewData.getView( $location.path().substr(1) );
 
         return $q.all([data]).then(function(results) {
-          return results[0];
-        });
+            return results[0];
+          })
+          .catch(function () {
+            return null;
+          });
       };
     }
   ]);

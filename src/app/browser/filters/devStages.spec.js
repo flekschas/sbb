@@ -1,7 +1,16 @@
 describe("Unit: Filter: devStage", function() {
   "use strict";
 
+  /*****************************************************************************
+   * Global Variables
+   ****************************************************************************/
+
   var $filter;
+
+
+  /*****************************************************************************
+   * Global Setting / Setup
+   ****************************************************************************/
 
   beforeEach(function () {
     module( 'ngRoute' );
@@ -12,6 +21,11 @@ describe("Unit: Filter: devStage", function() {
     });
   });
 
+
+  /*****************************************************************************
+   * General / Existance Testing
+   ****************************************************************************/
+
   it('should have a filter', function() {
     expect($filter).not.toEqual(null);
   });
@@ -19,6 +33,11 @@ describe("Unit: Filter: devStage", function() {
   it('should return null when nothing is set', function() {
     expect($filter()).toEqual(null);
   });
+
+
+  /*****************************************************************************
+   * Functional Testing
+   ****************************************************************************/
 
   it('should return original varible when something other than a string is given',
     function() {
@@ -39,16 +58,42 @@ describe("Unit: Filter: devStage", function() {
 
   it('should return augmented string when species is mouse',
     function() {
-      var string = 'cs-17',
+      var prefix = 'cs-',
           results;
 
-      results = $filter(string, 'mouse');
+      function mapping (theiler) {
+        if (theiler === 3) {
+          return 4;
+        }
+        if (theiler === 4) {
+          return 6;
+        }
+        if (theiler > 3 && theiler <= 18) {
+          return theiler + 3;
+        }
+        if (theiler > 18) {
+          return Math.min(22, theiler + 2);
+        }
+        return theiler;
+      }
 
-      expect(results).toEqual('Carnegie stage 17 (Theiler stage 20)');
+      for (var i = 1; i < 21; i++) {
+        expect($filter(prefix + i, 'mouse'))
+          .toEqual('Carnegie stage '+ i +' (Theiler stage '+ mapping(i) +')');
+      }
+
+      /*
+       * Carnegie stages over 20 should fall back to `adult`
+       */
+      expect($filter(prefix + '25', 'mouse'))
+        .toEqual('Adult');
+
+      expect($filter('whatever', 'mouse'))
+        .toEqual('Adult');
     }
   );
 
-  it('should allow substages',
+  it('should allow sub-stages',
     function() {
       var string = 'cs-17a',
           results;

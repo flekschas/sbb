@@ -73,9 +73,11 @@ angular
                 case 20:
                   theiler = 22;
                   break;
+                default:
+                  return "Adult";
               }
             } else {
-              return "adult";
+              return "Adult";
             }
             return 'Carnegie stage ' + match[1] + match[2] +
                    ' (Theiler stage ' + theiler + match[2] + ')';

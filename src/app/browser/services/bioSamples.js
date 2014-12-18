@@ -76,6 +76,8 @@ angular
         sparql += '    a obo:' + uri + ' .\n';
         sparql += '}';
 
+
+
         /*
          * Work around as POST isn't implemented yet but will be in a month.
          */
@@ -92,44 +94,47 @@ angular
             inference: 'false'
           }
         })
-        .success(function ( data ) {
-          console.log(data);
+        .success(function (data) {
           data = parseSparqlResults(data.results.bindings);
           deferred.resolve(data);
         })
-        .error(function ( error ) {
+        .error(function (error) {
           deferred.reject(error);
         });
 
         /*
          * Organise results to avoid errors when properties are missing.
          */
-        function parseSparqlResults ( data ) {
+        function parseSparqlResults (data) {
+          var len = data.length;
 
-          console.log(data);
-          results = [];
+          if (len > 0) {
+            results = [];
 
-          for (var i = 0; i < data.length; i++) {
-            results.push({
-              exp: null,
-              acc: null,
-              desc: null,
-              repo: null,
-              title: null,
-              url: null
-            });
+            for (var i = 0; i < len; i++) {
+              results.push({
+                exp: null,
+                acc: null,
+                desc: null,
+                repo: null,
+                title: null,
+                url: null
+              });
 
-            for (var prop in data[i]) {
-              if (data[i].hasOwnProperty(prop)) {
-                results[i][prop] = data[i][prop].value;
+              for (var prop in data[i]) {
+                if (data[i].hasOwnProperty(prop)) {
+                  results[i][prop] = data[i][prop].value;
+                }
               }
             }
+          } else {
+            results = null;
           }
 
           /*
            * Cache data for later use
            */
-          bs.exp.put(uri, results === undefined ? null : results);
+          bs.exp.put(uri, results);
 
           return results;
         }
@@ -174,7 +179,7 @@ angular
          * Look for cached results first.
          */
         results = bs.expDetails.get(expUri);
-        if (results) {
+        if (typeof(results) !== 'undefined') {
           deferred.resolve(results);
           return deferred.promise;
         }
@@ -246,30 +251,38 @@ angular
          * Organise results to avoid errors when properties are missing.
          */
         function parseSparqlResults ( data ) {
-          results = {};
+          var len = data.length;
 
-          for (var i = 0; i < data.length; i++) {
-            for (var prop in data[i]) {
-              if (data[i].hasOwnProperty(prop)) {
-                if (results[prop] === undefined) {
-                  results[prop] = [data[i][prop].value];
-                } else {
-                  results[prop].push(data[i][prop].value);
+          if (len > 0) {
+            results = {};
+            for (var i = 0; i < len; i++) {
+              for (var prop in data[i]) {
+                if (data[i].hasOwnProperty(prop)) {
+                  if (results[prop] === undefined) {
+                    results[prop] = [data[i][prop].value];
+                  } else {
+                    results[prop].push(data[i][prop].value);
+                  }
                 }
               }
             }
-          }
 
-          if (results.people) {
-            for (var j = results.people.length - 1; j >= 0; j--) {
-              results.people[j] = results.people[j][0] + results.people[j].substr(1).replace(/([A-Z])/g, ' $1');
+            /*
+             * Inserts a whitespace before capital letters starting from pos 1.
+             */
+            if (results.people) {
+              for (var j = results.people.length - 1; j >= 0; j--) {
+                results.people[j] = results.people[j][0] + results.people[j].substr(1).replace(/([A-Z])/g, ' $1');
+              }
             }
+          } else {
+            results = null;
           }
 
           /*
            * Cache data for later use
            */
-          bs.expDetails.put(expUri, results === undefined ? null : results);
+          bs.expDetails.put(expUri, results);
 
           return results;
         }

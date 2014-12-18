@@ -46,7 +46,8 @@ describe("about.controller (unit testing)", function() {
 
       AboutCtrl = $controller('AboutCtrl', {
         $scope: aboutScope,
-        news: news
+        news: news,
+        initData: $injector.get('aboutInitData')
       });
     });
   });

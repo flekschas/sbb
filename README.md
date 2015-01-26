@@ -22,19 +22,22 @@ structures while relying on the strong pattern recognition capabilities of human
 users.
 
 
-## Requirements
+## Installation
 
-All you need to get the Semantic Body Browser up and running is:
+### Requirements
+
+In order to set up the Semantic Body Browser locally you need to have the
+following up and running:
 
 * [Apache web server][ape] with [mod_rewrite][mrw] enabled
+* [Node.js][nodejs] with [NPM][npm]
+* [Sass][sass] (requires `Ruby`)
 * Internet connection
-* [Node.js][nodejs] with [NPM][npm] (1)
 * Modern [web browser][wb]
 
+### Instal
+
 1) You can also download a pre-compiled version then you don't need Node.js.
-
-
-## Installation
 
 1. Check out the repository somewhere into your Apache document root directory:
 
@@ -210,6 +213,7 @@ organism and spatially resolved expression data visualisation.**
 [npm]: https://www.npmjs.org/
 [p]: https://github.com/flekschas/sbb/pulls
 [rp]: https://github.com/DmitryBaranovskiy/raphael/
+[sass]: http://sass-lang.com
 [sbb]: http://sbb.cellfinder.org
 [sp]: https://github.com/fgnass/spin.js
 [wb]: http://sbb.cellfinder.org/about#compatability

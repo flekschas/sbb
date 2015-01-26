@@ -121,7 +121,7 @@ angular
         }
 
         function checkStatus () {
-          if (typeof scope.results !== 'undefined' && scope.results.length === 0) {
+          if (scope.results === null) {
             scope.nothingFound = true;
           } else {
             scope.nothingFound = false;

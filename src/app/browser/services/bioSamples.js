@@ -43,6 +43,18 @@ angular
         sparql += '    <http://semanticscience.org/resource/SIO_000332> ?about .\n';
 
         /*
+         * Specify species.
+         */
+        sparql += '  ?about\n';
+        sparql += '    biosd:has-bio-characteristic-type [a obo:' + species + '] .\n';
+
+        /*
+         * Define the bio characteristic which is the anatomical entitiy.
+         */
+        sparql += '  ?bioChar\n';
+        sparql += '    biosd:has-bio-characteristic-type [a obo:' + uri + '] .\n';
+
+        /*
          * Get experiment the samples is associated to.
          */
         sparql += '  ?exp\n';
@@ -52,28 +64,12 @@ angular
         sparql += '    rdfs:comment ?desc .\n';
 
         /*
-         * Specify species.
+         * Get web repository.
          */
         sparql += '  ?webRec\n';
         sparql += '    dcterms:identifier ?acc;\n';
         sparql += '    dcterms:source ?repo;\n';
         sparql += '    <http://xmlns.com/foaf/0.1/page> ?url.\n';
-
-        /*
-         * Specify species.
-         */
-        sparql += '  ?about\n';
-        sparql += '    biosd:has-bio-characteristic-type ?aboutType .\n';
-        sparql += '  ?aboutType\n';
-        sparql += '    a obo:' + species + ' .\n';
-
-        /*
-         * Define the bio characteristic which is the anatomical entitiy.
-         */
-        sparql += '  ?bioChar\n';
-        sparql += '    biosd:has-bio-characteristic-type ?bioCharType.\n';
-        sparql += '  ?bioCharType\n';
-        sparql += '    a obo:' + uri + ' .\n';
         sparql += '}';
 
 
@@ -81,6 +77,7 @@ angular
         /*
          * Work around as POST isn't implemented yet but will be in a month.
          */
+        // console.log(sparql);
         $http({
           url: settings.ebiBS,
           method: "GET",

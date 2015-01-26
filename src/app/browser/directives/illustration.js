@@ -199,15 +199,13 @@ angular
           if (Math.abs(stepZoom - initialScale) > 0.1) {
             var i = vectorElements.length;
             while (i--) {
-              if(typeof vectorElements[i].attrs['stroke-width'] !== 'undefined') {
-                vectorElements[i].attr({
-                  'stroke-width': vectorElements[i].attrs['stroke-width'] * (stepZoom / initialScale)
-                });
+              var strokeWidth = vectorElements[i].attrs['stroke-width'];
+
+              // http://stackoverflow.com/a/1830844/981933
+              if (!isNaN(parseFloat(strokeWidth)) && isFinite(strokeWidth)) {
+                vectorElements[i].attr('stroke-width', strokeWidth);
               } else {
-                // Remove stroke
-                vectorElements[i].attr({
-                  'stroke': undefined
-                });
+                vectorElements[i].attr('stroke', undefined);
               }
             }
             stepZoom = initialScale;
@@ -343,8 +341,15 @@ angular
 
         // Method for setting general attributes of elements
         fn.setAttrs = function(i, attrs) {
+          // Set stroke to none if no attributes are given because Raphael 2.1.3
+          // adds the color `#000000` automatically.
+          if (typeof(attrs['stroke-width']) === 'undefined') {
+            attrs.stroke = 'none';
+          }
+
           vectorElements[i].attr(attrs);
           vectorElements[i].node.id = i;
+
           if (attrs.id) {
             units[attrs.id] = i;
             vectorElements[i].node.setAttribute('data-id', attrs.id);

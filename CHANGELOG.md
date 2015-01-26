@@ -1,6 +1,34 @@
 Changelog
 =========
 
+1.6.2 / 2015-01-26
+------------------
+
+AngularJS 1.3 and over 200 unit tests.
+
+**Enhancements:**
+
+* Large number of unit tests and basic clean-up.
+* Start page got a fresh new look.
+
+**Updates:**
+
+* `AngularJS` from 1.2.25 to 1.3.10.
+* `Hammer.js` from 2.0.3 to 2.0.4.
+* `isMobile` from 0.3.0 to 0.3.4.
+* `Normalize.css` from 3.0.1 to 3.0.2.
+* `Raphaël` from 2.1.2 to 2.1.3.
+* Removed `Angular-Bindonce` as it is directly implemented in `AngularJS` 1.3.
+* Better notification support.
+* Beautified start page.
+
+**Bug Fixes:**
+
+* Replaced `ngTouch` with `FastClick` because `ngTouch` doesn't work properly in
+  combination with `jQuery`.
+* Couple of smaller bug fixes.
+
+
 1.6.1 / 2014-11-04
 ------------------
 
@@ -33,7 +61,7 @@ the [README][README.md#Folder-Structure] for details.
 * New icon for the drop down panel of the developmental stages. Should show the
   meiosis of a cell. Feedback is very welcome.
 * Search inputs now feature a magnifier icon.
-* AngularJS from 1.2.22 to 1.2.25.
+* `AngularJS` from 1.2.22 to 1.2.25.
 
 **Bug Fixes:**
 
@@ -53,7 +81,7 @@ AngularJS and third party libraries update.
 
 ***Attention:*** Firefox 3.6.x is no longer being supported. Problems concerning
 AngularJS and inline SVGs led to this decision. If you need support please
-check out version [1.4.2][https://github.com/flekschas/sbb/releases/tag/v1.4.2]
+check out version [1.4.2](https://github.com/flekschas/sbb/releases/tag/v1.4.2)
 which provides full support. The oldest version of Firefox supported.
 
 **Enhancements:**
@@ -65,10 +93,10 @@ which provides full support. The oldest version of Firefox supported.
 
 **Updates:**
 
-* AngularJS from 1.2.21 to 1.2.22.
-* Normalize.css from 2.1.1 to 3.0.1.
-* Hammer.js from 1.x to 2.0.2.
-* Anatomical entities mapped to UBERON where possible.
+* `AngularJS` from 1.2.21 to 1.2.22.
+* `Normalize`.css from 2.1.1 to 3.0.1.
+* `Hammer.js` from 1.x to 2.0.2.
+* Anatomical entities mapped to `UBERON` where possible.
 * Updated and extended the about page with further supplementary information.
 
 **Bug Fixes:**

@@ -1,5 +1,5 @@
 {
-  "apache_root": "/",
+  "apache_root": "/Users/fritz/Sites",
   "build_dir": "build",
   "compile_dir": "bin",
   "app_files": {

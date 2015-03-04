@@ -680,11 +680,15 @@ header #search,
     padding: 0 4px;
 }
 
-#sidebar p,
-#sidebar ul,
-#sidebar ol {
-    margin: 4px 0;
+#sidebar p {
+    margin: 0.5em 0;
 }
+
+// #sidebar p,
+// #sidebar ul,
+// #sidebar ol {
+//     margin: 4px 0;
+// }
 
 #sidebar .itemList > li {
     border-top: 1px solid #e5e3e1;
@@ -1046,7 +1050,6 @@ header #search,
 .colors {
     width: 100%;
     height: 3px;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNDA4MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc1JSIgc3RvcC1jb2xvcj0iI2JmMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmQ1MDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background: -moz-linear-gradient(left,  #004080 0%, #bf0000 75%, #ffd500 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#004080), color-stop(75%,#bf0000), color-stop(100%,#ffd500)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(left,  #004080 0%,#bf0000 75%,#ffd500 100%); /* Chrome10+,Safari5.1+ */
@@ -2775,6 +2778,85 @@ sbb-chosen a {
     stroke: #ccc;
     stroke-width: 2px;
 }
+
+/*******************************************************************************
+ * Class styles
+ ******************************************************************************/
+
+/* ----------------------------------- T ------------------------------------ */
+
+.tabs {
+    position: relative;
+}
+
+.tabs-full-size {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.tabs-full-size nav ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.tabs-full-size nav li {
+    display: block;
+    padding: 0.5em 0;
+    line-height: 1em;
+    float: left;
+    text-align: center;
+}
+
+.tabs-full-size nav li:hover {
+    cursor: pointer;
+}
+
+.tabs-2 nav li {
+    width: 50%;
+}
+
+.tabs-3 nav li {
+    width: 33.333%;
+}
+
+.tabs-4 nav li {
+    width: 25%;
+}
+
+.tabs-5 nav li {
+    width: 16.666%;
+}
+
+.tabs-6 nav li {
+    width: 12.5%;
+}
+
+.tabs-full-size .tabs-contents {
+    position: absolute;
+    top: 2em;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: yellow;
+}
+
+.tabs .tabs-content {
+    display: none;
+}
+
+.tabs .tabs-content.active {
+    display: block;
+}
+
+
+
+/*******************************************************************************
+ * Media Queries
+ ******************************************************************************/
 
 @media (min-width: 1600px) {
     #content {

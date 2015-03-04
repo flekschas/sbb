@@ -1,0 +1,33 @@
+<div class="wrapper tabs tabs-2 tabs-full-size">
+    <nav>
+        <ul>
+            <li ng-click="openTab('data')" ng-class="{ active : isActiveTab('data') }">Data Source</li>
+            <li ng-click="openTab('genes')" ng-class="{ active : isActiveTab('genes') }">Gene Selection</li>
+        </ul>
+    </nav>
+    <div class="tabs-contents">
+        <div class="tabs-content" ng-class="{ active : isActiveTab('data') }">
+            Data
+        </div>
+        <div class="tabs-content" ng-class="{ active : isActiveTab('genes') }">
+            <div class="expValue">
+                <h4 title="Transcripts per million">TPM</h4>
+                <div class="colors"></div>
+                <span class="min">{{ expression.min }}</span>
+                <span class="max">{{ expression.max }}</span>
+            </div>
+            <div class="dataset">
+                <select
+                    ng-model="dataset"
+                    ng-options="id as name for (id, name) in data.expDatasets">
+                </select>
+            </div>
+            <sbb-chosen
+                data="geneList"
+                selection="genes"
+                limit="15"
+                placeholder="Search for a gene"
+                no-results="Nothing found." />
+        </div>
+    </div>
+</div>

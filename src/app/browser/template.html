@@ -245,33 +245,14 @@
                 ng-show="genes.length">Close</li>
         </ul>
         <div class="content">
-            <div class="wrapper">
-                <div class="expValue">
-                    <h4 title="Transcripts per million">TPM</h4>
-                    <div class="colors"></div>
-                    <span class="min">{{ expression.min }}</span>
-                    <span class="max">{{ expression.max }}</span>
-                </div>
-                <div class="dataset">
-                    <select
-                        ng-model="dataset"
-                        ng-options="id as name for (id, name) in data.expDatasets">
-                    </select>
-                </div>
-                <sbb-chosen
-                    data="geneList"
-                    selection="genes"
-                    limit="15"
-                    placeholder="Search for a gene"
-                    no-results="Nothing found." />
-            </div>
+            <sbb-heat-map />
         </div>
     </section>
     <section panel="images"
              ng-class="{
                 'disabled': !picturesAvailable(),
                 'error': data.pictures.length && !omeroAvailable
-            }">
+             }">
         <div class="poi"
              ng-include
              src="helpPicture"

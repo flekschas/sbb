@@ -31,13 +31,11 @@ following up and running:
 
 * [Apache web server][ape] with [mod_rewrite][mrw] enabled
 * [Node.js][nodejs] with [NPM][npm]
-* [Sass][sass] (requires `Ruby`)
+* [Sass][sass] (requires Ruby)
 * Internet connection
 * Modern [web browser][wb]
 
-### Instal
-
-1) You can also download a pre-compiled version then you don't need Node.js.
+### Install
 
 1. Check out the repository somewhere into your Apache document root directory:
 
@@ -185,9 +183,9 @@ Copyright © 2012-2014 Lekschas et al.
 
 ### Publication
 
-Lekschas et al. (2014) **Semantic Body Browser: Graphical exploration of an
-organism and spatially resolved expression data visualisation.**
-*Bioinformatics*, [doi: 10.1093/bioinformatics/btu707][doi].
+Lekschas et al. (2015) **Semantic Body Browser: Graphical exploration of an
+organism and spatially resolved expression data visualization.**
+*Bioinformatics*, 31, 5, 794-796. [doi: 10.1093/bioinformatics/btu707][doi].
 
 [about]: http://sbb.cellfinder.org/about
 [ape]: https://httpd.apache.org/

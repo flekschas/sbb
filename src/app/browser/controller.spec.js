@@ -169,7 +169,7 @@ describe("browser.controller (unit testing)", function() {
       var $location = $injector.get('$location'),
           testUrl = 'test';
 
-      spyOn($location, 'url').andCallThrough();
+      spyOn($location, 'url').and.callThrough();
 
       browserScope.setLocation(testUrl);
 
@@ -186,7 +186,7 @@ describe("browser.controller (unit testing)", function() {
 
   it('should set `active unit` and trigger event when `setActiveUnit` is called',
     function () {
-      spyOn($rootScope, '$broadcast').andCallThrough();
+      spyOn($rootScope, '$broadcast').and.callThrough();
 
       browserScope.setActiveUnit('test');
 
@@ -205,7 +205,7 @@ describe("browser.controller (unit testing)", function() {
             tpl: 'browser/partials/dialogs/heatmap.info.html'
           };
 
-      spyOn($rootScope, '$broadcast').andCallThrough();
+      spyOn($rootScope, '$broadcast').and.callThrough();
 
       browserScope.openHeatmapInfo();
 

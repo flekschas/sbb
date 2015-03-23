@@ -15,8 +15,8 @@ describe("maxStringLength (unit testing)", function() {
     expect($filter).not.toEqual(null);
   });
 
-  it('should return null when nothing is set', function() {
-    expect($filter()).toEqual(null);
+  it('should return undefined when nothing is set', function() {
+    expect($filter()).toEqual(undefined);
   });
 
   it('should return full string when length is below standard cutoff',

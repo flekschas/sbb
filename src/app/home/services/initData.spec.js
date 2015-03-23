@@ -34,7 +34,7 @@ describe("home.service.initData (unit testing)", function() {
           results;
 
       spyOn(versionService, "getVersions")
-        .andCallFake(function() {
+        .and.callFake(function() {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;
@@ -62,7 +62,7 @@ describe("home.service.initData (unit testing)", function() {
           results;
 
       spyOn(versionService, "getVersions")
-        .andCallFake(function() {
+        .and.callFake(function() {
           var deferred = $q.defer();
           deferred.reject('test');
           return deferred.promise;

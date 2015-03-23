@@ -168,7 +168,7 @@ describe("home.controller (unit testing)", function() {
             message: 'API is currently unavailable! Please try again later.'
           };
 
-      spyOn($rootScope, '$broadcast').andCallThrough();
+      spyOn($rootScope, '$broadcast').and.callThrough();
 
       homeScope.searchInput = keyword;
 
@@ -194,7 +194,7 @@ describe("home.controller (unit testing)", function() {
             message: 'The page you were looking for (' + errLocation + ') is not available!'
           };
 
-      spyOn($rootScope, '$broadcast').andCallThrough();
+      spyOn($rootScope, '$broadcast').and.callThrough();
 
       $location.search('error', errLocation);
 
@@ -210,7 +210,7 @@ describe("home.controller (unit testing)", function() {
       var $location = $injector.get('$location'),
           testUrl = 'test';
 
-      spyOn($location, 'url').andCallThrough();
+      spyOn($location, 'url').and.callThrough();
 
       homeScope.setLocation('test');
 
@@ -225,7 +225,7 @@ describe("home.controller (unit testing)", function() {
       var $location = $injector.get('$location'),
           storage = $injector.get('storage');
 
-      spyOn($location, 'url').andCallThrough();
+      spyOn($location, 'url').and.callThrough();
 
       homeScope.startHelp();
 

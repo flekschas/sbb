@@ -17,14 +17,14 @@ describe("about.service.initData (unit testing)", function() {
       $rootScope = $injector.get('$rootScope');
 
       spyOn(versionService, "getChangelog")
-        .andCallFake(function() {
+        .and.callFake(function() {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;
         });
 
       spyOn(versionService, "getVersions")
-        .andCallFake(function() {
+        .and.callFake(function() {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;

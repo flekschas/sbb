@@ -30,8 +30,8 @@ describe("Unit: Filter: devStage", function() {
     expect($filter).not.toEqual(null);
   });
 
-  it('should return null when nothing is set', function() {
-    expect($filter()).toEqual(null);
+  it('should return undefined when nothing is set', function() {
+    expect($filter()).toEqual(undefined);
   });
 
 

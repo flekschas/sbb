@@ -60,7 +60,7 @@ describe("browser.service.initData (unit testing)", function() {
       var results;
 
       spyOn(viewData, "getView")
-        .andCallFake(function() {
+        .and.callFake(function() {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;
@@ -85,7 +85,7 @@ describe("browser.service.initData (unit testing)", function() {
       var results;
 
       spyOn(viewData, "getView")
-        .andCallFake(function() {
+        .and.callFake(function() {
           var deferred = $q.defer();
           deferred.reject('test');
           return deferred.promise;

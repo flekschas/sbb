@@ -17,13 +17,13 @@ describe("app.service.storage (unit testing)", function() {
   beforeEach(function() {
     module('sbb');
 
-    spyOn(localStorage, 'getItem').andCallFake(function(key) {
+    spyOn(localStorage, 'getItem').and.callFake(function(key) {
       return localFakeStorage[key];
     });
-    spyOn(localStorage, 'setItem').andCallFake(function(key, value) {
+    spyOn(localStorage, 'setItem').and.callFake(function(key, value) {
       localFakeStorage[key] = value;
     });
-    spyOn(localStorage, 'removeItem').andCallFake(function(key) {
+    spyOn(localStorage, 'removeItem').and.callFake(function(key) {
       localFakeStorage[key] = null;
     });
 

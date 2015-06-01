@@ -1,7 +1,7 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbSliderImg', ['$timeout', '$', 'news',
-  function($timeout, $, news) {
+  .module('sbb.browser')
+  .directive('sbbSliderImg', ['$timeout', '$', 'news',
+  function ($timeout, $, news) {
     return {
       restrict: 'E',
       scope: {
@@ -10,7 +10,7 @@ angular
       },
       templateUrl: 'browser/directives/sliderImg.html',
       replace: true,
-      link: function(scope, element) {
+      link: function (scope, element) {
         var sliderWidthOn,
             $el = $(element),
             fn = {
@@ -36,14 +36,17 @@ angular
                  */
                 readyWatcher();
                 fn.checkImageSrc();
-                // scope.src = 'http://cellfinder.org/omero/webgateway/render_thumbnail/' + scope.picture + '/' + news.sliderWidth + '/';
-                $el.css("background-image", "url('http://cellfinder.org/omero/webgateway/render_thumbnail/" + scope.picture + "/" + $el.width() + "/')");
+                $el.css('background-image', 'url(http://cellfinder.org/omero/webgateway/render_thumbnail/' +
+                  scope.picture +
+                  '/' +
+                  $el.width() +
+                  '/)');
               },
               checkHeight: function () {
                 var i = 0;
                 console.log($el.css('height'))
                 (function checkHeight(height) {
-                  $timeout(function(){
+                  $timeout(function () {
                     if (height === 0 && i < 25) {
                       ++i;
                       checkHeight($el.height());
@@ -57,7 +60,7 @@ angular
                 if (scope.picture && scope.picture.length) {
                   fn.setSrc();
                 } else {
-                  var srcWatcher = scope.$watch('picture', function(value) {
+                  var srcWatcher = scope.$watch('picture', function (value) {
                     if (value && value.length) {
                       fn.unSetSrcWatcher();
                     }
@@ -66,7 +69,7 @@ angular
               }
             };
 
-        var readyWatcher = scope.$watch('ready', function(){
+        var readyWatcher = scope.$watch('ready', function () {
           if (scope.ready) {
             fn.checkPicture();
           }

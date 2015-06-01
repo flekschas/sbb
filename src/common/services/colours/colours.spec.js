@@ -1,9 +1,9 @@
-describe("colours (unit testing)", function() {
-  "use strict";
+describe('colours (unit testing)', function () {
+  'use strict';
 
   var colours;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('colours');
 
     inject(function (_colours_) {
@@ -41,7 +41,7 @@ describe("colours (unit testing)", function() {
     }
   );
 
-  it('should convert HEX `#ff0000` to RGB `{r:255, g:0, b:0}',
+  it('should convert HEX `#ff0000` to RGB `{r:255, g:0, b:0}`',
     function () {
       var hex = '#ff0000',
           rgb = {
@@ -54,7 +54,7 @@ describe("colours (unit testing)", function() {
     }
   );
 
-  it('should convert RGB object `{r:0, g:0, b:0}` to HEX `#ff0000`',
+  it('should convert RGB object `{r:255, g:0, b:0}` to HEX string `#ff0000`',
     function () {
       var hex = '#ff0000',
           rgb = {
@@ -67,7 +67,7 @@ describe("colours (unit testing)", function() {
     }
   );
 
-  it('should convert RGB parameters `r:0, g:0, b:0` to HEX `#ff0000`',
+  it('should convert RGB parameters `r:255, g:0, b:0` to HEX string `#ff0000`',
     function () {
       var hex = '#ff0000',
           rgb = {

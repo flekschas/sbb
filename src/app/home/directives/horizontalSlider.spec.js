@@ -1,5 +1,5 @@
-describe("home.directive.horizontalSlider (unit testing)", function() {
-  "use strict";
+describe('home.directive.horizontalSlider (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $compile,
@@ -7,7 +7,7 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
       $parentScope,
       element;
 
-  beforeEach(function(){
+  beforeEach(function () {
     module('sbb');
     module('sbb.home');
 
@@ -29,11 +29,11 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should have a scroll function',
     function () {
       expect(typeof($scope.scroll)).toEqual('function');
@@ -68,11 +68,11 @@ describe("home.directive.horizontalSlider (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should be scrollable when the number of results > number visual',
     function () {
       $parentScope.data = {

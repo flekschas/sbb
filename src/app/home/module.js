@@ -1,2 +1,2 @@
 angular
-  .module( 'sbb.home', [] );
+  .module('sbb.home', []);

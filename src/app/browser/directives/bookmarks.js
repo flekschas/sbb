@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbBookmarks', ['$location', '$', 'news', 'storage', 'settings',
+  .module('sbb.browser')
+  .directive('sbbBookmarks', ['$location', '$', 'news', 'storage', 'settings',
   function ($location, $, news, storage, settings) {
     return {
       restrict: 'A',
@@ -10,26 +10,31 @@ angular
         name: '@',
         displayOnly: '@'
       },
-      link: function(scope, element) {
+      link: function (scope, element) {
         var $el = $(element),
             opened,
             bookmarks;
 
         scope.buttonText = 'Add Bookmark';
 
-        scope.addBookmark = function() {
-          if(!scope.disabled && scope.name) {
+        scope.addBookmark = function () {
+          if (!scope.disabled && scope.name) {
             var url = $location.url();
 
             bookmarks = storage.get('bookmarks');
             console.log(bookmarks);
             if (bookmarks.length > 0) {
-              bookmarks.unshift({'name': scope.name,'url': url});
+              bookmarks.unshift({
+                'name': scope.name,
+                'url': url
+              });
             } else {
-              bookmarks = [{'name': scope.name,'url': url}];
+              bookmarks = [{
+                'name': scope.name,
+                'url': url
+              }];
             }
             bookmarks = bookmarks.splice(0, settings.maxBookmarks);
-
 
             storage.set('bookmarks', bookmarks);
             scope.bookmarks = bookmarks;
@@ -40,7 +45,7 @@ angular
         };
 
         // Toggles the visibility of the drop down menu
-        scope.toggle = function(state) {
+        scope.toggle = function (state) {
           if (scope.enabled) {
             opened = (typeof state === 'undefined') ? !opened : state;
             $el.removeClass(opened ? 'closed' : 'opened');
@@ -49,21 +54,21 @@ angular
         };
 
         // Listens for the global click event broad-casted by the news service
-        scope.$on('click', function(e, target) {
+        scope.$on('click', function (e, target) {
           if ($el.find(target.tagName)[0] !== target) {
             scope.toggle(false);
           }
         });
 
         // Watchers
-        scope.$watch(function() {
+        scope.$watch(function () {
           return $location.url();
-        }, function(newValue){
-          if(newValue && scope.bookmarks) {
-          // '~' bit-wise negation => each 1 turns to 0 because
-          // indexOf returns '-1', when nothing is found, which is
-          // represented by 1111..111 it will be turned into 0 which
-          // is falsy
+        }, function (newValue) {
+          if (newValue && scope.bookmarks) {
+            // '~' bit-wise negation => each 1 turns to 0 because
+            // indexOf returns '-1', when nothing is found, which is
+            // represented by 1111..111 it will be turned into 0 which
+            // is falsy
             for (var i = scope.bookmarks.length - 1; i >= 0; i--) {
               if (scope.bookmarks[i].url == newValue) {
                 scope.disabled = true;

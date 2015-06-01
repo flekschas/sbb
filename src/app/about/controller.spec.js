@@ -1,10 +1,11 @@
-describe("about.controller (unit testing)", function() {
-  "use strict";
+describe('about.controller (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var AppCtrl,
       appScope,
       AboutCtrl,
@@ -13,21 +14,21 @@ describe("about.controller (unit testing)", function() {
       $window,
       news;
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
     module('sbb.about');
-    module( function ($provide) {
+    module(function ($provide) {
       $window = {
         location: {},
         document: window.document
       };
       // We register our new $window instead of the old
-      $provide.constant( '$window' , $window );
+      $provide.constant('$window' , $window);
     });
 
     inject(function ($injector) {
@@ -52,41 +53,42 @@ describe("about.controller (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should exist the AboutCtrl controller',
-    function() {
+    function () {
       expect(AboutCtrl).toBeTruthy();
     }
   );
 
   it('should set app in `ready` mode',
-    function() {
+    function () {
       $rootScope.$digest();
       expect(AppCtrl.status).toEqual('ready');
     }
   );
 
   it('should exist the `mail` function',
-    function() {
+    function () {
       expect(typeof(aboutScope.mail)).toEqual('function');
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should change the `window` location to trigger mail clients',
     function () {
       aboutScope.mail();
       $rootScope.$digest();
 
-      expect($window.location).toEqual('mailto:fritz.lekschas@charite.de?subject=[SBB]');
+      expect($window.location)
+        .toEqual('mailto:fritz.lekschas@charite.de?subject=[SBB]');
     }
   );
 });

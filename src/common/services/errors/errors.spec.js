@@ -1,10 +1,10 @@
-describe("errors: Errors (unit testing)", function() {
-  "use strict";
+describe('errors: Errors (unit testing)', function () {
+  'use strict';
 
   var errors,
       rootScope;
 
-  beforeEach(function(){
+  beforeEach(function () {
     module('errors');
 
     inject(function (_errors_, $injector) {

@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb' )
-  .directive ( 'sbbNotification', [
+  .module('sbb')
+  .directive('sbbNotification', [
     '$compile', '$templateCache', '$timeout',
     function ($compile, $templateCache, $timeout) {
       var directive = {
@@ -11,7 +11,7 @@ angular
         templateUrl: 'common/directives/notification.html'
       };
 
-      function link ( scope, element, attrs ) {
+      function link (scope, element, attrs) {
         var contentEl = angular.element(element[0].querySelector('.content'));
 
         scope.show = false;

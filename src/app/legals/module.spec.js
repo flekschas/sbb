@@ -1,12 +1,12 @@
-describe("Legals Module: Unit Testing", function() {
+describe('Legals Module: Unit Testing', function () {
 
   var module;
 
-  beforeEach(function() {
-    module = angular.module("sbb.legals");
+  beforeEach(function () {
+    module = angular.module('sbb.legals');
   });
 
-  it("should be registered", function() {
+  it('should be registered', function () {
     expect(module).not.toEqual(null);
   });
 });

@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbSpecies', ['$location', '$', 'news', 'storage', 'settings',
+  .module('sbb.browser')
+  .directive('sbbSpecies', ['$location', '$', 'news', 'storage', 'settings',
   function ($location, $, news, storage, settings) {
     return {
       restrict: 'AE',
@@ -11,7 +11,7 @@ angular
         stage: '@',
         similarViews: '='
       },
-      link: function(scope, element) {
+      link: function (scope, element) {
         var $el = $(element),
             opened = true;
 
@@ -23,7 +23,7 @@ angular
         };
 
         // Toggles the visibility of the drop down menu
-        scope.toggle = function(state, init) {
+        scope.toggle = function (state, init) {
           if (scope.enabled || init) {
             opened = (typeof state === 'undefined') ? !opened : state;
             $el.removeClass(opened ? 'closed' : 'opened');
@@ -32,7 +32,7 @@ angular
         };
 
         // Look for views of different species with the same developmental stage
-        scope.$watch('similarViews', function(value) {
+        scope.$watch('similarViews', function (value) {
           if (value) {
             var count = 0;
             scope.allSpecies = {};
@@ -59,7 +59,7 @@ angular
         });
 
         // Listens for the global click event broad-casted by the news service
-        scope.$on('click', function(e, target){
+        scope.$on('click', function (e, target) {
           if ($el.find(target.tagName)[0] !== target) {
             scope.toggle(false);
           }

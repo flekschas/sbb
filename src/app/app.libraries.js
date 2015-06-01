@@ -1,5 +1,5 @@
 angular
-  .module( 'sbb' )
+  .module('sbb')
   .constant('Hammer', Hammer)
   .constant('isMobile', isMobile)
   .constant('$', jQuery)

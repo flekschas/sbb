@@ -1,8 +1,8 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbResultsBar', [
+  .module('sbb.browser')
+  .directive('sbbResultsBar', [
     '$compile', '$templateCache', '$', 'Spinner', 'news', 'bioSamples',
-    function($compile, $templateCache, $, Spinner, news, bioSamples) {
+    function ($compile, $templateCache, $, Spinner, news, bioSamples) {
       var directive = {
         link: link,
         restrict: 'AE',
@@ -16,7 +16,7 @@ angular
         templateUrl: 'browser/directives/resultsBar.html'
       };
 
-      function link ( scope, element, attrs ) {
+      function link (scope, element, attrs) {
         var $content = $(element[0].querySelector('.content')),
             $limited,
             $scrollListener,
@@ -35,11 +35,11 @@ angular
         scope.error = false;
         scope.nothingFound = false;
 
-
-        /* *********************************************************************
+        /*
+         * ---------------------------------------------------------------------
          * Watchers and Listerners
-         * ********************************************************************/
-
+         * ---------------------------------------------------------------------
+         */
         scope.$watch('type', function (tplName) {
           if (tplName.length > 0) {
             var tpl = $templateCache
@@ -69,23 +69,23 @@ angular
           }
         });
 
-
-        /* *********************************************************************
-         * Listerners
-         * ********************************************************************/
-
-         scope.$on('error:getGXE', function(e, errNo) {
+        /*
+         * ---------------------------------------------------------------------
+         *  Listerners
+         * ---------------------------------------------------------------------
+         */
+        scope.$on('error:getGXE', function (e, errNo) {
           scope.error = true;
           scope.nothingFound = false;
           scope.loading = false;
-         });
+        });
 
-
-        /* *********************************************************************
-         * Public functions
-         * ********************************************************************/
-
-        scope.openGXE = function ( data ) {
+        /*
+         * ---------------------------------------------------------------------
+         *  Public functions
+         * ---------------------------------------------------------------------
+         */
+        scope.openGXE = function (data) {
           news.broadcast('sbbDialog:open', {
             scope: data,
             size: 'large',
@@ -94,16 +94,16 @@ angular
 
           bioSamples
             .getExpDetails(data.exp)
-            .then(function ( results ) {
+            .then(function (results) {
               news.broadcast('sbbDialog:updateContent', results);
             });
         };
 
-
-        /* *********************************************************************
-         * Private functions
-         * ********************************************************************/
-
+        /*
+         * ---------------------------------------------------------------------
+         *  Private functions
+         * ---------------------------------------------------------------------
+         */
         function setScrollListener () {
           $scrollListener = $content.on('scroll', function (e) {
             // Check if we scrolled to the bottom

@@ -1,12 +1,12 @@
-describe("containElement (unit testing)", function() {
-  "use strict";
+describe('containElement (unit testing)', function () {
+  'use strict';
 
   var containElement,
       $rootScope,
       $compile,
       element;
 
-  beforeEach(function(){
+  beforeEach(function () {
     module('containElement');
 
     inject(function (_containElement_, $injector) {

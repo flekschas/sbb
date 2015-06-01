@@ -1,8 +1,13 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbChosen', [
-    '$compile', '$sce', '$timeout', '$', 'stringWidth', 'news',
-    function($compile, $sce, $timeout, $, stringWidth, news) {
+  .module('sbb.browser')
+  .directive('sbbChosen', [
+    '$compile',
+    '$sce',
+    '$timeout',
+    '$',
+    'stringWidth',
+    'news',
+    function ($compile, $sce, $timeout, $, stringWidth, news) {
       return {
         restrict: 'E',
         scope: {
@@ -12,7 +17,7 @@ angular
           max: '@'
         },
         templateUrl: 'browser/directives/chosen.html',
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
           var $el = $(element),
               fn = {},
               cachedHits = {},
@@ -36,7 +41,7 @@ angular
             fn.select(scope.selection, true);
           });
 
-          scope.$on('ngRepeatFinished', function(e, el) {
+          scope.$on('ngRepeatFinished', function (e, el) {
             // Listen for when the selection ngRepeat finished rendering
             // Then set the top margin for the ul.hits equal to the
             // ul.selection height
@@ -46,7 +51,7 @@ angular
 
               // Check of outerHeight does not respond to the real
               // height because of min-height 50%
-              if(outerHeight < liHeight) {
+              if (outerHeight < liHeight) {
                 $hits.css('top', outerHeight + liHeight);
               } else {
                 $hits.css('top', outerHeight);
@@ -63,7 +68,7 @@ angular
           });
 
           // Whatch for source data
-          scope.$watch('data', function(newValue) {
+          scope.$watch('data', function (newValue) {
             if (newValue && newValue.length) {
               // Enable chosen
               dataLength = newValue.length;
@@ -71,9 +76,9 @@ angular
           });
 
           // Whatch for the selection to be reset
-          scope.$watch(function() {
+          scope.$watch(function () {
             return scope.selection.length;
-          }, function(newValue, oldValue) {
+          }, function (newValue, oldValue) {
             if (!newValue && oldValue && scope.preselection.length > 1) {
               scope.preselection = [{}];
             }
@@ -84,7 +89,7 @@ angular
           };
 
           scope.focusLatest = function () {
-            $timeout(function(){
+            $timeout(function () {
               $selection.find('li:last input')[0].focus();
             });
           };
@@ -189,17 +194,17 @@ angular
           scope.noResults = function () {
             if (!scope.hits.length && $selection.find('li:last input').val().length > 1) {
               return true;
-            }
-            else {
+            } else {
               return false;
             }
           };
 
           scope.noInput = function () {
-            if (!scope.selection.length && !scope.hits.length && $selection.find('li:last input').val().length < 2) {
+            if (!scope.selection.length &&
+                !scope.hits.length &&
+                $selection.find('li:last input').val().length < 2) {
               return true;
-            }
-            else {
+            } else {
               return false;
             }
           };
@@ -215,7 +220,7 @@ angular
             return (scope.selection.indexOf(needle) >= 0);
           };
 
-          scope.$on('singleGene', function(e, index) {
+          scope.$on('singleGene', function (e, index) {
             scope.selectedGene = index;
           });
 
@@ -244,30 +249,39 @@ angular
               scope.selected = 0;
 
               // Check if hits are cached
-              if (typeof cachedHits[needle] !== 'undefined' && cachedHits[needle].length) {
+              if (typeof cachedHits[needle] !== 'undefined' &&
+                  cachedHits[needle].length) {
                 scope.hits = cachedHits[needle];
                 return;
               }
 
               // Check if needle has only been extended
               // So the previous needle should be a prefix of the current needle
-              if ( needle.indexOf(scope.prevNeedle) === 0 ) {
+              if (needle.indexOf(scope.prevNeedle) === 0) {
                 i = scope.hits.length;
                 while (i--) {
-                  if ( (pos = scope.hits[i].value.indexOf(needle)) >= 0 ) {
+                  if ((pos = scope.hits[i].value.indexOf(needle)) >= 0) {
                     tmp.push({
                       value: scope.hits[i].value,
-                      with_hit: $sce.trustAsHtml(scope.hits[i].value.substr(0, pos) + '<u>' + scope.hits[i].value.substr(pos, needleLength) + '</u>' + scope.hits[i].value.substr(pos + needleLength))
+                      withHit: $sce.trustAsHtml(scope.hits[i].value.substr(0, pos) +
+                        '<u>' +
+                        scope.hits[i].value.substr(pos, needleLength) +
+                        '</u>' +
+                        scope.hits[i].value.substr(pos + needleLength))
                     });
                   }
                 }
               } else {
                 i = dataLength;
                 while (i--) {
-                  if ( (pos = scope.data[i].indexOf(needle)) >= 0 ) {
+                  if ((pos = scope.data[i].indexOf(needle)) >= 0) {
                     tmp.push({
                       value: scope.data[i],
-                      with_hit: $sce.trustAsHtml(scope.data[i].substr(0, pos) + '<u>' + scope.data[i].substr(pos, needleLength) + '</u>' + scope.data[i].substr(pos + needleLength))
+                      withHit: $sce.trustAsHtml(scope.data[i].substr(0, pos) +
+                        '<u>' +
+                        scope.data[i].substr(pos, needleLength) +
+                        '</u>' +
+                        scope.data[i].substr(pos + needleLength))
                     });
                   }
                 }
@@ -291,7 +305,7 @@ angular
           };
 
           fn.checkShadow = function (forceRemoval) {
-            if(!forceRemoval && $hits[0].scrollHeight > hitsHeight) {
+            if (!forceRemoval && $hits[0].scrollHeight > hitsHeight) {
               $selection.addClass('shadow');
             } else {
               $selection.removeClass('shadow');
@@ -305,7 +319,12 @@ angular
               } else {
                 offset = 0;
               }
-              $(el).css('width', stringWidth(el.value, hitsFontSize + ' ' + bodyFont) + offset);
+              $(el).css('width',
+                stringWidth(
+                  el.value,
+                  hitsFontSize + ' ' + bodyFont
+                ) +
+                offset);
             } else {
               $(el).css('width', '');
             }
@@ -334,8 +353,7 @@ angular
               value = el.data('value');
             }
 
-
-            if (Object.prototype.toString.call( value ) === '[object Array]') {
+            if (Object.prototype.toString.call(value) === '[object Array]') {
               // Multi-select
               var tmp = [],
                   len = value.length;
@@ -350,14 +368,14 @@ angular
 
               scope.preselection = tmp;
               scope.selection = value;
-            } else  {
+            } else {
               // Single-select
               // Check if value is already selected
               try {
                 if (scope.selection.indexOf(value) === -1) {
                   scope.selection.push(value);
                 }
-              } catch(e) {
+              } catch (e) {
 
               }
               scope.preselection[scope.preselection.length - 1].value = value;
@@ -365,7 +383,7 @@ angular
               scope.preselection.push({});
             }
 
-            scope.$on('ngRepeatFinished', function() {
+            scope.$on('ngRepeatFinished', function () {
               // When ngRepeat finished rendering focus the last
               // (new) input
               scope.focusLatest();
@@ -393,14 +411,14 @@ angular
             }
           };
 
-          fn.clear = function(){
+          fn.clear = function () {
             scope.hits = [];
             scope.prevNeedle = null;
             scope.limit = limit;
             fn.checkShadow(true);
           };
 
-          fn.checkScrollPos = function() {
+          fn.checkScrollPos = function () {
             var el = $hits.find('li.selected'),
                 elHeight = el.outerHeight(),
                 elOffsetTop = el.offset().top;

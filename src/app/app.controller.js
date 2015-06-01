@@ -1,20 +1,20 @@
 angular
-  .module( 'sbb' )
-  .controller( 'AppCtrl', ['$scope', '$location', 'news', 'storage',
-    function ( $scope, $location, news, storage ) {
+  .module('sbb')
+  .controller('AppCtrl', ['$scope', '$location', 'news', 'storage',
+    function ($scope, $location, news, storage) {
       var ctrl = this;
 
       ctrl.globalClick = function ($event) {
         news.broadcast('click', $event.target);
       };
 
-      ctrl.ready = function() {
+      ctrl.ready = function () {
         ctrl.status = 'ready';
       };
 
       $scope
         .$on('$routeChangeStart',
-          function(event, currentRoute, previousRoute) {
+          function (event, currentRoute, previousRoute) {
             ctrl.status = 'loading';
 
             if (currentRoute.title) {

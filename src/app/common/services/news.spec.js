@@ -1,10 +1,10 @@
-describe("app.service.news (unit testing)", function() {
-  "use strict";
+describe('app.service.news (unit testing)', function () {
+  'use strict';
 
   var news,
       $rootScope;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
 
     inject(function ($injector) {
@@ -14,10 +14,11 @@ describe("app.service.news (unit testing)", function() {
     });
   });
 
-  /* ***************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Basic tests
-   * **************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('exists the news service',
     function () {
       expect(news).not.toEqual(null);
@@ -60,10 +61,11 @@ describe("app.service.news (unit testing)", function() {
     }
   );
 
-  /* ***************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional tests
-   * **************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('broadcast and sets the `active unit`',
     function () {
       news.setActiveUnit('test');
@@ -133,5 +135,4 @@ describe("app.service.news (unit testing)", function() {
       expect($rootScope.$broadcast).toHaveBeenCalledWith(event, data, undefined);
     }
   );
-
 });

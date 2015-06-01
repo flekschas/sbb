@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb.browser' )
-  .controller( 'BrowserCtrl', [
+  .module('sbb.browser')
+  .controller('BrowserCtrl', [
     '$scope',
     '$routeParams',
     '$filter',
@@ -16,7 +16,7 @@ angular
     'genes',
     'geneExpressions',
     'errors',
-    function(
+    function (
       $scope,
       $routeParams,
       $filter,
@@ -33,29 +33,28 @@ angular
       geneExpressions,
       errors) {
 
-      /*************************************************************************
+      /*
+       * -----------------------------------------------------------------------
        * Variables
-       ************************************************************************/
-
+       * -----------------------------------------------------------------------
+       */
       var fn = {},
           allUnits;
 
-
-      /*************************************************************************
-       * Functions
-       ************************************************************************/
-
       /*
+       * -----------------------------------------------------------------------
+       * Functions
+       * -----------------------------------------------------------------------
+       *
        * Getter
        */
-
-      $scope.getGXE = function ( entity ) {
+      $scope.getGXE = function (entity) {
         $scope.resultsBarType = 'bioSamples';
         $scope.showResultsBar = true;
         $scope.resultsLoading = true;
         bioSamples
           .getExp(getEntityUri(entity), getSpeciesUri())
-          .then(function ( results ) {
+          .then(function (results) {
             console.log('getError', results);
             $scope.results = results;
             if ($scope.results) {
@@ -67,21 +66,19 @@ angular
       };
 
       // Returns the Ontology ID of a unit
-      $scope.getOntId = function ( unit ) {
+      $scope.getOntId = function (unit) {
         try {
-          return $scope.data.units[$scope.unit[unit]].ont_id;
-        } catch(e) {
+          return $scope.data.units[$scope.unit[unit]].ontId;
+        } catch (e) {
           return;
         }
       };
 
-
       /*
        * Setter
        */
-
       // Prepare new active unit for broadcasting
-      $scope.setActiveUnit = function ( unit, group ) {
+      $scope.setActiveUnit = function (unit, group) {
         // Replaces the an empty unit with the group if possible
         if (group && typeof $scope.unit[unit] === 'undefined') {
           unit = group;
@@ -90,7 +87,7 @@ angular
       };
 
       // Wrapper method for changing the location
-      $scope.setLocation = function(url, keepActiveUnit) {
+      $scope.setLocation = function (url, keepActiveUnit) {
         if (keepActiveUnit && $scope.activeUnit) {
           $location.url(url + '?unit=' + $scope.activeUnit);
         } else {
@@ -101,31 +98,29 @@ angular
       // Checks whether a view can be loaded and calles the setLocation method
       // Even though the name usually corresponds with the species,
       // developmental stage and view it could be totally arbitrary
-      $scope.setView = function ( view ) {
+      $scope.setView = function (view) {
         $http
           .get(settings.apiPath +
               'find/' +
-              ($scope.data.units[$scope.unit[view]].custom_zoom ?
-               $scope.data.units[$scope.unit[view]].custom_zoom : view) +
+              ($scope.data.units[$scope.unit[view]].customZoom ?
+               $scope.data.units[$scope.unit[view]].customZoom : view) +
               '/' +
               $scope.data.view.stage +
               '/' +
               $scope.data.view.species)
           .success(function (data) {
-            if(data.name) {
+            if (data.name) {
               // The view was found the thelocation will be set
               $scope.setLocation(data.name);
             }
           });
       };
 
-
       /*
        * Status / State
        */
-
       $scope.isMouse = function () {
-        return $scope.data.view.species === "mouse";
+        return $scope.data.view.species === 'mouse';
       };
 
       // Returns whether the unit is overlayed
@@ -138,7 +133,7 @@ angular
 
       // Returns true if a unit is zoomable meaning that a higher resolution of
       // the unit is available
-      $scope.isZoomable = function ( unit ) {
+      $scope.isZoomable = function (unit) {
         if (unit && $scope.data.units[$scope.unit[unit]].zoom) {
           return true;
         } else {
@@ -146,12 +141,10 @@ angular
         }
       };
 
-
       /*
        * General
        */
-
-      $scope.closeHelpMessage = function($event) {
+      $scope.closeHelpMessage = function ($event) {
         if ($event) {
           var target = $event.target;
           while (target.tagName.toLowerCase() !== 'body') {
@@ -185,11 +178,11 @@ angular
       };
 
       // Returns the view specific prefix if hasPrefix is true
-      $scope.prefix = function ( hasPrefix ) {
+      $scope.prefix = function (hasPrefix) {
         return hasPrefix ? $scope.data.view.prefix : '';
       };
 
-      $scope.relColor = function(expression) {
+      $scope.relColor = function (expression) {
         if (expression && $scope.expression) {
           var percent = (expression - $scope.expression.min) / $scope.expression.norm,
               style = {};
@@ -197,8 +190,8 @@ angular
           if (percent < 0.75) {
             style['background-color'] = colours.overlay('#004080', '#bf0000', percent / 0.75);
             style.color = '#fff';
-          } else  {
-            style['background-color'] = colours.overlay('#bf0000', '#ffd500', (percent - 0.75) / 0.25 );
+          } else {
+            style['background-color'] = colours.overlay('#bf0000', '#ffd500', (percent - 0.75) / 0.25);
             if (percent < 0.85) {
               style.color = '#fff';
             } else {
@@ -209,11 +202,11 @@ angular
         }
       };
 
-      $scope.relExp = function(unit, gene) {
-        return Math.abs(Math.floor($scope.expression[unit][gene] / $scope.expression.max * 10000) / 100) + "%";
+      $scope.relExp = function (unit, gene) {
+        return Math.abs(Math.floor($scope.expression[unit][gene] / $scope.expression.max * 10000) / 100) + '%';
       };
 
-      $scope.resetHeatmap = function() {
+      $scope.resetHeatmap = function () {
         $scope.genes = [];
       };
 
@@ -228,7 +221,7 @@ angular
        * Private Functions
        */
 
-      fn.expressionUnitSelection = function() {
+      fn.expressionUnitSelection = function () {
         if ($scope.expression) {
 
           var tmp = {},
@@ -237,7 +230,7 @@ angular
           for (var id in $scope.expression.sum) {
             if ($scope.expression.sum.hasOwnProperty(id)) {
               if (typeof $scope.unit[id] !== 'undefined') {
-                firstChar = id.substr(0,1);
+                firstChar = id.substr(0, 1);
                 // Create new sub array
                 if (!tmp[firstChar]) {
                   tmp[firstChar] = [];
@@ -257,7 +250,7 @@ angular
         }
       };
 
-      fn.getExpressions = function() {
+      fn.getExpressions = function () {
         if ($scope.genes.length && $scope.dataset) {
           geneExpressions
             .get($scope.dataset, $scope.genes)
@@ -299,9 +292,9 @@ angular
         }
       }
 
-      function getEntityUri ( entity ) {
+      function getEntityUri (entity) {
         try {
-          return $scope.data.units[$scope.unit[entity]].uberon || $scope.data.units[$scope.unit[entity]].ont_id;
+          return $scope.data.units[$scope.unit[entity]].uberon || $scope.data.units[$scope.unit[entity]].ontId;
         } catch (e) {
           return false;
         }
@@ -322,16 +315,13 @@ angular
         }
       }
 
-
-
-      /*************************************************************************
-       * Listeners
-       ************************************************************************/
-
       /*
+       * -----------------------------------------------------------------------
+       * Listeners
+       * -----------------------------------------------------------------------
+       *
        * Event Listeners
        */
-
       $scope.$on('activePanel', function () {
         if (news.activePanel === 'heatmap') {
           // Open a message the first time the heatmap is used
@@ -345,16 +335,16 @@ angular
       // Listen for when activeUnit is broadcasted
       // Note that activeUnit is only the name of the notification the news
       // service broadcasts
-      $scope.$on('activeUnit', function() {
+      $scope.$on('activeUnit', function () {
         $scope.activeUnit = news.activeUnit;
       });
 
-      $scope.$on('iluReady', function() {
+      $scope.$on('iluReady', function () {
         $scope.app.ready();
       });
 
       // Watch for the help being broadcasted
-      $scope.$on('help', function() {
+      $scope.$on('help', function () {
         // Check whether help is activated
         if (news.help) {
           news.broadcast('showAll');
@@ -400,7 +390,7 @@ angular
         $scope.omeroAvailable = true;
       });
 
-      $scope.$on('singleGene', function(e, index) {
+      $scope.$on('singleGene', function (e, index) {
         $scope.selectedGene = index;
       });
 
@@ -409,17 +399,17 @@ angular
        */
 
       // Enable heatmap and load hgnc_symbols
-      $scope.$watch(function(){
+      $scope.$watch(function () {
         return $scope.data.expDatasets;
-      }, function(newValue) {
+      }, function (newValue) {
         if (newValue) {
           // Set default dataset to hbm
           $scope.dataset = 'hbm';
           $scope.geneList = [];
 
           genes.getAll().then(function success (results) {
-              $scope.geneList = results;
-              $scope.heatmap = true;
+            $scope.geneList = results;
+            $scope.heatmap = true;
           }, function error () {
 
           });
@@ -428,9 +418,9 @@ angular
 
       // Watch for a gene selection and load expression data
       $scope.genes = [];
-      $scope.$watch(function(){
+      $scope.$watch(function () {
         return $scope.genes.length;
-      }, function(newValue, oldValue) {
+      }, function (newValue, oldValue) {
         if (newValue) {
           fn.getExpressions();
         } else if (oldValue) {
@@ -441,20 +431,20 @@ angular
       });
 
       // Watch a dataset
-      $scope.$watch(function(){
+      $scope.$watch(function () {
         return $scope.dataset;
-      }, function(newValue) {
+      }, function (newValue) {
         if (newValue) {
           fn.getExpressions();
         }
       });
 
       // Watch for $scope.activeUnit to change
-      $scope.$watch(function() {
+      $scope.$watch(function () {
         return $scope.activeUnit;
-      }, function(newValue, oldValue) {
+      }, function (newValue, oldValue) {
         // Prevent the location service from firing when Angular initializes
-        if(typeof newValue !== 'undefined') {
+        if (typeof newValue !== 'undefined') {
           $location.search('entity', newValue);
         } else if (typeof oldValue !== 'undefined') {
           $location.search('entity', null);
@@ -466,9 +456,9 @@ angular
       // Watch for the $location.search().entity to change
       // $location.search().entity represents the value in the URL like so:
       // http://domain.com/path/?entity=<VALUE>
-      $scope.$watch(function() {
+      $scope.$watch(function () {
         return $location.search().entity;
-      }, function(newValue) {
+      }, function (newValue) {
         $scope.setActiveUnit(newValue);
       });
 
@@ -500,9 +490,9 @@ angular
       // Watch for the search to change
       // Cache results for more speed
       var results = {};
-      $scope.$watch(function() {
+      $scope.$watch(function () {
         return $scope.searchInput;
-      }, function(search) {
+      }, function (search) {
         if (typeof search !== 'undefined' && search.length) {
           $scope.resultsBarType = 'search';
           $scope.showResultsBar = true;
@@ -550,19 +540,18 @@ angular
       //   }
       // });
 
-
-
-      /*************************************************************************
+      /*
+       * -----------------------------------------------------------------------
        * Basic Logic
-       ************************************************************************/
-
+       * -----------------------------------------------------------------------
+       */
       $scope.data = initData;
 
       // Shim for browsers that do not support Object.keys()
       if (typeof Object.keys != 'function') {
-        Object.keys = function(obj) {
-          if (typeof obj !== "object" && typeof obj !== "function" || obj === null) {
-            throw new TypeError("Object.keys called on non-object");
+        Object.keys = function (obj) {
+          if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) {
+            throw new TypeError('Object.keys called on non-object');
           }
           var keys = [];
           for (var p in obj) {
@@ -603,17 +592,26 @@ angular
         // Check for prefix
         if ($scope.data.units[i].name.indexOf($scope.data.view.prefix) >= 0) {
           $scope.data.units[i].prefix = true;
-          $scope.data.units[i].title = $scope.data.units[i].title ? $scope.data.units[i].title : $scope.data.units[i].name.substr($scope.data.view.prefix.length + 1).replace(/-/g, ' ');
+          if (!$scope.data.units[i].title) {
+            $scope.data.units[i].title = $scope.data.units[i].name
+              .substr($scope.data.view.prefix.length + 1)
+              .replace(/-/g, ' ');
+          }
         } else {
-          $scope.data.units[i].title = $scope.data.units[i].title ? $scope.data.units[i].title : $scope.data.units[i].name.replace(/-/g, ' ');
+          if (!$scope.data.units[i].title) {
+            $scope.data.units[i].title = $scope.data.units[i].name
+              .replace(/-/g, ' ');
+          }
         }
 
         // Create new sub array
-        if (!$scope.units[$scope.data.units[i].title.substr(0,1)]) {
-          $scope.units[$scope.data.units[i].title.substr(0,1)] = [];
+        if (!$scope.units[$scope.data.units[i].title.substr(0, 1)]) {
+          $scope.units[$scope.data.units[i].title.substr(0, 1)] = [];
         }
 
-        $scope.units[$scope.data.units[i].title.substr(0,1)].push($scope.data.units[i]);
+        $scope
+          .units[$scope.data.units[i].title.substr(0, 1)]
+          .push($scope.data.units[i]);
 
         // Save a reference to the index
         $scope.unit[$scope.data.units[i].name] = i;
@@ -640,7 +638,7 @@ angular
       }
 
       viewData
-        .getIllustration( $scope.data.view.imgSrc )
+        .getIllustration($scope.data.view.imgSrc)
         .then(
           function success (result) {
             $scope.illustration = result;
@@ -652,13 +650,13 @@ angular
               }
             };
           }
-        );
+       );
 
       viewData
-        .getDevStages( $scope.data.view.level )
+        .getDevStages($scope.data.view.level)
         .then(function success (result) {
             $scope.similarViews = result;
           }
-        );
+       );
     }
   ]);

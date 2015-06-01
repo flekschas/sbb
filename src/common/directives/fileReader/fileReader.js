@@ -1,6 +1,6 @@
 angular
-  .module( 'fileReader', [] )
-  .factory( 'fileReader', [
+  .module('fileReader', [])
+  .factory('fileReader', [
     function () {
       var files = [];
 
@@ -8,14 +8,17 @@ angular
        * Test if the browser fully supports the HTML5 File-API
        */
       function isSupported () {
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
+        if (window.File &&
+            window.FileReader &&
+            window.FileList &&
+            window.Blob) {
           return true;
         } else {
           return false;
         }
       }
 
-      function link ( scope, element, attrs ) {
+      function link (scope, element, attrs) {
         var supported = isSupported();
 
         function handleFileSelect (evt) {

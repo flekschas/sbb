@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb' )
-  .directive ( 'sbbDialog', [
+  .module('sbb')
+  .directive('sbbDialog', [
     '$compile', '$templateCache', '$timeout', '$', 'containElement',  'news',
     function ($compile, $templateCache, $timeout, $, containElement, news) {
       var directive = {
@@ -11,7 +11,7 @@ angular
         templateUrl: 'common/directives/dialog.html'
       };
 
-      function link ( scope, element, attrs ) {
+      function link (scope, element, attrs) {
         var $el = $(element),
             $content = $el.find('.content');
 
@@ -33,7 +33,7 @@ angular
               $content.html($compile(tpl)(scope));
             }
 
-            $timeout(function(){
+            $timeout(function () {
               scope.show = true;
             }, 250);
           });

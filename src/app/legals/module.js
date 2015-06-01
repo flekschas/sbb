@@ -1,2 +1,2 @@
 angular
-  .module( 'sbb.legals', [] );
+  .module('sbb.legals', []);

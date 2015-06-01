@@ -1,6 +1,6 @@
 angular
-  .module( 'containElement', [] )
-  .factory( 'containElement', [
+  .module('containElement', [])
+  .factory('containElement', [
     function () {
       return function (searchEl, targetEl) {
         var found = false;

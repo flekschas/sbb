@@ -1,7 +1,7 @@
 angular
-  .module( 'sbb' )
-  .constant( 'settings', {
-    apiPath: 'http://sbb.cellfinder.org/api/1.2.3/',
+  .module('sbb')
+  .constant('settings', {
+    apiPath: 'http://sbb.cellfinder.org/api/1.2.4/',
     ebiBS: 'https://www.ebi.ac.uk/rdf/services/biosamples/sparql',
     ebiGXA: 'https://www.ebi.ac.uk/rdf/services/atlas/sparql',
     illuPath: 'assets/illustrations/',

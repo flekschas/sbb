@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb.legals' )
-  .config(function config( $routeProvider ) {
+  .module('sbb.legals')
+  .config(function config ($routeProvider) {
     $routeProvider
       .when('/legals', {
         controller: 'LegalsCtrl',

@@ -1,12 +1,12 @@
 {
   "name": "sbb",
-  "version": "1.6.3-pre",
+  "version": "1.6.3-alpha",
   "dependencies": {},
   "devDependencies": {
     "angular": "~1.3.15",
     "angular-route": "~1.3.15",
     "angular-mocks": "~1.3.15",
-    "normalize-css": "^3.0.2",
+    "normalize-css": "^3.0.3",
     "jquery-mousewheel": "~3.1.12",
     "hammerjs": "~2.0.4",
     "isMobile": "~0.3.6",

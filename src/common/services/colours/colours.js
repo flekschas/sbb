@@ -1,7 +1,7 @@
 angular
-  .module( 'colours', [])
-  .factory( 'colours', [
-    function() {
+  .module('colours', [])
+  .factory('colours', [
+    function () {
       return {
         hexToRgb: function (hex) {
           var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -24,7 +24,7 @@ angular
          * bg: HEX colour string
          * overlay: HEX colour string
          */
-        overlay: function(bg, overlay, percent) {
+        overlay: function (bg, overlay, percent) {
           if (bg && bg !== 'none') {
 
             bg = this.hexToRgb(bg);

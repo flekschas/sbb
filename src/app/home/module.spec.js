@@ -1,11 +1,11 @@
-describe("Home Module: Unit Testing", function() {
+describe('Home Module: Unit Testing', function () {
 
   var module;
-  beforeEach(function() {
-    module = angular.module("sbb.home");
+  beforeEach(function () {
+    module = angular.module('sbb.home');
   });
 
-  it("should be registered", function() {
+  it('should be registered', function () {
     expect(module).not.toEqual(null);
   });
 });

@@ -1,12 +1,19 @@
 angular
-  .module( 'SbbSpinner', [])
-  .factory( 'SbbSpinner', ['$timeout', 'Raphael',
-    function( $timeout, Raphael ) {
-      return function SbbSpinner (paper, containerWidth, containerHeight, R1, R2,
-                               count, stroke_width, colour) {
+  .module('SbbSpinner', [])
+  .factory('SbbSpinner', ['$timeout', 'Raphael',
+    function ($timeout, Raphael) {
+      return function SbbSpinner (
+        paper,
+        containerWidth,
+        containerHeight,
+        R1,
+        R2,
+        count,
+        strokeWidth,
+        colour) {
         var sectorsCount = count || 12,
-            color = colour || "#303030",
-            width = stroke_width || 4,
+            color = colour || '#303030',
+            width = strokeWidth || 4,
             r1 = Math.min(R1, R2) || 32,
             r2 = Math.max(R1, R2) || 18,
             cx = r2 + width + (containerWidth / 2),
@@ -15,9 +22,9 @@ angular
             opacity = [],
             beta = 2 * Math.PI / sectorsCount,
             pathParams = {
-              "stroke": color,
-              "stroke-width": width,
-              "stroke-linecap": "round"
+              'stroke': color,
+              'stroke-width': width,
+              'stroke-linecap': 'round'
             };
 
         Raphael.getColor.reset();
@@ -29,8 +36,8 @@ angular
             sin = Math.sin(alpha);
           opacity[i] = 1 / sectorsCount * i;
           sectors[i] = paper.path([
-            ["M", cx + r1 * cos, cy + r1 * sin],
-            ["L", cx + r2 * cos, cy + r2 * sin]
+            ['M', cx + r1 * cos, cy + r1 * sin],
+            ['L', cx + r2 * cos, cy + r2 * sin]
           ]).attr(pathParams);
         }
 
@@ -43,16 +50,16 @@ angular
           opacity.unshift(opacity.pop());
           var i = sectorsCount;
           while (i--) {
-            sectors[i].attr("opacity", opacity[i]);
+            sectors[i].attr('opacity', opacity[i]);
           }
           paper.safari();
-          if( k <= sectorsCount) {
+          if (k <= sectorsCount) {
             tick = $timeout(ticker, 500 / sectorsCount);
           }
         })();
 
         return function () {
-          $timeout.cancel( tick );
+          $timeout.cancel(tick);
         };
       };
     }

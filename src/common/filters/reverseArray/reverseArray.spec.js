@@ -1,5 +1,5 @@
-describe("Unit: reverseArray", function() {
-  "use strict";
+describe('Unit: reverseArray', function () {
+  'use strict';
 
   var $filter;
 
@@ -11,16 +11,15 @@ describe("Unit: reverseArray", function() {
     });
   });
 
-  it('should have a filter', function() {
+  it('should have a filter', function () {
     expect($filter).not.toEqual(null);
   });
 
-  it('should return undefined when nothing is set', function() {
+  it('should return undefined when nothing is set', function () {
     expect($filter()).toEqual(undefined);
   });
 
-  it('should return a reversed array',
-     function() {
-      expect($filter([1,2,3])).toEqual([3,2,1]);
+  it('should return a reversed array', function () {
+    expect($filter([1, 2, 3])).toEqual([3, 2, 1]);
   });
 });

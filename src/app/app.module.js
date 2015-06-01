@@ -1,4 +1,4 @@
-angular.module( 'sbb', [
+angular.module('sbb', [
   /*
    * HTML in JS templates for All-In-One loading
    */

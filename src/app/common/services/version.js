@@ -1,9 +1,9 @@
 angular
-  .module( 'sbb' )
-  .factory( 'versionService', ['$q', '$http', 'settings', 'errors',
-    function($q, $http, settings, errors) {
+  .module('sbb')
+  .factory('versionService', ['$q', '$http', 'settings', 'errors',
+    function ($q, $http, settings, errors) {
       return {
-        getVersions: function() {
+        getVersions: function () {
           var deferred = $q.defer();
 
           $http
@@ -17,7 +17,7 @@ angular
 
           return deferred.promise;
         },
-        getChangelog: function() {
+        getChangelog: function () {
           var deferred = $q.defer();
 
           $http
@@ -25,7 +25,7 @@ angular
             .success(function (data) {
               var changelog = {};
               for (var i = 0, len = data.length; i < len; i++) {
-                if (typeof changelog[data[i].version] !== 'undefined'){
+                if (typeof changelog[data[i].version] !== 'undefined') {
                   changelog[data[i].version].push(data[i]);
                 } else {
                   changelog[data[i].version] = [data[i]];

@@ -1,14 +1,14 @@
-describe("SbbSpinner (unit testing)", function() {
-  "use strict";
+describe('SbbSpinner (unit testing)', function () {
+  'use strict';
 
   var SbbSpinner,
       $timeout,
       paper;
 
-  beforeEach(function() {
+  beforeEach(function () {
     // Define `Raphael` as Raphael for dependency injection.
     module(function ($provide) {
-        $provide.value('Raphael', Raphael);
+      $provide.value('Raphael', Raphael);
     });
 
     module('SbbSpinner');
@@ -39,7 +39,7 @@ describe("SbbSpinner (unit testing)", function() {
       var spinner = new SbbSpinner(paper, 100, 100),
           i = 0;
 
-      paper.forEach(function(el) {
+      paper.forEach(function (el) {
         i++;
       });
 

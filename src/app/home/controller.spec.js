@@ -1,28 +1,32 @@
-describe("home.controller (unit testing)", function() {
-  "use strict";
+describe('home.controller (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var AppCtrl,
       appScope,
       HomeCtrl,
       homeScope,
       $rootScope,
-      news;
+      news,
+      settings;
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
     module('sbb.home');
 
     inject(function ($injector) {
       var $controller = $injector.get('$controller');
+
+      settings = $injector.get('settings');
 
       news = $injector.get('news');
       $rootScope = $injector.get('$rootScope');
@@ -43,11 +47,11 @@ describe("home.controller (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should exist the HomeCtrl controller',
     function () {
       expect(HomeCtrl).toBeTruthy();
@@ -73,61 +77,63 @@ describe("home.controller (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should get and cache search data when input changes',
     inject(function ($injector) {
       var $httpBackend = $injector.get('$httpBackend'),
           keyword = 'kid',
           data = {
-            "views": [
+            'views': [
               {
-                "name": "kidney",
-                "score": 0.5,
-                "i": 0,
-                "sub":  [
+                'name': 'kidney',
+                'score': 0.5,
+                'i': 0,
+                'sub':  [
                   {
-                    "species": "human",
-                    "stage": "adult",
-                    "link": "human-adult-kidney",
-                    "score": 0
+                    'species': 'human',
+                    'stage': 'adult',
+                    'link': 'human-adult-kidney',
+                    'score': 0
                   },
                   {
-                    "species": "mouse",
-                    "stage": "adult",
-                    "link": "mouse-adult-kidney",
-                    "score": 0
+                    'species': 'mouse',
+                    'stage': 'adult',
+                    'link': 'mouse-adult-kidney',
+                    'score': 0
                   }
                 ]
               }
             ],
-            "units": [
+            'units': [
               {
-                "name": "kidney",
-                "score": 0.5,
-                "i": 0,
-                "sub": [
+                'name': 'kidney',
+                'score': 0.5,
+                'i': 0,
+                'sub': [
                   {
-                    "species": "human",
-                    "stage": "adult",
-                    "link": "human-adult-male-body",
-                    "score": 0,
-                    "view": "male body"
+                    'species': 'human',
+                    'stage': 'adult',
+                    'link': 'human-adult-male-body',
+                    'score': 0,
+                    'view': 'male body'
                   },
                   {
-                    "species": "human",
-                    "stage": "adult",
-                    "link": "human-adult-female-body",
-                    "score": 0,"view": "female body"
+                    'species': 'human',
+                    'stage': 'adult',
+                    'link': 'human-adult-female-body',
+                    'score': 0,
+                    'view': 'female body'
                   },
                   {
-                    "species": "mouse",
-                    "stage": "adult",
-                    "link": "mouse-adult-body",
-                    "score": 0,"view": "body"
+                    'species': 'mouse',
+                    'stage': 'adult',
+                    'link': 'mouse-adult-body',
+                    'score': 0,
+                    'view': 'body'
                   }
                 ]
               }
@@ -137,7 +143,7 @@ describe("home.controller (unit testing)", function() {
       homeScope.searchInput = keyword;
 
       $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/s/' + keyword)
+        .expectGET('http://sbb.cellfinder.org/api/1.2.4/s/' + keyword)
         .respond(data);
       $httpBackend.flush();
 
@@ -173,7 +179,7 @@ describe("home.controller (unit testing)", function() {
       homeScope.searchInput = keyword;
 
       $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/s/' + keyword)
+        .expectGET(settings.apiPath + 's/' + keyword)
         .respond(500);
       $httpBackend.flush();
 

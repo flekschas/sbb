@@ -1,12 +1,13 @@
-describe("browser.route (unit testing)", function() {
-  "use strict";
+describe('browser.route (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $location,
       $route,
-      $httpBackend;
+      $httpBackend,
+      settings;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
     module('sbb.browser');
 
@@ -15,9 +16,12 @@ describe("browser.route (unit testing)", function() {
       $location = $injector.get('$location');
       $route = $injector.get('$route');
       $httpBackend = $injector.get('$httpBackend');
+      settings = $injector.get('settings');
     });
 
-    $httpBackend.expectGET('http://sbb.cellfinder.org/api/1.2.3/browser').respond(200, '');
+    $httpBackend
+      .expectGET(settings.apiPath + 'browser')
+      .respond(200, '');
   });
 
   it('should load the browser template and controller',

@@ -1,6 +1,6 @@
 angular
-  .module( 'stringWidth', [] )
-  .factory( 'stringWidth', ['$',
+  .module('stringWidth', [])
+  .factory('stringWidth', ['$',
     function ($) {
       return function (string, font) {
         var element = $('<div>' + string + '</div>')

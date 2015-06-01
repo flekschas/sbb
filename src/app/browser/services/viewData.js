@@ -1,9 +1,9 @@
 angular
-  .module( 'sbb.browser' )
-  .factory( 'viewData', ['$q', '$http', 'settings',
-    function($q, $http, settings) {
+  .module('sbb.browser')
+  .factory('viewData', ['$q', '$http', 'settings',
+    function ($q, $http, settings) {
       return {
-        getView: function( view ) {
+        getView: function (view) {
           var deferred = $q.defer();
 
           $http
@@ -17,7 +17,7 @@ angular
 
           return deferred.promise;
         },
-        getIllustration: function( imgSrc ) {
+        getIllustration: function (imgSrc) {
           var deferred = $q.defer();
 
           $http
@@ -31,7 +31,7 @@ angular
 
           return deferred.promise;
         },
-        getDevStages: function( level ) {
+        getDevStages: function (level) {
           var deferred = $q.defer();
 
           $http

@@ -1,10 +1,11 @@
-describe("browser.service.bioSamples (unit testing)", function() {
-  "use strict";
+describe('browser.service.bioSamples (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var $rootScope,
       $httpBackend,
       bioSamples,
@@ -184,17 +185,17 @@ describe("browser.service.bioSamples (unit testing)", function() {
                    replace(/%20/g, '+');
       },
       urlParams = function (params) {
-        return  Object.keys(params).sort().map(function(key) {
-          return encodeUriQuery(key) + "=" + encodeUriQuery(params[key]);
+        return Object.keys(params).sort().map(function (key) {
+          return encodeUriQuery(key) + '=' + encodeUriQuery(params[key]);
         }).join('&');
       };
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
     module('sbb.browser');
 
@@ -207,11 +208,11 @@ describe("browser.service.bioSamples (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should contain the bioSamples',
     function () {
       expect(bioSamples).not.toEqual(null);
@@ -230,14 +231,14 @@ describe("browser.service.bioSamples (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should resolve promises and cache results for `getExp`',
     function () {
-      var uri= 'test',
+      var uri = 'test',
           species = 'human',
           params = {
             query: fakeExpSparql(uri, species),
@@ -248,16 +249,16 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       $httpBackend
         .expectGET(
-          settings.ebiBS +'?'+ urlParams(params),
+          settings.ebiBS + '?' + urlParams(params),
           {
-            "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           }
         )
         .respond(fakeExpData);
 
       bioSamples
         .getExp(uri, species)
-        .then(function (data){
+        .then(function (data) {
           bioSamplesData = data;
         });
 
@@ -275,7 +276,7 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       bioSamples
         .getExp(uri, species)
-        .then(function (data){
+        .then(function (data) {
           bioSamplesData = data;
         });
       $rootScope.$digest();
@@ -290,9 +291,9 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       $httpBackend
         .expectGET(
-          settings.ebiBS +'?'+ urlParams(params),
+          settings.ebiBS + '?' + urlParams(params),
           {
-            "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           }
         )
         .respond({
@@ -303,7 +304,7 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       bioSamples
         .getExp(uri + uri, species)
-        .then(function (data){
+        .then(function (data) {
           bioSamplesData = data;
         });
 
@@ -316,7 +317,7 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
   it('should reject errors for `getExp`',
     function () {
-      var uri= 'test',
+      var uri = 'test',
           species = 'human',
           params = {
             query: fakeExpSparql(uri, species),
@@ -327,9 +328,9 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       $httpBackend
         .expectGET(
-          settings.ebiBS +'?'+ urlParams(params),
+          settings.ebiBS + '?' + urlParams(params),
           {
-            "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           }
         )
         .respond(500, 'error');
@@ -349,7 +350,7 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
   it('should resolve promises and cache results for `getExpDetails`',
     function () {
-      var uri= 'test',
+      var uri = 'test',
           species = 'human',
           params = {
             query: fakeExpDetailsSparql(uri),
@@ -360,16 +361,16 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       $httpBackend
         .expectGET(
-          settings.ebiBS +'?'+ urlParams(params),
+          settings.ebiBS + '?' + urlParams(params),
           {
-            "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           }
         )
         .respond(fakeExpDetails);
 
       bioSamples
         .getExpDetails(uri)
-        .then(function (data){
+        .then(function (data) {
           bioSamplesData = data;
         });
 
@@ -381,13 +382,12 @@ describe("browser.service.bioSamples (unit testing)", function() {
       /*
        * Results should now be cached so we don't expect another http request
        */
-
       bioSamplesData = undefined;
       $rootScope.$digest();
 
       bioSamples
         .getExpDetails(uri)
-        .then(function (data){
+        .then(function (data) {
           bioSamplesData = data;
         });
       $rootScope.$digest();
@@ -397,14 +397,13 @@ describe("browser.service.bioSamples (unit testing)", function() {
       /*
        * If nothing is found the results should be set to `null`
        */
-
       params.query = fakeExpDetailsSparql(uri + uri);
 
       $httpBackend
         .expectGET(
-          settings.ebiBS +'?'+ urlParams(params),
+          settings.ebiBS + '?' + urlParams(params),
           {
-            "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           }
         )
         .respond({
@@ -415,7 +414,7 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       bioSamples
         .getExpDetails(uri + uri)
-        .then(function (data){
+        .then(function (data) {
           bioSamplesData = data;
         });
 
@@ -428,7 +427,7 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
   it('should reject errors for `getExpDetails`',
     function () {
-      var uri= 'test',
+      var uri = 'test',
           params = {
             query: fakeExpDetailsSparql(uri),
             offset: 0,
@@ -438,9 +437,9 @@ describe("browser.service.bioSamples (unit testing)", function() {
 
       $httpBackend
         .expectGET(
-          settings.ebiBS +'?'+ urlParams(params),
+          settings.ebiBS + '?' + urlParams(params),
           {
-            "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           }
         )
         .respond(500, 'error');
@@ -457,5 +456,4 @@ describe("browser.service.bioSamples (unit testing)", function() {
       expect(bioSamplesErr).toEqual('error');
     }
   );
-
 });

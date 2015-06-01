@@ -246,7 +246,7 @@ module.exports = function ( grunt ) {
        */
       gruntfile: {
         files: 'Gruntfile.js',
-        tasks: [ 'jshint:gruntfile' ],
+        tasks: [ 'jshint:gruntfile', 'jscs:gruntfile' ],
         options: {
           livereload: false
         }
@@ -260,7 +260,7 @@ module.exports = function ( grunt ) {
         files: [
           '<%= cfg.app_files.js %>'
         ],
-        tasks: [ 'jshint:src', 'karma:unit:run', 'copy:build_app_js' ]
+        tasks: [ 'jshint:src', 'jscs:src', 'karma:unit:run', 'copy:build_app_js' ]
       },
 
       /*
@@ -309,7 +309,7 @@ module.exports = function ( grunt ) {
         files: [
           '<%= cfg.app_files.jsunit %>'
         ],
-        tasks: [ 'jshint:test', 'karma:unit:run' ],
+        tasks: [ 'jshint:test', 'jscs:test', 'karma:unit:run' ],
         options: {
           livereload: false
         }
@@ -382,6 +382,22 @@ module.exports = function ( grunt ) {
           '<%= concat.compile_js.dest %>',
           '<%= cfg.compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
+      }
+    },
+
+    /*
+     * Automatic code style linting.
+     */
+    jscs: {
+      src: [
+        '<%= cfg.app_files.js %>'
+      ],
+      test: [
+        '<%= cfg.app_files.jsunit %>'
+      ],
+      options: {
+          config: ".jscsrc",
+          requireCurlyBraces: [ "if" ]
       }
     },
 
@@ -460,7 +476,7 @@ module.exports = function ( grunt ) {
         ' * <%= pkg.homepage %>\n' +
         ' *\n' +
         ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-        ' * Licensed <%= pkg.licenses.type %> <<%= pkg.licenses.url %>>\n' +
+        ' * Licensed under <%= pkg.license %>\n' +
         ' */\n'
     },
 
@@ -562,7 +578,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean:build', 'html2js', 'jshint', 'sass:build',
+    'clean:build', 'html2js', 'jshint', 'jscs', 'sass:build',
     'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_app_js',
     'copy:build_vendor_js_css', 'index:build', 'copy:build_apache_config',
     'karmaconfig', 'karma:continuous'

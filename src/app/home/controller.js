@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb.home' )
-  .controller( 'HomeCtrl', [
+  .module('sbb.home')
+  .controller('HomeCtrl', [
     '$scope',
     '$location',
     '$window',
@@ -10,7 +10,7 @@ angular
     'settings',
     'storage',
     'errors',
-    function(
+    function (
       $scope,
       $location,
       $window,
@@ -25,16 +25,16 @@ angular
       $scope.currentDate = Date.now();
 
       // Wrapper method for changing the location
-      $scope.setLocation = function(url) {
+      $scope.setLocation = function (url) {
         $location.url(url);
       };
 
       // Watch for the search to change
       // Cache results for more speed
       var results = {};
-      $scope.$watch(function() {
+      $scope.$watch(function () {
         return $scope.searchInput;
-      }, function(search) {
+      }, function (search) {
         if (typeof search !== 'undefined' && search.length) {
           // Check for cached results
           if (typeof results[search] !== 'undefined') {
@@ -52,7 +52,8 @@ angular
                 $scope.searchError = true;
                 news.broadcast('sbbNotification:open', {
                   type: 'error',
-                  message: 'API is currently unavailable! Please try again later.'
+                  message: 'API is currently unavailable! Please try again ' +
+                    'later.'
                 });
               });
           }
@@ -63,15 +64,16 @@ angular
       $scope.$watch(function () {
         return $location.search().error;
       }, function (newValue, oldValue) {
-        if(newValue) {
+        if (newValue) {
           news.broadcast('sbbNotification:open', {
             type: 'error',
-            message: 'The page you were looking for (' + $location.search().error + ') is not available!'
+            message: 'The page you were looking for (' +
+              $location.search().error + ') is not available!'
           });
         }
       });
 
-      $scope.startHelp = function() {
+      $scope.startHelp = function () {
         storage.set('helpActive', 1, true);
         $location.url('human-adult-male-body?unit=liver');
       };

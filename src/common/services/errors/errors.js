@@ -1,6 +1,6 @@
 angular
-  .module( 'errors', [])
-  .factory( 'errors', ['$rootScope', function($rootScope) {
+  .module('errors', [])
+  .factory('errors', ['$rootScope', function ($rootScope) {
     var errors = [];
 
     function broadcast (errId) {

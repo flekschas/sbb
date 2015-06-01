@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb' )
-  .factory( 'storage', [
+  .module('sbb')
+  .factory('storage', [
     function () {
       var session = {},
           supportLocalStorage;
@@ -10,7 +10,7 @@ angular
         localStorage.setItem('SBB/test', 'test');
         localStorage.removeItem('SBB/test');
         supportLocalStorage = true;
-      } catch(e) {
+      } catch (e) {
         supportLocalStorage = false;
       }
 
@@ -22,7 +22,7 @@ angular
               localStorage.setItem('SBB/' + key, JSON.stringify(value));
             }
             return true;
-          } catch(e) {
+          } catch (e) {
             return false;
           }
         }
@@ -35,7 +35,7 @@ angular
           } else {
             return JSON.parse(value);
           }
-        } catch(e) {
+        } catch (e) {
           return false;
         }
       }

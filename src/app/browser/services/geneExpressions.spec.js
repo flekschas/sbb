@@ -1,22 +1,23 @@
-describe("browser.service.geneExpressions (unit testing)", function() {
-  "use strict";
+describe('browser.service.geneExpressions (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var $rootScope,
       $httpBackend,
       geneExpressions,
       settings,
       fakegeneExpressions = ['abc'];
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
     module('sbb.browser');
 
@@ -29,11 +30,11 @@ describe("browser.service.geneExpressions (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should contain the geneExpressions',
     function () {
       expect(geneExpressions).not.toEqual(null);
@@ -46,14 +47,14 @@ describe("browser.service.geneExpressions (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should resolve promises',
     function () {
-      var dataset= 'test',
+      var dataset = 'test',
           genes = ['testGeneA', 'testGeneB'],
           expressions;
 
@@ -63,7 +64,7 @@ describe("browser.service.geneExpressions (unit testing)", function() {
 
       geneExpressions
         .get(dataset, genes)
-        .then(function (data){
+        .then(function (data) {
           expressions = data;
         });
 
@@ -76,7 +77,7 @@ describe("browser.service.geneExpressions (unit testing)", function() {
 
   it('should reject errors',
     function () {
-      var dataset= 'test',
+      var dataset = 'test',
           genes = ['testGeneA', 'testGeneB'],
           geneExpressionsErr;
 
@@ -96,5 +97,4 @@ describe("browser.service.geneExpressions (unit testing)", function() {
       expect(geneExpressionsErr).toEqual('error');
     }
   );
-
 });

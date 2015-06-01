@@ -1,19 +1,18 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbAccordion', ['$', 'news',
-    function($, news) {
+  .module('sbb.browser')
+  .directive('sbbAccordion', ['$', 'news',
+    function ($, news) {
       var directive = {
         link: link,
         restrict: 'AE'
       };
 
-      function link ( scope, element, attrs ) {
+      function link (scope, element, attrs) {
         /*
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          * Variables
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          */
-
         var $el = $(element),
             panels = {},
             numPanels = 0,
@@ -24,16 +23,15 @@ angular
             lastClick = 0;
 
         /*
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          * Private
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          */
-
         function init () {
           /*
            * Store each panel's DOM reference in an object for fast access
            */
-          $el.find('[panel]').each(function( index ) {
+          $el.find('[panel]').each(function (index) {
             var $this = $(this);
 
             /*
@@ -82,7 +80,7 @@ angular
             }
           }
         }
-        function maximise ( panel ) {
+        function maximise (panel) {
           /*
            * Maximise one panel and minimise all other panels.
            */
@@ -105,23 +103,23 @@ angular
           setPanelHeight();
         }
 
-        function toggle ( panel ) {
+        function toggle (panel) {
           try {
             /*
-              * Toggle between visibility.
-              */
+             * Toggle between visibility.
+             */
             lastClick = Date.now();
             if (panels[panel].open) {
               /*
-                * Close panel
-                */
+               * Close panel
+               */
               numOpenPanels--;
               panels[panel].open = false;
               panels[panel].el.removeClass('open');
             } else {
               /*
-                * Open panel
-                */
+               * Open panel
+               */
               numOpenPanels++;
               panels[panel].open = true;
               panels[panel].el.addClass('open');
@@ -132,7 +130,7 @@ angular
           }
         }
 
-        function open ( panel ) {
+        function open (panel) {
           try {
             if (!panels[panel].open) {
               toggle(panel);
@@ -143,35 +141,32 @@ angular
         }
 
         /*
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          * Public
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          */
-
-        scope.maximise = function ( panel ) {
+        scope.maximise = function (panel) {
           maximise(panel);
         };
 
-        scope.toggle = function ( panel ) {
+        scope.toggle = function (panel) {
           toggle(panel);
         };
 
         /*
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          * Listeners
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          */
-
         scope.$on('sbbAccordion:open', function (e, panel) {
           open(panel);
         });
 
         /*
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          * Initialise
-         * *********************************************************************
+         * ---------------------------------------------------------------------
          */
-
         init();
       }
 

@@ -1,7 +1,7 @@
 angular
-  .module( 'sbb.browser' )
-  .factory( 'bioSamples', ['$cacheFactory', '$http', '$q', 'settings',
-    function($cacheFactory, $http, $q, settings) {
+  .module('sbb.browser')
+  .factory('bioSamples', ['$cacheFactory', '$http', '$q', 'settings',
+    function ($cacheFactory, $http, $q, settings) {
       var bs = this;
 
       bs.exp = $cacheFactory('bioSamplesExp', {
@@ -12,7 +12,7 @@ angular
         number: 5
       });
 
-      function getExp ( uri, species ) {
+      function getExp (uri, species) {
         var deferred = $q.defer(),
             results,
             sparql = '';
@@ -72,17 +72,14 @@ angular
         sparql += '    <http://xmlns.com/foaf/0.1/page> ?url.\n';
         sparql += '}';
 
-
-
         /*
          * Work around as POST isn't implemented yet but will be in a month.
          */
-        // console.log(sparql);
         $http({
           url: settings.ebiBS,
-          method: "GET",
+          method: 'GET',
           headers: {
-              "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           },
           params: {
             query: sparql,
@@ -144,9 +141,9 @@ angular
          */
         // $http({
         //   url: settings.ebiBS,
-        //   method: "POST",
+        //   method: 'POST',
         //   headers: {
-        //      "Content-Type": "application/sparql-query"
+        //      'Content-Type': 'application/sparql-query'
         //   },
         //   data: {
         //     query: sparql,
@@ -166,7 +163,7 @@ angular
         return deferred.promise;
       }
 
-      function getExpDetails ( expUri ) {
+      function getExpDetails (expUri) {
         var deferred = $q.defer(),
             results,
             sparql = '',
@@ -226,9 +223,9 @@ angular
          */
         $http({
           url: settings.ebiBS,
-          method: "GET",
+          method: 'GET',
           headers: {
-              "Accept": "application/sparql-results+json"
+            'Accept': 'application/sparql-results+json'
           },
           params: {
             query: sparql,
@@ -236,18 +233,18 @@ angular
             inference: 'false'
           }
         })
-        .success(function ( data ) {
+        .success(function (data) {
           data = parseSparqlResults(data.results.bindings);
           deferred.resolve(data);
         })
-        .error(function ( error ) {
+        .error(function (error) {
           deferred.reject(error);
         });
 
         /*
          * Organise results to avoid errors when properties are missing.
          */
-        function parseSparqlResults ( data ) {
+        function parseSparqlResults (data) {
           var len = data.length;
 
           if (len > 0) {
@@ -292,9 +289,9 @@ angular
          */
         // $http({
         //   url: settings.ebiBS,
-        //   method: "POST",
+        //   method: 'POST',
         //   headers: {
-        //      "Content-Type": "application/sparql-query"
+        //      'Content-Type': 'application/sparql-query'
         //   },
         //   data: {
         //     query: sparql,

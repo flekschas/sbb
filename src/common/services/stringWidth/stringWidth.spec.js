@@ -1,12 +1,12 @@
-describe("stringWidth (unit testing)", function() {
-  "use strict";
+describe('stringWidth (unit testing)', function () {
+  'use strict';
 
   var stringWidth;
 
-  beforeEach(function() {
+  beforeEach(function () {
     // Define the $ as stringWidth needs it.
     module(function ($provide) {
-        $provide.value('$', jQuery);
+      $provide.value('$', jQuery);
     });
 
     module('stringWidth');

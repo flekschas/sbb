@@ -1,5 +1,5 @@
-describe("legals.controller (unit testing)", function() {
-  "use strict";
+describe('legals.controller (unit testing)', function () {
+  'use strict';
 
   var AppCtrl,
       appScope,
@@ -7,7 +7,7 @@ describe("legals.controller (unit testing)", function() {
       legalsScope,
       $rootScope;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
     module('sbb.legals');
 
@@ -31,13 +31,13 @@ describe("legals.controller (unit testing)", function() {
   });
 
   it('should have LegalsCtrl',
-    function() {
+    function () {
       expect(LegalsCtrl).toBeTruthy();
     }
   );
 
   it('should set the app status to `ready`',
-    function() {
+    function () {
       $rootScope.$digest();
       expect(AppCtrl.status).toEqual('ready');
     }

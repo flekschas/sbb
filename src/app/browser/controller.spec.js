@@ -1,28 +1,32 @@
-describe("browser.controller (unit testing)", function() {
-  "use strict";
+describe('browser.controller (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var AppCtrl,
       appScope,
       BrowserCtrl,
       browserScope,
       $rootScope,
-      news;
+      news,
+      settings;
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
     module('sbb.home');
 
     inject(function ($injector) {
       var $controller = $injector.get('$controller');
+
+      settings = $injector.get('settings');
 
       news = $injector.get('news');
       $rootScope = $injector.get('$rootScope');
@@ -43,11 +47,11 @@ describe("browser.controller (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should exist the BrowserCtrl controller',
     function () {
       expect(BrowserCtrl).toBeTruthy();
@@ -150,11 +154,11 @@ describe("browser.controller (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should set app `ready` when `iluReady` is broadcatsed',
     function () {
       $rootScope.$broadcast('iluReady');
@@ -240,79 +244,58 @@ describe("browser.controller (unit testing)", function() {
       var $httpBackend = $injector.get('$httpBackend'),
           keyword = 'kid',
           data = {
-            "views": [
+            'views': [
               {
-                "name": "kidney",
-                "score": 0.5,
-                "i": 0,
-                "sub":  [
+                'name': 'kidney',
+                'score': 0.5,
+                'i': 0,
+                'sub':  [
                   {
-                    "species": "human",
-                    "stage": "adult",
-                    "link": "human-adult-kidney",
-                    "score": 0
+                    'species': 'human',
+                    'stage': 'adult',
+                    'link': 'human-adult-kidney',
+                    'score': 0
                   },
                   {
-                    "species": "mouse",
-                    "stage": "adult",
-                    "link": "mouse-adult-kidney",
-                    "score": 0
+                    'species': 'mouse',
+                    'stage': 'adult',
+                    'link': 'mouse-adult-kidney',
+                    'score': 0
                   }
                 ]
               }
             ],
-            "units": [
+            'units': [
               {
-                "name": "kidney",
-                "score": 0.5,
-                "i": 0,
-                "sub": [
+                'name': 'kidney',
+                'score': 0.5,
+                'i': 0,
+                'sub': [
                   {
-                    "species": "human",
-                    "stage": "adult",
-                    "link": "human-adult-male-body",
-                    "score": 0,
-                    "view": "male body"
+                    'species': 'human',
+                    'stage': 'adult',
+                    'link': 'human-adult-male-body',
+                    'score': 0,
+                    'view': 'male body'
                   },
                   {
-                    "species": "human",
-                    "stage": "adult",
-                    "link": "human-adult-female-body",
-                    "score": 0,"view": "female body"
+                    'species': 'human',
+                    'stage': 'adult',
+                    'link': 'human-adult-female-body',
+                    'score': 0,
+                    'view': 'female body'
                   },
                   {
-                    "species": "mouse",
-                    "stage": "adult",
-                    "link": "mouse-adult-body",
-                    "score": 0,"view": "body"
+                    'species': 'mouse',
+                    'stage': 'adult',
+                    'link': 'mouse-adult-body',
+                    'score': 0,
+                    'view': 'body'
                   }
                 ]
               }
             ]
           };
-
-      // browserScope.searchInput = keyword;
-
-      // $httpBackend
-      //   .expectGET('http://sbb.cellfinder.org/api/1.2.3/s/' + keyword)
-      //   .respond(data);
-      // $httpBackend.flush();
-
-      // browserScope.$digest();
-
-      // expect(browserScope.results).toEqual(data);
-
-      // // Reset search
-      // browserScope.searchInput = '';
-      // browserScope.results = null;
-
-      // browserScope.$digest();
-
-      // // Search again but this time the results should cause any GET request.
-      // browserScope.searchInput = keyword;
-      // browserScope.$digest();
-
-      // expect(browserScope.results).toEqual(data);
     })
   );
 });

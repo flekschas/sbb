@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbHeatMap', ['genes',
+  .module('sbb.browser')
+  .directive('sbbHeatMap', ['genes',
     function (genes) {
       var directive = {
         link: link,
@@ -10,19 +10,18 @@ angular
         templateUrl: 'browser/directives/heatMap.html'
       };
 
-      function link ( scope, element, attrs ) {
-        /* *********************************************************************
+      function link (scope, element, attrs) {
+        /*
+         * ---------------------------------------------------------------------
          * Scope Variables
-         **********************************************************************/
-
+         * ---------------------------------------------------------------------
+         */
         scope.activeTab = 'data';
 
-
-        /* *********************************************************************
-         * Public functions
-         * ********************************************************************/
-
         /*
+         * ---------------------------------------------------------------------
+         * Public functions
+         * ---------------------------------------------------------------------
          * Why is `isActiveTab()` 16x evaluated if openTab is clicked once even
          * though there are only 4 elements?
          */

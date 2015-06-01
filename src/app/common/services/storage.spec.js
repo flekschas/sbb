@@ -1,29 +1,31 @@
-describe("app.service.storage (unit testing)", function() {
-  "use strict";
+describe('app.service.storage (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
-   * Global Variables
-   ****************************************************************************/
+  /*
+   * ---------------------------------------------------------------------------
+   *  Global Variables
+   *  --------------------------------------------------------------------------
+   */
 
   var localFakeStorage = {},
       storage,
       $rootScope;
 
-
-  /*****************************************************************************
-   * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+  /*
+   * ---------------------------------------------------------------------------
+   *  Global Setting / Setup
+   *  --------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
 
-    spyOn(localStorage, 'getItem').and.callFake(function(key) {
+    spyOn(localStorage, 'getItem').and.callFake(function (key) {
       return localFakeStorage[key];
     });
-    spyOn(localStorage, 'setItem').and.callFake(function(key, value) {
+    spyOn(localStorage, 'setItem').and.callFake(function (key, value) {
       localFakeStorage[key] = value;
     });
-    spyOn(localStorage, 'removeItem').and.callFake(function(key) {
+    spyOn(localStorage, 'removeItem').and.callFake(function (key) {
       localFakeStorage[key] = null;
     });
 
@@ -35,11 +37,11 @@ describe("app.service.storage (unit testing)", function() {
     $rootScope.$digest();
   });
 
-
-  /*****************************************************************************
-   * General / Existance Testing
-   ****************************************************************************/
-
+  /*
+   * ---------------------------------------------------------------------------
+   *  General / Existance Testing
+   *  --------------------------------------------------------------------------
+   */
   it('should exist the storage service',
     function () {
       expect(storage).not.toEqual(null);
@@ -77,11 +79,11 @@ describe("app.service.storage (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
-   * Functional Testing
-   ****************************************************************************/
-
+  /*
+   * ---------------------------------------------------------------------------
+   *  Functional Testing
+   *  --------------------------------------------------------------------------
+   */
   it('should set and get a value using `localStorage`',
     function () {
       var obj = {

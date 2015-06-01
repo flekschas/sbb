@@ -1,10 +1,10 @@
-describe("pmid (unit testing)", function() {
-  "use strict";
+describe('pmid (unit testing)', function () {
+  'use strict';
 
   var pmid,
       pubmedBaseUrl = 'http://www.ncbi.nlm.nih.gov/pubmed/';
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('pmid');
 
     inject(function (_$filter_) {

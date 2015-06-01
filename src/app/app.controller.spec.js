@@ -1,21 +1,22 @@
-describe("app.controller (unit testing)", function() {
-  "use strict";
+describe('app.controller (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var AppCtrl,
       appScope,
       $rootScope,
       storage;
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
 
     inject(function ($injector) {
@@ -33,36 +34,36 @@ describe("app.controller (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should have the AppCtrl',
-    function() {
+    function () {
       expect(AppCtrl).toBeTruthy();
     }
   );
 
   it('should have the `globalClick` function',
-    function() {
+    function () {
       expect(typeof(AppCtrl.globalClick)).toEqual('function');
     }
   );
 
   it('should have the `ready` function',
-    function() {
+    function () {
       expect(typeof(AppCtrl.ready)).toEqual('function');
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should set app status correctly',
-    function() {
+    function () {
       /*
        * App status should be undefined before the `$routeChangeStart` event has
        * been triggered.
@@ -88,8 +89,9 @@ describe("app.controller (unit testing)", function() {
     }
   );
 
-  it('should set the title according to the `$routeChangeStart` currentRoute title',
-    function() {
+  it(
+    'should set the title according to the `$routeChangeStart` currentRoute title',
+    function () {
 
       $rootScope.$broadcast('$routeChangeStart', {title: 'test'});
       $rootScope.$digest();
@@ -98,8 +100,9 @@ describe("app.controller (unit testing)", function() {
     }
   );
 
-  it('should set the title according to the `$location` if currentRoute title is unavailable',
-    inject(function($location) {
+  it(
+    'should set the title according to the `$location` if currentRoute title is unavailable',
+    inject(function ($location) {
       $location.path('/this-is-a-test');
 
       $rootScope.$broadcast('$routeChangeStart', {});
@@ -109,8 +112,9 @@ describe("app.controller (unit testing)", function() {
     })
   );
 
-  it('should store last visited',
-    function() {
+  it(
+    'should store last visited',
+    function () {
       $rootScope.$broadcast('$routeChangeStart', {});
       $rootScope.$digest();
 
@@ -118,7 +122,8 @@ describe("app.controller (unit testing)", function() {
     }
   );
 
-  it('should broadcast click target when `globalClick` is called',
+  it(
+    'should broadcast click target when `globalClick` is called',
     inject(function ($injector) {
       var event = {
         target: 'test'

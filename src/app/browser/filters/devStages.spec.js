@@ -1,52 +1,53 @@
-describe("Unit: Filter: devStage", function() {
-  "use strict";
+describe('Unit: Filter: devStage', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var $filter;
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   beforeEach(function () {
-    module( 'ngRoute' );
-    module( 'sbb.browser' );
+    module('ngRoute');
+    module('sbb.browser');
 
     inject(function (_$filter_) {
-      $filter = _$filter_( 'devStage' );
+      $filter = _$filter_('devStage');
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
-  it('should have a filter', function() {
+   * ---------------------------------------------------------------------------
+   */
+  it('should have a filter', function () {
     expect($filter).not.toEqual(null);
   });
 
-  it('should return undefined when nothing is set', function() {
+  it('should return undefined when nothing is set', function () {
     expect($filter()).toEqual(undefined);
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should return original varible when something other than a string is given',
-    function() {
+    function () {
       expect($filter([1, 2, 3])).toEqual([1, 2, 3]);
     }
   );
 
   it('should return Carnegie Stage string when species is not mouse',
-    function() {
+    function () {
       var string = 'cs-1',
           results;
 
@@ -57,7 +58,7 @@ describe("Unit: Filter: devStage", function() {
   );
 
   it('should return augmented string when species is mouse',
-    function() {
+    function () {
       var prefix = 'cs-',
           results;
 
@@ -79,7 +80,7 @@ describe("Unit: Filter: devStage", function() {
 
       for (var i = 1; i < 21; i++) {
         expect($filter(prefix + i, 'mouse'))
-          .toEqual('Carnegie stage '+ i +' (Theiler stage '+ mapping(i) +')');
+          .toEqual('Carnegie stage ' + i + ' (Theiler stage ' + mapping(i) + ')');
       }
 
       /*
@@ -94,7 +95,7 @@ describe("Unit: Filter: devStage", function() {
   );
 
   it('should allow sub-stages',
-    function() {
+    function () {
       var string = 'cs-17a',
           results;
 

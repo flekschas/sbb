@@ -1,5 +1,5 @@
-describe("app.common.directive.dialog (unit testing)", function() {
-  "use strict";
+describe('app.common.directive.dialog (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $compile,
@@ -8,7 +8,7 @@ describe("app.common.directive.dialog (unit testing)", function() {
       baseEl,
       dialogEl;
 
-  beforeEach(function(){
+  beforeEach(function () {
     module('sbb');
 
     inject(function ($injector) {

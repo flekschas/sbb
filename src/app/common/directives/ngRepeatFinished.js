@@ -1,6 +1,6 @@
 angular
-  .module( 'sbb' )
-  .directive( 'ngRepeatFinished', ['$timeout', 'news',
+  .module('sbb')
+  .directive('ngRepeatFinished', ['$timeout', 'news',
     function ($timeout, news) {
       return {
         restrict: 'A',

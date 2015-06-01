@@ -1,9 +1,9 @@
 angular
-  .module( 'sbb.browser' )
-  .filter( 'devStage', [
-    function() {
+  .module('sbb.browser')
+  .filter('devStage', [
+    function () {
       // Reformat the developmental stage name
-      return function(s, species) {
+      return function (s, species) {
         try {
           if (species == 'mouse') {
             var regex = /cs-([0-9]+)([a-zA-Z]?)/g;
@@ -12,7 +12,7 @@ angular
             if (match !== null) {
               // According to:
               // http://bioinformatics.oxfordjournals.org/content/28/3/397/T1.expansion.html
-              switch(parseInt(match[1])) {
+              switch (parseInt(match[1])) {
                 case 1:
                   theiler = 1;
                   break;
@@ -74,17 +74,17 @@ angular
                   theiler = 22;
                   break;
                 default:
-                  return "Adult";
+                  return 'Adult';
               }
             } else {
-              return "Adult";
+              return 'Adult';
             }
             return 'Carnegie stage ' + match[1] + match[2] +
                    ' (Theiler stage ' + theiler + match[2] + ')';
           }
           // Default return expects Carnegie Stage as the input
           return s.replace('cs-', 'Carnegie stage ');
-        } catch(e) {
+        } catch (e) {
           return s;
         }
       };

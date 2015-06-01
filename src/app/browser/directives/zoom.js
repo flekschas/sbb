@@ -1,7 +1,7 @@
 angular
-  .module( 'sbb.browser' )
-  .directive( 'sbbZoom', ['$', 'storage', 'news', 'settings',
-    function($, storage, news, settings) {
+  .module('sbb.browser')
+  .directive('sbbZoom', ['$', 'storage', 'news', 'settings',
+    function ($, storage, news, settings) {
       // Drop down menu for changing the resolution, meaning to zoom in or out
       return {
         restrict: 'AE',
@@ -12,18 +12,18 @@ angular
           species: '@',
           stage: '@',
         },
-        link: function(scope, element) {
+        link: function (scope, element) {
           var $el = $(element),
               opened = true;
 
           // Toggles the visibility of the drop down menu
-          scope.toggle = function(state, init) {
+          scope.toggle = function (state, init) {
             opened = (typeof state === 'undefined') ? !opened : state;
             $el.removeClass(opened ? 'closed' : 'opened');
             $el.addClass(opened ? 'opened' : 'closed');
           };
 
-          scope.goto = function(level) {
+          scope.goto = function (level) {
             var gender = '';
 
             if (level === 'body' && scope.species == 'human') {
@@ -44,7 +44,7 @@ angular
           };
 
           // Listens for the global click event broad-casted by the news service
-          scope.$on('click', function(e, target) {
+          scope.$on('click', function (e, target) {
             if ($el.find(target.tagName)[0] !== target) {
               scope.toggle(false);
             }

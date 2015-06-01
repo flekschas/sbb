@@ -1,22 +1,25 @@
-describe("home.service.initData (unit testing)", function() {
-  "use strict";
+describe('home.service.initData (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $httpBackend,
       $q,
       homeInitData,
+      settings,
       versionService;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
     module('sbb.home');
 
     inject(function ($injector) {
-      $q = $injector.get('$q');
       $httpBackend = $injector.get('$httpBackend');
-      versionService = $injector.get('versionService');
-      homeInitData = $injector.get('homeInitData');
+      $q = $injector.get('$q');
       $rootScope = $injector.get('$rootScope');
+
+      homeInitData = $injector.get('homeInitData');
+      settings = $injector.get('settings');
+      versionService = $injector.get('versionService');
     });
   });
 
@@ -33,18 +36,18 @@ describe("home.service.initData (unit testing)", function() {
           },
           results;
 
-      spyOn(versionService, "getVersions")
-        .and.callFake(function() {
+      spyOn(versionService, 'getVersions')
+        .and.callFake(function () {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;
         });
 
       $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
+        .expectGET(settings.apiPath + 'versions')
         .respond(200, '');
 
-      homeInitData().then(function(data){
+      homeInitData().then(function (data) {
         results = data;
       });
 
@@ -61,8 +64,8 @@ describe("home.service.initData (unit testing)", function() {
           },
           results;
 
-      spyOn(versionService, "getVersions")
-        .and.callFake(function() {
+      spyOn(versionService, 'getVersions')
+        .and.callFake(function () {
           var deferred = $q.defer();
           deferred.reject('test');
           return deferred.promise;
@@ -73,7 +76,7 @@ describe("home.service.initData (unit testing)", function() {
         .respond(200, '');
 
       homeInitData()
-        .then(function(data){
+        .then(function (data) {
           results = data;
         });
 

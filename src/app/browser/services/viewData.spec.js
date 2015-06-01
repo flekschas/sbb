@@ -1,84 +1,85 @@
-describe("browser.service.viewData (unit testing)", function() {
-  "use strict";
+describe('browser.service.viewData (unit testing)', function () {
+  'use strict';
 
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Variables
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   var $rootScope,
       $httpBackend,
       viewData,
       settings,
       fakeViewData = {
-          "view": {
-              "name": "human-pretubular-aggregate",
-              "level": "nephron",
-              "gender": null,
-              "genderOntId": null,
-              "stage": "cs-17a",
-              "species": "human",
-              "speciesOntId": "NCBITaxon_9606",
-              "ontId": "CELDA_000001474",
-              "imgSrc": "",
-              "prefix": "renal",
-              "license": "Creative Commons BY-SA 4.0",
-              "holdCopyright": 1
-          },
-          "units": [
-              {
-                  "view": "human-pretubular-aggregate",
-                  "name": "cap-mesenchyme",
-                  "ont_id": "UBERON_0005107",
-                  "custom_zoom": null,
-                  "generic_zoom": null,
-                  "title": null,
-                  "custom_prefix": null,
-                  "overlayed": null,
-                  "uberon": null,
-                  "url": null,
-                  "zoom": null
-              }
-          ],
-          "zoomOutLevels": [
-              {
-                  "level": "body",
-                  "male": "human-adult-male-body",
-                  "female": "human-adult-female-body"
-              }
-          ],
-          "definitions": [],
-          "synonyms": [],
-          "pictures": [],
-          "prefixes": [
-              {
-                  "abbr": "celda",
-                  "prefix": "http://ontology.cellfinder.org/CELDA.owl#"
-              }
-          ],
-          "expDatasets": null
+        'view': {
+          'name': 'human-pretubular-aggregate',
+          'level': 'nephron',
+          'gender': null,
+          'genderOntId': null,
+          'stage': 'cs-17a',
+          'species': 'human',
+          'speciesOntId': 'NCBITaxon_9606',
+          'ontId': 'CELDA_000001474',
+          'imgSrc': '',
+          'prefix': 'renal',
+          'license': 'Creative Commons BY-SA 4.0',
+          'holdCopyright': 1
+        },
+        'units': [
+          {
+            'view': 'human-pretubular-aggregate',
+            'name': 'cap-mesenchyme',
+            'ontId': 'UBERON_0005107',
+            'customZoom': null,
+            'genericZoom': null,
+            'title': null,
+            'customPrefix': null,
+            'overlayed': null,
+            'uberon': null,
+            'url': null,
+            'zoom': null
+          }
+        ],
+        'zoomOutLevels': [
+          {
+            'level': 'body',
+            'male': 'human-adult-male-body',
+            'female': 'human-adult-female-body'
+          }
+        ],
+        'definitions': [],
+        'synonyms': [],
+        'pictures': [],
+        'prefixes': [
+          {
+            'abbr': 'celda',
+            'prefix': 'http://ontology.cellfinder.org/CELDA.owl#'
+          }
+        ],
+        'expDatasets': null
       },
       fakeIllustration = {
-        "uri": null,
-        "elements": [],
-        "id": "collecting-duct"
+        'uri': null,
+        'elements': [],
+        'id': 'collecting-duct'
       },
       fakeDevStages = [
-          {
-              "name": "mouse-adult-kidney",
-              "level": "kidney",
-              "stage": "adult",
-              "species": "mouse",
-              "gender": null,
-              "order": "27"
-          }
+        {
+          'name': 'mouse-adult-kidney',
+          'level': 'kidney',
+          'stage': 'adult',
+          'species': 'mouse',
+          'gender': null,
+          'order': '27'
+        }
       ];
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Global Setting / Setup
-   ****************************************************************************/
-
-  beforeEach(function() {
+   * ---------------------------------------------------------------------------
+   */
+  beforeEach(function () {
     module('sbb');
     module('sbb.browser');
 
@@ -91,11 +92,11 @@ describe("browser.service.viewData (unit testing)", function() {
     });
   });
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * General / Existance Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should contain the viewData',
     function () {
       expect(viewData).not.toEqual(null);
@@ -120,11 +121,11 @@ describe("browser.service.viewData (unit testing)", function() {
     }
   );
 
-
-  /*****************************************************************************
+  /*
+   * ---------------------------------------------------------------------------
    * Functional Testing
-   ****************************************************************************/
-
+   * ---------------------------------------------------------------------------
+   */
   it('should resolve promises',
     function () {
       var path = 'test',
@@ -147,17 +148,17 @@ describe("browser.service.viewData (unit testing)", function() {
         .respond(fakeDevStages);
 
       viewData.getView(path)
-        .then(function(data){
+        .then(function (data) {
           view = data;
         });
 
       viewData.getIllustration(imgSrc)
-        .then(function(data){
+        .then(function (data) {
           illustration = data;
         });
 
       viewData.getDevStages(level)
-        .then(function(data){
+        .then(function (data) {
           devStages = data;
         });
 
@@ -217,5 +218,4 @@ describe("browser.service.viewData (unit testing)", function() {
       expect(devStagesErr).toEqual('error');
     }
   );
-
 });

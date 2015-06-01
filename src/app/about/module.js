@@ -1,2 +1,2 @@
 angular
-  .module( 'sbb.about', [] );
+  .module('sbb.about', []);

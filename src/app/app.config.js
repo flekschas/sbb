@@ -1,14 +1,10 @@
 angular
-  .module( 'sbb' )
+  .module('sbb')
   .config([
     '$locationProvider',
     '$httpProvider',
     'FastClick',
-    function(
-      $locationProvider,
-      $httpProvider,
-      FastClick) {
-
+    function ($locationProvider, $httpProvider, FastClick) {
       // Activates HTML5 History API for modern browsers and sets the hashbang
       // for legacy browsers
       $locationProvider.html5Mode(true).hashPrefix('!');

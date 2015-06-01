@@ -1,5 +1,5 @@
-describe("app.common.directive.ngRepeatFinished (unit testing)", function() {
-  "use strict";
+describe('app.common.directive.ngRepeatFinished (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $compile,
@@ -7,7 +7,7 @@ describe("app.common.directive.ngRepeatFinished (unit testing)", function() {
       $scope,
       element;
 
-  beforeEach(function(){
+  beforeEach(function () {
     module('sbb');
 
     inject(function ($injector) {
@@ -16,7 +16,8 @@ describe("app.common.directive.ngRepeatFinished (unit testing)", function() {
       $timeout = $injector.get('$timeout');
       $scope = $rootScope.$new();
 
-      element = '<div><p ng-repeat="test in tests track by $index" id="p-{{ $index }}" ng-repeat-finished>{{ test }}</p></div>';
+      element = '<div><p ng-repeat="test in tests track by $index" id="p-{{ $' +
+       'index }}" ng-repeat-finished>{{ test }}</p></div>';
       element = $compile(element)($scope);
 
       spyOn($rootScope, '$broadcast');
@@ -29,7 +30,12 @@ describe("app.common.directive.ngRepeatFinished (unit testing)", function() {
       $scope.$digest();
       $timeout.flush();
 
-      expect($rootScope.$broadcast).toHaveBeenCalledWith('ngRepeatFinished', angular.element(element[0].querySelector('#p-2')), undefined);
+      expect($rootScope.$broadcast)
+        .toHaveBeenCalledWith(
+          'ngRepeatFinished',
+          angular.element(element[0].querySelector('#p-2')),
+          undefined
+        );
     }
   );
 });

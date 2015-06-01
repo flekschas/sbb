@@ -1,11 +1,11 @@
-describe("legals.route (unit testing)", function() {
-  "use strict";
+describe('legals.route (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $location,
       $route;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
     module('sbb.legals');
 
@@ -16,7 +16,8 @@ describe("legals.route (unit testing)", function() {
     });
   });
 
-  it('should load the legals template and controller',
+  it(
+    'should load the legals template and controller',
     function () {
       $location.path('/legals');
       $rootScope.$digest();

@@ -1,12 +1,12 @@
-describe("app.common.directive.sbbAbout (unit testing)", function() {
-  "use strict";
+describe('app.common.directive.sbbAbout (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $compile,
       $scope,
       element;
 
-  beforeEach(function(){
+  beforeEach(function () {
     module('sbb');
 
     inject(function ($injector) {

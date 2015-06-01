@@ -1,12 +1,13 @@
-describe("about.route (unit testing)", function() {
-  "use strict";
+describe('about.route (unit testing)', function () {
+  'use strict';
 
   var $rootScope,
       $location,
       $route,
-      $httpBackend;
+      $httpBackend,
+      settings;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
     module('sbb.about');
 
@@ -15,10 +16,15 @@ describe("about.route (unit testing)", function() {
       $location = $injector.get('$location');
       $route = $injector.get('$route');
       $httpBackend = $injector.get('$httpBackend');
+      settings = $injector.get('settings');
     });
 
-    $httpBackend.expectGET('http://sbb.cellfinder.org/api/1.2.3/changelog').respond(200, '');
-    $httpBackend.expectGET('http://sbb.cellfinder.org/api/1.2.3/versions').respond(200, '');
+    $httpBackend
+      .expectGET(settings.apiPath + 'changelog')
+      .respond(200, '');
+    $httpBackend
+      .expectGET(settings.apiPath + 'versions')
+      .respond(200, '');
   });
 
   it('should load the about template and controller',

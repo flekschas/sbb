@@ -25,7 +25,7 @@
         ng-repeat-finished
         ng-click="select($event)"
         ng-mouseenter="hover($index)"
-        ng-bind-html="hit.with_hit"
+        ng-bind-html="hit.withHit"
         ng-class="{ 'selected': $index == selected, 'disabled': alreadySelected(hit.value) }"
         data-value="{{ hit.value }}">
     </li>

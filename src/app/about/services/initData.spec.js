@@ -1,10 +1,11 @@
-describe("about.service.initData (unit testing)", function() {
-  "use strict";
+describe('about.service.initData (unit testing)', function () {
+  'use strict';
 
-  var aboutInitData,
-      $rootScope;
+  var $rootScope,
+      aboutInitData,
+      settings;
 
-  beforeEach(function() {
+  beforeEach(function () {
     module('sbb');
     module('sbb.about');
 
@@ -13,29 +14,30 @@ describe("about.service.initData (unit testing)", function() {
           $q = $injector.get('$q'),
           $httpBackend = $injector.get('$httpBackend');
 
-      aboutInitData = $injector.get('aboutInitData');
       $rootScope = $injector.get('$rootScope');
+      aboutInitData = $injector.get('aboutInitData');
+      settings = $injector.get('settings');
 
-      spyOn(versionService, "getChangelog")
-        .and.callFake(function() {
+      spyOn(versionService, 'getChangelog')
+        .and.callFake(function () {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;
         });
 
-      spyOn(versionService, "getVersions")
-        .and.callFake(function() {
+      spyOn(versionService, 'getVersions')
+        .and.callFake(function () {
           var deferred = $q.defer();
           deferred.resolve('test');
           return deferred.promise;
         });
 
       $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/changelog')
+        .expectGET(settings.apiPath + 'changelog')
         .respond(200, '');
 
       $httpBackend
-        .expectGET('http://sbb.cellfinder.org/api/1.2.3/versions')
+        .expectGET(settings.apiPath + 'versions')
         .respond(200, '');
     });
   });
@@ -54,7 +56,7 @@ describe("about.service.initData (unit testing)", function() {
           },
           results;
 
-      aboutInitData().then(function(data){
+      aboutInitData().then(function (data) {
         results = data;
       });
 
@@ -63,5 +65,4 @@ describe("about.service.initData (unit testing)", function() {
       expect(results).toEqual(data);
     }
   );
-
 });

@@ -1,6 +1,6 @@
 angular
-  .module( 'reverseArray', [] )
-  .filter( 'reverseArray', [
+  .module('reverseArray', [])
+  .filter('reverseArray', [
     function () {
       return function (items) {
         if (angular.isArray(items)) {

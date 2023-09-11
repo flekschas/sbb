@@ -1,15 +1,13 @@
 # Semantic Body Browser
 
 <p align="center">
-  <img src="http://sbb.cellfinder.org/github.svg"
+  <img src="http://semantic-body-browser.lekschas.de/images/teaser.jpg"
        alt="Semantic Body Browser" />
 </p>
 
 This is the repository of the [Semantic Body Browser][sbb] web application. More
 background information about the project can be found on the project's
 [about][about] page.
-
-[![Build Status](https://travis-ci.org/flekschas/sbb.svg)](https://travis-ci.org/flekschas/sbb)
 
 
 ## Abstract
